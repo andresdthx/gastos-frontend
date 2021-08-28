@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter, Route } from 'react-router-dom';
+import Sidebar from './components/common/Sidebar';
+import FloatButton from './components/FloatButton';
+import HomeScreen from './screens/HomeScreen';
+import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+        <Sidebar />
+        <Route path="/" component={HomeScreen} exact></Route>
+        <Route path="/login" component={LoginScreen}></Route>
+        <Route path="/register" component={RegisterScreen}></Route>
+
+        <FloatButton />
+    </BrowserRouter>
   );
 }
 
