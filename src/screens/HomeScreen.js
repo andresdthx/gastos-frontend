@@ -72,16 +72,19 @@ export default function HomeScreen(props) {
             error ? <MessageBox variant="danger">{error}</MessageBox>
             :
             (
-            <MDBDataTableV5
-                hover
-                entriesOptions={[5, 20, 25]}
-                entries={5}
-                pagesAmount={4}
-                data={datatable}
-                pagingTop
-                searchTop
-                searchBottom={false}
-                fullPagination />
+              <div className="datatable">
+                <MDBDataTableV5
+                  hover
+                  entriesOptions={[5, 10, 20]}
+                  entries={5}
+                  pagesAmount={4}
+                  data={datatable}
+                  pagingTop
+                  searchTop
+                  searchBottom={false}
+                  fullPagination 
+                />
+              </div>
             )}
         </div>
     )

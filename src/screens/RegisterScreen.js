@@ -33,9 +33,7 @@ export default function RegisterScreen(props) {
     })
 
     return (
-        <div className="home" style={{ 
-            backgroundImage: `url("images/background/login-2.png")`
-            }}>
+        <div className="home">
             <form className="form" onSubmit={submitHandler}>
                 <div className="title">
                     Registro
@@ -46,52 +44,36 @@ export default function RegisterScreen(props) {
                 </div>
 
                 <div>
-                    <label htmlFor="username">Username</label>
-                    <div>
-                        <i className="fas fa-user"></i>
-                        <input
-                                type="text"
-                                id="username"
-                                placeholder="Username"
-                                onChange={ e => setUsername(e.target.value)}
-                        ></input>
-                    </div>
+                    <input
+                            type="text"
+                            id="username"
+                            placeholder="Username"
+                            onChange={ e => setUsername(e.target.value)}
+                    ></input>
                 </div>
                 <div>
-                    <label htmlFor="username">Email</label>
-                    <div>
-                        <i className="fas fa-user"></i>
-                        <input
-                                type="email"
-                                id="email"
-                                placeholder="Email"
-                                onChange={ e => setEmail(e.target.value)}
-                        ></input>
-                    </div>
+                    <input
+                            type="email"
+                            id="email"
+                            placeholder="Email"
+                            onChange={ e => setEmail(e.target.value)}
+                    ></input>
                 </div>
                 <div>
-                    <label htmlFor="password">Contraseña</label>
-                    <div>
-                        <i class="fas fa-lock"></i>
-                        <input
-                                type="password"
-                                id="password"
-                                placeholder="Password"
-                                onChange={e => setPassword(e.target.value)}
-                        ></input>
-                    </div>
+                    <input
+                            type="password"
+                            id="password"
+                            placeholder="Password"
+                            onChange={e => setPassword(e.target.value)}
+                    ></input>
                 </div>
                 <div>
-                    <label htmlFor="password">Confirmar contraseña</label>
-                    <div>
-                        <i class="fas fa-lock"></i>
-                        <input
-                                type="password"
-                                id="password"
-                                placeholder="Password"
-                                onChange={e => setConfirmPassword(e.target.value)}
-                        ></input>
-                    </div>
+                    <input
+                            type="password"
+                            id="password"
+                            placeholder="Password"
+                            onChange={e => setConfirmPassword(e.target.value)}
+                    ></input>
                 </div>
                 <div>
                     <button className="btn primary" type="submit">Registrarme</button>

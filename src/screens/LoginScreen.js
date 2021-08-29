@@ -24,47 +24,44 @@ export default function LoginScreen(props) {
         }
     }, [userInfo, props])
     return (
-        <div className="home" style={{ 
-            backgroundImage: `url("images/background/login-2.png")`
-            }}>
+        <div className="home">
             <form className="form" onSubmit={submitHandler}>
                 <div className="title">
-                    Login
+                    Iniciar sesión
                 </div>
 
                 <div>
-                    <label htmlFor="username">Username</label>
-                    <div>
-                        <i className="fas fa-user"></i>
-                        <input
-                                type="text"
-                                id="username"
-                                placeholder="Username"
-                                onChange={ e => setUsername(e.target.value)}
-                        ></input>
-                    </div>
+                    <input
+                            type="text"
+                            id="username"
+                            placeholder="Username"
+                            onChange={ e => setUsername(e.target.value)}
+                    ></input>
                 </div>
                 <div>
-                    <label htmlFor="password">Password</label>
-                    <div>
-                        <i className="fas fa-lock"></i>
-                        <input
-                                type="password"
-                                id="password"
-                                placeholder="Password"
-                                onChange={e => setPassword(e.target.value)}
-                        ></input>
-                    </div>
-                    <span><Link to="/">recuperar contraseña</Link></span>
+                    <input
+                            type="password"
+                            id="password"
+                            placeholder="Password"
+                            onChange={e => setPassword(e.target.value)}
+                    ></input>
+                    {/* <span><Link to="/">recuperar contraseña</Link></span> */}
                 </div>
                 <div>
-                    <button className="btn primary" type="submit">Sign In</button>
+                    <button className="btn primary" type="submit">Iniciar Sesión</button>
                 </div>
 
                 <div>
-                    <Link to="/register">Registrarme</Link> 
+                    <Link to="/register">¿Olvidaste tu contraseña?</Link> 
                 </div>
             </form>
+            <div className="box-register">
+                <div>
+                    <span>
+                        <Link to="/register">Crear una cuenta</Link> 
+                    </span>
+                </div>
+            </div>
         </div>
     )
 }
