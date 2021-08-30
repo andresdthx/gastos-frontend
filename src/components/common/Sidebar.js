@@ -19,7 +19,9 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import PersonIcon from '@material-ui/icons/Person';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { signout } from '../../actions/userActions';
+import { Redirect } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -54,6 +56,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Sidebar() {
+
+  const dispatch = useDispatch();
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -68,6 +72,11 @@ export default function Sidebar() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const handlerSignout = () => {
+    dispatch(signout());
+    return <Redirect to="/"></Redirect>
+  }
 
   return (
     <div>
@@ -91,7 +100,7 @@ export default function Sidebar() {
 
               <Typography className={classes.menuContent}>
                 <NotificationsIcon className={classes.menuItems} />
-                <PersonIcon className={classes.menuItems} />
+                <PersonIcon className={classes.menuItems} onClick={handlerSignout} />
               </Typography>
             </Toolbar>
           </AppBar>

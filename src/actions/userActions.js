@@ -1,4 +1,4 @@
-import { USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_SIGIN_FAIL, USER_SIGIN_REQUEST, USER_SIGIN_SUCCESS } from "../constants/userConstants";
+import { USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_SIGIN_FAIL, USER_SIGIN_REQUEST, USER_SIGIN_SUCCESS, USER_SIGNOUT_FAIL } from "../constants/userConstants";
 import axios from 'axios';
 
 export const signin = (userData) => async (dispatch) => {
@@ -17,6 +17,11 @@ export const signin = (userData) => async (dispatch) => {
             : error.message
         });
     }
+}
+
+export const signout = () => async(dispatch) => {
+    localStorage.removeItem('userInfo');;
+    dispatch({ type: USER_SIGNOUT_FAIL });
 }
 
 export const registerUser = (userData) => async(dispatch) => {

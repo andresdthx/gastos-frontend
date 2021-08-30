@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ModalComponent from './ModalComponent';
+import AddIcon from '@material-ui/icons/Add';
 
 export default function FloatButton() {
     const dispatch = useDispatch();
@@ -31,8 +32,9 @@ export default function FloatButton() {
                 userInfo && 
                 (
                     <div className="floating-button">
-                        <button onClick={() => setIsOpen(true)}>
-                            <i className="fas fa-plus-circle" />
+                        <button className="btoncito" onClick={() => setIsOpen(true)}>
+                            <AddIcon />
+                            {/* <i className="fas fa-plus-circle" /> */}
                         </button>
                     </div>
                 )

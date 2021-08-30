@@ -76,11 +76,17 @@ export default function ModalComponent(props) {
         let month = newDate.getMonth() + 1;
         let year = newDate.getFullYear();
 
-        if(date < 10) date = `0${date}`;
-        if(month < 10) month = `0${month}`;
+        date = date < 10 ? `0${date}` : `${date}`;
+        month = month < 10 ? `0${month}` : `${month}`;
+
         let today = `${year}-${month}-${date}`;
         setToday(today);
         setDate(today);
+    }
+
+    const handletDate = (e) => {
+        setToday(e);
+        setDate(e);
     }
 
     useEffect(()=>{
@@ -96,13 +102,13 @@ export default function ModalComponent(props) {
     }, [category, subcategories, load, dispatch])
 
     useEffect(()=>{
-        loadCategories();
         getDate();
+        loadCategories();
     }, [loadCategories]);
 
     useEffect(()=>{
         if (expense && submit) {
-            dispatch(listExpenses());
+            dispatch(listExpenses(['08'], []));
             closeModal();
         }
     },[expense, dispatch, submit, closeModal]);
@@ -176,7 +182,7 @@ export default function ModalComponent(props) {
                             <input
                                 value={today} 
                                 type="date"
-                                onChange={e => setDate(e.target.value)}
+                                onChange={e => handletDate(e.target.value)}
                                 placeholder="Fecha">
                             </input>
                         </div>
@@ -184,12 +190,12 @@ export default function ModalComponent(props) {
                             {
                                 loadingSuccess ? <LoadingBox />
                                 :(
-                                    <button className="btn secundary" type="submit">Crear</button>
+                                    <button className="btn primary" type="submit">Crear</button>
                                 )
                             }
                         </div>
                         <div>
-                            <button className="btn danger" onClick={closeModal}>Cancelar</button>
+                            <button className="btn secundary" onClick={closeModal}>Cancelar</button>
                         </div>
                   </form>
                   </MDBModalBody>

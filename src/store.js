@@ -4,6 +4,7 @@ import { createCategoryReducers, listCategoriesReducer } from './reducers/catego
 import { createExpenseReducer, listExpensesReducer } from './reducers/expenseReducers';
 import { createSubcategoryReducer, listSubcategoriesReducer } from './reducers/subcategoryReducers';
 import { registerReducer, signinReducer } from './reducers/userReducer';
+import { getMonthsReducer } from './reducers/utilsReducers';
 
 const initialState = {
     userSignin:{
@@ -24,7 +25,9 @@ const reducer = combineReducers({
     categoriesList: listCategoriesReducer,
 
     subcategoriesList: listSubcategoriesReducer,
-    subcategoryCreate: createSubcategoryReducer
+    subcategoryCreate: createSubcategoryReducer,
+
+    monthsGet: getMonthsReducer
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

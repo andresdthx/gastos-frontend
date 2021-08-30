@@ -63,11 +63,6 @@ border-bottom: 1px solid #838383;
   color: #838383;
 }
 
-.title{
-  font-weight: bold;
-  text-align: center;
-  font-size: 1.5rem;
-}
 .form div:last-child{
   text-align: center;
   /* font-weight: bold; */
@@ -92,7 +87,7 @@ border-bottom: 1px solid #838383;
 }
 .btn {
   font-family: Roboto, serif;
-  padding: 0.4rem;
+  padding: 0.6rem;
   border-radius: 0.3rem;
   border: none;
   box-shadow: none;
@@ -105,21 +100,23 @@ border-bottom: 1px solid #838383;
   box-shadow:none;
 }
 .btn.primary {
-  background-color: #54C0FF;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  background-color: none;
+  color: #8F8F8F !important;
   /* background: rgb(39,35,112);
   background: linear-gradient(90deg, rgba(39,35,112,1) 0%, rgba(70,70,125,1) 52%, rgba(0,212,255,1) 100%); */
 
 }
 .btn.primary:hover{
-  color: #929292;
+  color: #000000 !important;
 }
 
 .btn.secundary{
-  background: #54C0FF;
+  background: #1200BA;
 }
-.btn.secundary:hover{
-  background: #13A4F8;
-}
+/* .btn.secundary:hover{
+  background: #170D71;
+} */
 
 .btn.danger{
   background: #F42F2F;
@@ -127,13 +124,72 @@ border-bottom: 1px solid #838383;
 .btn.danger:hover{
   background: #E11A1A;
 }
-.select{
+.form-modal .select{
   text-decoration: none;
   border: none;
   width: 90%;
   box-shadow: none;
 }
-/* data table */
+/* Home screen */
+.home-screen .title{
+  font-family: Roboto, serif;
+  padding: 0.5rem;
+  font-size:1.5rem;
+}
+/* datatable */
+.mdb-datatable{
+  position: relative !important;
+  width: 99% !important;
+}
+.justify-content-end {
+  margin-left: 0.5rem;
+  justify-content: left !important;
+}
+
+.data-info{
+  display:flex;
+  /* justify-items: ; */
+  justify-content:space-between;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+}
+.data-card{
+  display: block;
+  border: none;
+  max-width: 40rem;
+  width: 40rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  text-align: left;
+}
+.data-card div:first-child{
+font-size: 0.8rem;
+}
+.data-card div:last-child{
+  font-size: 1.5rem;
+  font-weight: 500;
+  }
+
+.data-table{
+  margin: 0.5rem;
+  padding-top: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.selects-datable{
+  padding: 0.5rem;
+}
+
+.selects-datable .select{
+  max-width: 40rem;
+  margin-top: 0.5rem;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 4px;
+}
+table.table td:nth-child(3){
+  font-weight: bold;
+}
+
 .row {
   padding-left: 0.6rem;
   position: relative !important;
@@ -252,7 +308,7 @@ border-bottom: 1px solid #838383;
 
 /* Style the active/current link*/
 .header a.active {
-  background-color: dodgerblue;
+  background-color: #2B15FF;
   color: white;
 }
 
@@ -271,13 +327,8 @@ border-bottom: 1px solid #838383;
   height: 5rem;
 }
 .MuiAppBar-colorPrimary {
-  background-color: #54C0FF !important;
+  background-color: #080058 !important;
 }
-.MuiAppBar-positionFixed {
-  /* position:relative !important; */
-  /* width: 100%; */
-}
-
 
 /* spinner */
 .spinner {
@@ -304,19 +355,28 @@ border-bottom: 1px solid #838383;
 
 /* floating-button */
 .floating-button{
-  bottom: 5%;
-  right: 5%;
+  bottom: 3%;
+  right: 3%;
   position: fixed;
 }
 .floating-button > button{
   cursor: pointer;
+  background: #080058;
   border: none;
-  background: none;
+  width: 3rem;
+  height: 3rem;
+  margin: 0;
+  padding: 0;
+  border-radius: 5rem;
 }
-.floating-button > button > i{
-  font-size: 3.5rem;
-  color: #54C0FF;
+.floating-button > button > svg{
+  font-size: 3rem;
+  color: #ffffff;
 }
+.btoncito{
+  background: #E11A1A;
+}
+
 
 @media only screen and (max-width: 450px) {
   .home {
@@ -333,5 +393,22 @@ border-bottom: 1px solid #838383;
     margin-top: 1rem;
     text-align:center;
     box-shadow: none;
+  }
+  .modal, .modal-dialog, .modal-body {
+    margin: 0;
+    padding: 0 !important;
+  }
+  .modal-body{
+    height: 100vh;
+    position: relative;
+  }
+  .modal-body .form-modal{
+    position: absolute;
+    width: 100%;
+    top: 10%;
+  }
+  .modal-content{
+    margin-top: 4rem;
+    width: 100%;
   }
 }
