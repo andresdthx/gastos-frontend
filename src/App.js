@@ -1,4 +1,4 @@
-import {BrowserRouter, Route } from 'react-router-dom';
+import {BrowserRouter, HashRouter, Route } from 'react-router-dom';
 import Sidebar from './components/common/Sidebar';
 import FloatButton from './components/FloatButton';
 import HomeScreen from './screens/HomeScreen';
@@ -9,7 +9,9 @@ function App() {
 
   return (
     <BrowserRouter>
-        <Sidebar />
+        <HashRouter>
+            <Sidebar></Sidebar>
+        </HashRouter>
         <Route path="/" component={HomeScreen} exact></Route>
         <Route path="/login" component={LoginScreen}></Route>
         <Route path="/register" component={RegisterScreen}></Route>

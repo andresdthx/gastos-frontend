@@ -21,7 +21,8 @@ import PersonIcon from '@material-ui/icons/Person';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { useDispatch, useSelector } from 'react-redux';
 import { signout } from '../../actions/userActions';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
+import { Menu, MenuItem } from '@material-ui/core';
 
 const drawerWidth = 240;
 
@@ -34,7 +35,8 @@ const useStyles = makeStyles((theme) => ({
     right: '2%',
   },
   menuItems: {
-    marginRight: '0.5rem'
+    marginRight: '1rem',
+    cursor: 'pointer'
   },
   hide: {
     display: 'none',
@@ -61,6 +63,7 @@ export default function Sidebar() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   const userSignin = useSelector(state => state.userSignin);
   const { userInfo } = userSignin;
@@ -75,8 +78,27 @@ export default function Sidebar() {
 
   const handlerSignout = () => {
     dispatch(signout());
-    return <Redirect to="/"></Redirect>
+    window.location.reload();
+    // return <Redirect to="/login"></Redirect>
   }
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = (option) => {
+
+    setAnchorEl(null);
+
+    switch (option) {
+      case 'logout':
+        handlerSignout();
+        break;
+    
+      default:
+        break;
+    }
+  };
 
   return (
     <div>
@@ -100,7 +122,17 @@ export default function Sidebar() {
 
               <Typography className={classes.menuContent}>
                 <NotificationsIcon className={classes.menuItems} />
-                <PersonIcon className={classes.menuItems} onClick={handlerSignout} />
+                <PersonIcon className={classes.menuItems} onClick={handleClick} />
+                <Menu
+                  id="simple-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={() => handleClose()}
+                >
+                  <MenuItem onClick={() => handleClose()}>Profile</MenuItem>
+                  <MenuItem onClick={() => handleClose('logout')}>Logout</MenuItem>
+                </Menu>
               </Typography>
             </Toolbar>
           </AppBar>

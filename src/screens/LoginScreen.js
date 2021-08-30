@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signin } from '../actions/userActions';
 import { Link } from 'react-router-dom';
+import LoadingBox from '../components/utils/LoadingBox';
+import MessageBox from '../components/MessageBox';
 
 export default function LoginScreen(props) {
 
     const dispatch = useDispatch();
 
     const userSignin = useSelector(state => state.userSignin);
-    const { userInfo } = userSignin;
+    const { userInfo, error, loading } = userSignin;
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -25,7 +27,9 @@ export default function LoginScreen(props) {
     }, [userInfo, props])
     return (
         <div className="home">
+            
             <form className="form" onSubmit={submitHandler}>
+                
                 <div className="title">
                     Iniciar sesión
                 </div>
@@ -48,11 +52,21 @@ export default function LoginScreen(props) {
                     {/* <span><Link to="/">recuperar contraseña</Link></span> */}
                 </div>
                 <div>
-                    <button className="btn primary" type="submit">Iniciar Sesión</button>
+                    {
+                        loading ? <LoadingBox />
+                        :
+                        (
+                            <button className="btn primary" type="submit">Iniciar Sesión</button>
+                        )
+                    }
                 </div>
 
                 <div>
                     <Link to="/register">¿Olvidaste tu contraseña?</Link> 
+                </div>
+
+                <div>
+                    { error && <MessageBox variant="danger">{error}</MessageBox> }
                 </div>
             </form>
             <div className="box-register">

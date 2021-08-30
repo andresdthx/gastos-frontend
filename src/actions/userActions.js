@@ -14,7 +14,7 @@ export const signin = (userData) => async (dispatch) => {
             payload: 
             error.response && error.response.data.response
             ? error.response.data.message
-            : error.message
+            : error.name
         });
     }
 }
@@ -37,7 +37,7 @@ export const registerUser = (userData) => async(dispatch) => {
             payload: 
             error.response && error.response.data.response
             ? error.response.data.message
-            : error.message
+            : error.name
         });
     }
 }
