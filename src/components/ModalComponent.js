@@ -9,6 +9,7 @@ import { listSubcategories } from '../actions/subcategoriesActions';
 import { createExpense, listExpenses } from '../actions/expenseActions';
 import SubForm from './SubForm';
 import { MDBContainer, MDBModal, MDBModalBody, MDBModalHeader } from 'mdbreact';
+import AddIcon from '@material-ui/icons/Add';
 
 
 Modal.setAppElement('body');
@@ -136,16 +137,20 @@ export default function ModalComponent(props) {
                                 onChange={e => handlerCategory(e.value)}
                                 defaultValue={categories[0]}
                                 options={categories} />
-                                <i 
+                                <AddIcon
                                     onClick={() => setShowNewCateogry(!showNewCategory)}
-                                    className="fas fa-plus-circle" />
+                                    className="fas fa-plus-circle"
+                                />
                                 { showNewCategory && <SubForm showNew={setShowNewCateogry} type={'category'} /> }
                             </div>
                             )}
                         </div>
                         <div>
                             {
-                                loadingSubcategory ? <LoadingBox />
+                                loadingSubcategory ? <div
+                                                         className="new-category"
+                                                         onClick={() => setShowNewCateogry(!showNewCategory)}
+                                                     >Crear categoria</div>
                                 :
                                 errorSubcategory ? <MessageBox variant="danger">{errorSubcategory}</MessageBox>
                                 :(
@@ -155,10 +160,12 @@ export default function ModalComponent(props) {
                                         placeholder="Subcategorias"
                                         onChange={e => setSubcategory(e.value)}
                                         defaultValue={subcategories[0]}
-                                        options={subcategories} />
-                                    <i 
+                                        options={subcategories}
+                                    />
+                                    <AddIcon 
                                         onClick={() => setShowNewSubcategory(!showNewSubcategory)}
-                                        className="fas fa-plus-circle" />
+                                        className="fas fa-plus-circle"
+                                    />  
                                     { showNewSubcategory && <SubForm showNew={setShowNewSubcategory} type={'subcategory'} categoryId={category} /> }
                                 </div>
                             )}

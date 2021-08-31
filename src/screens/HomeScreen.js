@@ -48,7 +48,7 @@ export default function HomeScreen(props) {
         if (expenses) {
             let columns = [
                 {
-                    label: 'Gasto',
+                    label: 'Categoria',
                     field: 'category',
                     width: 150,
                     attributes: {
@@ -57,7 +57,7 @@ export default function HomeScreen(props) {
                     },
                   },
                   {
-                    label: 'Descripción',
+                    label: 'Subcategoria',
                     field: 'subcategory',
                     width: 270,
                   },
@@ -66,19 +66,30 @@ export default function HomeScreen(props) {
                     field: 'value',
                     width: 270
                   },
-                  {
-                    label: 'Fecha',
-                    field: 'date',
-                    width: 270,
-                  }
             ];
+
+            if(expenses[0].description)
+              columns.push({
+                label: 'Descripción',
+                field: 'description',
+                width: 270,
+              });
+
+            if(expenses[0].date)
+              columns.push({
+                label: 'Fecha',
+                field: 'date',
+                width: 270,
+              });
+
             let rows = [];
 
             expenses.map(item => rows.push({
                 category: item.category.category,
                 subcategory: item.subcategory.subcategory,
+                description: item.description ? item.description : '',
                 value: new Intl.NumberFormat().format(item.value),
-                date: convertDate(item.date.split('T')[0]),
+                date: item.date ? convertDate(item.date.split('T')[0]) : '',
             }));
             setDatatable({ columns, rows });
         } else {
@@ -112,14 +123,17 @@ export default function HomeScreen(props) {
                 <div className="data-table">
                   <MDBDataTableV5
                     hover
-                    entriesOptions={[10, 20]}
-                    entries={10}
-                    pagesAmount={4}
+                    // entriesOptions={[10, 20]}
+                    // entries={10}
+                    // pagesAmount={4}
                     data={datatable}
-                    pagingTop
+                    // pagingTop
                     searchTop
+                    paging={false}
+                    info={false}
+                    // scrollX
                     searchBottom={false}
-                    fullPagination 
+                    // fullPagination 
                   />
                 </div>
               </div>

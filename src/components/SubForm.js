@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createCategory, listCategories } from '../actions/categoryActions';
 import { createSubcategory, listSubcategories } from '../actions/subcategoriesActions';
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
 
 export default function SubForm(props) {
 
@@ -59,15 +61,16 @@ export default function SubForm(props) {
             <div>
                 <input 
                     type="text"
+                    maxLength="20"
                     onChange={e => setname(e.target.value)}
                     placeholder={`Nueva ${title}`}>
                 </input>
             </div>
             <div>
-                <i onClick={handlerSubmit} className="fas fa-check"></i>
+                <CheckIcon onClick={handlerSubmit} />
             </div>
             <div>
-                <i onClick={() => showNew(false)} className="fas fa-times"></i>
+                <ClearIcon onClick={() => showNew(false)} />
             </div>
         </div>
     )
