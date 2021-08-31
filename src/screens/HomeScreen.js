@@ -123,17 +123,11 @@ export default function HomeScreen(props) {
                 <div className="data-table">
                   <MDBDataTableV5
                     hover
-                    // entriesOptions={[10, 20]}
-                    // entries={10}
-                    // pagesAmount={4}
                     data={datatable}
-                    // pagingTop
                     searchTop
                     paging={false}
                     info={false}
-                    // scrollX
                     searchBottom={false}
-                    // fullPagination 
                   />
                 </div>
               </div>

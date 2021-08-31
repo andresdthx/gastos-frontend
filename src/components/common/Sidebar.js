@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signout } from '../../actions/userActions';
 // import { Redirect } from 'react-router-dom';
 import { Menu, MenuItem } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -79,7 +80,6 @@ export default function Sidebar() {
   const handlerSignout = () => {
     dispatch(signout());
     window.location.reload();
-    // return <Redirect to="/login"></Redirect>
   }
 
   const handleClick = (event) => {
@@ -121,7 +121,9 @@ export default function Sidebar() {
               </IconButton>
 
               <Typography className={classes.menuContent}>
-                <NotificationsIcon className={classes.menuItems} />
+                <Link to="/alert">
+                  <NotificationsIcon className={classes.menuItems} />
+                </Link>
                 <PersonIcon className={classes.menuItems} onClick={handleClick} />
                 <Menu
                   id="simple-menu"
@@ -130,8 +132,8 @@ export default function Sidebar() {
                   open={Boolean(anchorEl)}
                   onClose={() => handleClose()}
                 >
-                  <MenuItem onClick={() => handleClose()}>Profile</MenuItem>
-                  <MenuItem onClick={() => handleClose('logout')}>Logout</MenuItem>
+                  <MenuItem onClick={() => handleClose()}>Perfil</MenuItem>
+                  <MenuItem onClick={() => handleClose('logout')}>Cerrar sesión</MenuItem>
                 </Menu>
               </Typography>
             </Toolbar>
