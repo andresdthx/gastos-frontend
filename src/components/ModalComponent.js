@@ -109,10 +109,11 @@ export default function ModalComponent(props) {
 
     useEffect(()=>{
         if (expense && submit) {
-            dispatch(listExpenses(['08'], []));
+            let month = [today.split('-')[1]];
+            dispatch(listExpenses( month, []));
             closeModal();
         }
-    },[expense, dispatch, submit, closeModal]);
+    },[expense, dispatch, submit, closeModal, today]);
 
     return (
         <div>

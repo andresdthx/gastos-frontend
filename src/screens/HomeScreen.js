@@ -68,7 +68,10 @@ export default function HomeScreen(props) {
                   },
             ];
 
-            if(expenses[0].description)
+            let rows = [];
+
+            if (expenses.length) {   
+              if(expenses[0].description)
               columns.push({
                 label: 'Descripción',
                 field: 'description',
@@ -81,16 +84,14 @@ export default function HomeScreen(props) {
                 field: 'date',
                 width: 270,
               });
-
-            let rows = [];
-
-            expenses.map(item => rows.push({
-                category: item.category.category,
-                subcategory: item.subcategory.subcategory,
-                description: item.description ? item.description : '',
-                value: new Intl.NumberFormat().format(item.value),
-                date: item.date ? convertDate(item.date.split('T')[0]) : '',
-            }));
+              expenses.map(item => rows.push({
+                  category: item.category.category,
+                  subcategory: item.subcategory.subcategory,
+                  description: item.description ? item.description : '',
+                  value: new Intl.NumberFormat().format(item.value),
+                  date: item.date ? convertDate(item.date.split('T')[0]) : '',
+              }));
+            }
             setDatatable({ columns, rows });
         } else {
             getDate();
@@ -130,6 +131,23 @@ export default function HomeScreen(props) {
                     searchBottom={false}
                   />
                 </div>
+                <div className="data-content">
+                    {
+                      expenses.map(item => (
+                        <div key={item.expenseId} className="data-table-items">
+                          <div>{item.date ? convertDate(item.date.split('T').[0]) : ''}</div>
+                          <div>
+                            <div>
+                                <div className="category">{item.category.category}</div>
+                                <div className="subcategory">{item.subcategory.subcategory}</div>
+                            </div>
+
+                            <div>${new Intl.NumberFormat().format(item.value)}</div>
+                          </div>
+                        </div>
+                      ))
+                    }
+                  </div>
               </div>
             )}
         </div>
