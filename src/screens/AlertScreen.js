@@ -28,34 +28,29 @@ export default function AlertScreen() {
                 {
                     label: 'Nombre',
                     field: 'alert',
-                    width: 150,
-                    attributes: {
-                      'aria-controls': 'DataTable',
-                      'aria-label': 'Gasto',
-                    },
+                    width: 150
                   },
                   {
                     label: 'Mensaje',
                     field: 'message',
-                    width: 270,
+                    width: 270
                   },
                   {
-                    label: 'Fecha de envio',
+                    label: 'Fecha',
                     field: 'date',
                     width: 270
                   },
             ];
+
             let rows = [];
 
             alerts.map(item => rows.push({
                 alert: item.alert,
                 message: item.message,
-                date: item.date.split('T')[0]
+                date: item.date
             }));
 
             setDatatable({ columns, rows })
-            console.log(columns);
-            console.log(rows);
         } else {
             dispatch(listAlerts());
         }
@@ -67,20 +62,20 @@ export default function AlertScreen() {
                 :
                 error ? <MessageBox variant="danger">{error}</MessageBox>
                 :(
-            <div>
+                <div>
 
-                <div>Mis Alertas</div>
-                <div className="data-table">
-                      <MDBDataTableV5
-                        hover
-                        data={datatable}
-                        searchTop
-                        paging={false}
-                        info={false}
-                        searchBottom={false}
-                      />
+                    <div>Mis Alertas</div>
+                    <div className="data-table">
+                        <MDBDataTableV5
+                            hover
+                            data={datatable}
+                            searchTop
+                            // paging={false}
+                            // info={false}
+                            // searchBottom={false}
+                        />
+                    </div>
                 </div>
-            </div>
                 )
             }
         </div>
