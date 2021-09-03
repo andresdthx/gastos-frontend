@@ -113,6 +113,11 @@ border-bottom: 1px solid #838383;
 .btn.danger:hover{
   background: #E11A1A;
 }
+.modal-title{
+  margin-top: 1rem;
+  font-size: 1.6rem;
+  text-align:center;
+}
 .form-modal .select{
   text-decoration: none;
   border: none;
@@ -170,7 +175,7 @@ border-bottom: 1px solid #838383;
 .data-table-items > div:nth-child(1){
   font-size: 0.8rem;
   /* font-weight: 200; */
-  color: #AFAFAF;
+  color: #818080;
   /* border-bottom: 1px solid rgba(175, 175, 175 , 0.3); */
 }
 .data-table-items > div:nth-child(2){
@@ -397,9 +402,66 @@ table.table td:nth-child(3){
   border-radius: 5rem;
 }
 .floating-button > button > svg{
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: #ffffff;
 }
+
+.container, .container-table {
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+h2 {
+  font-size: 26px;
+  margin: 20px 0;
+  text-align: center;
+  /* small {
+    font-size: 0.5em;
+  } */
+}
+
+.responsive-table {
+  padding: 0;
+  margin: 0;
+  margin-top: 1rem;
+  /* width: 100%; */
+}
+  li {
+    border-radius: 3px;
+    /* padding: 25px 30px; */
+    padding: 1rem 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    /* width: 100%;
+    position: relative; */
+  }
+  .table-header {
+    background-color: #080058;
+    color: #ffffff;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    /* width: 100%;
+    position: relative; */
+  }
+  .table-row {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+  }
+  .col-1 {
+    flex-basis: 10%;
+  }
+  .col-2 {
+    flex-basis: 40%;
+  }
+  .col-3 {
+    flex-basis: 25%;
+  }
+  .col-4 {
+    flex-basis: 25%;
+  }
+/* } */
 
 @media only screen and (max-width: 450px) {
   .home {
@@ -422,13 +484,12 @@ table.table td:nth-child(3){
     padding: 0 !important;
   }
   .modal-body{
-    height: 100vh;
+    height: 75vh;
     position: relative;
   }
   .modal-body .form-modal{
     position: absolute;
     width: 100%;
-    top: 10%;
   }
   .modal-content{
     margin-top: 4rem;
@@ -447,3 +508,15 @@ table.table td:nth-child(3){
     overflow-x: scroll;
   }
 }
+
+@media only screen and (max-width: 540px) {
+  .container-table{
+    max-width: 540px;
+    overflow-x: scroll;
+    margin: 0.2rem;
+  }
+  .responsive-table{
+    width: 540px;
+  }
+}
+

@@ -120,10 +120,10 @@ export default function ModalComponent(props) {
             
             <MDBContainer>
             <MDBModal isOpen={modalIsOpen} toggle={closeModal}>
-                <MDBModalHeader toggle={closeModal}>Nuevo gasto</MDBModalHeader>
+                <MDBModalHeader toggle={closeModal}></MDBModalHeader>
                 <MDBModalBody>
+                <div className="modal-title">Registrar gasto</div>
                   <form className="form-modal" onSubmit={handlerSubmit}>
-
                         {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
                         <div>
                             {
@@ -174,7 +174,6 @@ export default function ModalComponent(props) {
                         <div>
                             <input 
                                 type="number"
-                                step="1000"
                                 onChange={e => setValue(e.target.value)}
                                 placeholder="Valor">
                             </input>

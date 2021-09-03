@@ -15,15 +15,15 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import PersonIcon from '@material-ui/icons/Person';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { useDispatch, useSelector } from 'react-redux';
 import { signout } from '../../actions/userActions';
-// import { Redirect } from 'react-router-dom';
 import { Menu, MenuItem } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import HomeIcon from '@material-ui/icons/Home';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const drawerWidth = 240;
 
@@ -52,10 +52,25 @@ const useStyles = makeStyles((theme) => ({
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
   },
+  accountContent:{
+    width: '5rem',
+    marginTop: '-2.5rem',
+    marginBottom: '2.5rem',
+    textAlign: 'center',
+    margin: '0 auto'
+  },
+  accountIcon:{
+    color: '#080058',
+    fontSize: '4rem',
+  },
+  iconsSidebar:{
+    color: '#FFFFFF'
+  },
+  list:{
+    color: '#000000'
+  }
 }));
 
 export default function Sidebar() {
@@ -121,7 +136,7 @@ export default function Sidebar() {
               </IconButton>
 
               <Typography className={classes.menuContent}>
-                <Link to="/alert">
+                <Link className={classes.iconsSidebar} to="/alert">
                   <NotificationsIcon className={classes.menuItems} />
                 </Link>
                 <PersonIcon className={classes.menuItems} onClick={handleClick} />
@@ -132,7 +147,9 @@ export default function Sidebar() {
                   open={Boolean(anchorEl)}
                   onClose={() => handleClose()}
                 >
-                  <MenuItem onClick={() => handleClose()}>Perfil</MenuItem>
+                  <Link to="/profile">
+                    <MenuItem onClick={() => handleClose()}>Perfil</MenuItem>
+                  </Link>
                   <MenuItem onClick={() => handleClose('logout')}>Cerrar sesión</MenuItem>
                 </Menu>
               </Typography>
@@ -154,14 +171,30 @@ export default function Sidebar() {
               </IconButton>
             </div>
 
+
+            <List className={classes.accountContent}>
+              <AccountCircleIcon className={classes.accountIcon}  />
+              {userInfo.username}
+            </List>
+
             <Divider />
             <List>
-              {['Inicio', 'Alertas', 'Ingresos', 'Gastos'].map((text, index) => (
-                <ListItem button key={text}>
-                  <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                  <ListItemText primary={text} />
+                <Link className={classes.list} to="/">
+                  <ListItem onClick={handleDrawerClose} button>
+                    <ListItemIcon><HomeIcon /></ListItemIcon>
+                    <ListItemText primary="Inicio" />
+                  </ListItem>
+                </Link>
+                <Link className={classes.list} to="/alert">
+                  <ListItem onClick={handleDrawerClose} button>
+                    <ListItemIcon><NotificationsIcon /></ListItemIcon>
+                    <ListItemText primary="Alertas" />
+                  </ListItem>
+                </Link>
+                <ListItem className={classes.list} onClick={handleDrawerClose} button>
+                  <ListItemIcon><AttachMoneyIcon /></ListItemIcon>
+                  <ListItemText primary="Ingresos" />
                 </ListItem>
-              ))}
             </List>
             <Divider />
           </Drawer>

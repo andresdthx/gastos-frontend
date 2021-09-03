@@ -93,7 +93,7 @@ export default function HomeScreen(props) {
               }));
             }
             setDatatable({ columns, rows });
-        } else {
+          } else {
             getDate();
         }
         setSuccess(false);
