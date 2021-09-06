@@ -179,7 +179,7 @@ border-bottom: 1px solid #838383;
   font-family: Roboto, serif;
 }
 .data-table-items > div:nth-child(1){
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 400;
   color: #505050;
 }
@@ -198,7 +198,7 @@ border-bottom: 1px solid #838383;
 .subcategory{
   color: #505050;
   font-weight: 400;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 .data-table-items > div:nth-child(2) > div:nth-child(2){
   font-size: 1.2rem;
