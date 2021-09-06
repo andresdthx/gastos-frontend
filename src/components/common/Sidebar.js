@@ -24,6 +24,7 @@ import { Link } from 'react-router-dom';
 import HomeIcon from '@material-ui/icons/Home';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import InsertChartIcon from '@material-ui/icons/InsertChart';
 
 const drawerWidth = 240;
 
@@ -53,17 +54,30 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
+    height: '10vh'
+  },
+  contentHeader:{
+    color: 'white',
+    background: 'url(images/background/sidebar-2.jpg)',
+    backgroundSize: '900px 500px'
+  },
+  button:{
+    color: 'white'
+  },
+  icon:{
+    color: '#080058'
   },
   accountContent:{
     width: '5rem',
-    marginTop: '-2.5rem',
-    marginBottom: '2.5rem',
+    margin: '0.5rem',
+    // marginTop: '-2.5rem',
+    // marginBottom: '2.5rem',
     textAlign: 'center',
-    margin: '0 auto'
+    // margin: '0 auto',
+    // border: '1px solid black'
   },
   accountIcon:{
-    color: '#080058',
-    fontSize: '4rem',
+    fontSize: '4rem'
   },
   iconsSidebar:{
     color: '#FFFFFF'
@@ -165,34 +179,41 @@ export default function Sidebar() {
               paper: classes.drawerPaper,
             }}
           >
-            <div className={classes.drawerHeader}>
-              <IconButton onClick={handleDrawerClose}>
-                {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-              </IconButton>
+            <div className={classes.contentHeader}>
+              <div className={classes.drawerHeader}>
+                <IconButton className={classes.button} onClick={handleDrawerClose}>
+                  {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                </IconButton>
+              </div>
+
+
+              <List className={classes.accountContent}>
+                <AccountCircleIcon className={classes.accountIcon}  />
+                {userInfo.username}
+              </List>
             </div>
 
-
-            <List className={classes.accountContent}>
-              <AccountCircleIcon className={classes.accountIcon}  />
-              {userInfo.username}
-            </List>
-
-            <Divider />
             <List>
                 <Link className={classes.list} to="/">
                   <ListItem onClick={handleDrawerClose} button>
-                    <ListItemIcon><HomeIcon /></ListItemIcon>
+                    <ListItemIcon><HomeIcon className={classes.icon} /></ListItemIcon>
                     <ListItemText primary="Inicio" />
+                  </ListItem>
+                </Link>
+                <Link className={classes.list} to="/chart">
+                  <ListItem onClick={handleDrawerClose} button>
+                    <ListItemIcon><InsertChartIcon className={classes.icon} /></ListItemIcon>
+                    <ListItemText primary="Graficos" />
                   </ListItem>
                 </Link>
                 <Link className={classes.list} to="/alert">
                   <ListItem onClick={handleDrawerClose} button>
-                    <ListItemIcon><NotificationsIcon /></ListItemIcon>
+                    <ListItemIcon><NotificationsIcon className={classes.icon} /></ListItemIcon>
                     <ListItemText primary="Alertas" />
                   </ListItem>
                 </Link>
                 <ListItem className={classes.list} onClick={handleDrawerClose} button>
-                  <ListItemIcon><AttachMoneyIcon /></ListItemIcon>
+                  <ListItemIcon><AttachMoneyIcon className={classes.icon} /></ListItemIcon>
                   <ListItemText primary="Ingresos" />
                 </ListItem>
             </List>

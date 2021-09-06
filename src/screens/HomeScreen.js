@@ -93,9 +93,10 @@ export default function HomeScreen(props) {
               }));
             }
             setDatatable({ columns, rows });
-          } else {
+          }
+          if(!month) {
             getDate();
-        }
+          }
         setSuccess(false);
     }, [dispatch, props, userInfo, success, expenses, month]);
     

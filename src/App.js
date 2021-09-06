@@ -2,6 +2,7 @@ import {BrowserRouter, Route } from 'react-router-dom';
 import Sidebar from './components/common/Sidebar';
 import FloatButton from './components/FloatButton';
 import AlertScreen from './screens/AlertScreen';
+import ChartScreen from './screens/ChartScreen';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import ProfileScreen from './screens/ProfileScreen';
@@ -18,6 +19,7 @@ function App() {
         <Route path="/register" component={RegisterScreen}></Route>
         <Route path="/alert" component={AlertScreen}></Route>
         <Route path="/profile" component={ProfileScreen}></Route>
+        <Route path="/chart" component={ChartScreen}></Route>
 
         <FloatButton />
     </BrowserRouter>

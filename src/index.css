@@ -8,6 +8,9 @@ body, html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.cursor-pointer{
+  cursor: pointer;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -171,26 +174,28 @@ border-bottom: 1px solid #838383;
   margin-top: 0.5rem;
   padding: 0.5rem;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  font-family: Roboto, serif;
 }
 .data-table-items > div:nth-child(1){
-  font-size: 0.8rem;
-  /* font-weight: 200; */
-  color: #818080;
-  /* border-bottom: 1px solid rgba(175, 175, 175 , 0.3); */
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #505050;
 }
 .data-table-items > div:nth-child(2){
   margin-top: 0.2rem;
   display: flex;
   justify-content:space-between;
-  color: #3F3F40;
+  /* color: #3F3F40; */
 }
 .data-table-items > div:nth-child(2) > div:nth-child(1){
   font-size: 1rem;
 }
 .category{
-  font-weight: 500;
+  font-weight: 400;
 }
 .subcategory{
+  color: #505050;
+  font-weight: 400;
   font-size: 0.9rem;
 }
 .data-table-items > div:nth-child(2) > div:nth-child(2){
@@ -263,7 +268,7 @@ table.table td:nth-child(3){
   font-weight: bold;
   margin-bottom: 0.2rem;
 }
-.form-modal > div > input {
+.form-modal > div > input, .form-modal > div > textarea {
   border: none;
   outline: none;
   font-family: Roboto, serif;
