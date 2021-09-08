@@ -12,7 +12,7 @@ export default function AlertScreen() {
     const [rows, setRows] = useState([]);
     const [send, setSend] = useState(false);
     const [modalIsOpen, setIsOpen] = useState(false);
-    const [success, setSuccess] = useState(false);
+    // const [success, setSuccess] = useState(false);
     const [editAlert, setEditAlert] = useState();
     const [edit, setEdit] = useState(false);
 
@@ -66,7 +66,7 @@ export default function AlertScreen() {
             <ModalAlert 
                 modalIsOpen={modalIsOpen}
                 setIsOpen={setIsOpen}
-                successList={setSuccess}
+                // successList={setSuccess}
                 editAlert={editAlert}
                 edit={edit}
             />

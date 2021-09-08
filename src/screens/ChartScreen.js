@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Bar, Doughnut, Pie } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 import { useDispatch, useSelector } from 'react-redux';
 import { listExpenses } from '../actions/expenseActions';
 

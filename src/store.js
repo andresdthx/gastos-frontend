@@ -4,7 +4,7 @@ import { createAlertReducer, listAlertsReducer, updateAlertReducer } from './red
 import { createCategoryReducers, listCategoriesReducer } from './reducers/categoryReducers';
 import { createExpenseReducer, listExpensesReducer } from './reducers/expenseReducers';
 import { createSubcategoryReducer, listSubcategoriesReducer } from './reducers/subcategoryReducers';
-import { registerReducer, signinReducer } from './reducers/userReducer';
+import { registerReducer, signinReducer, suscribeUserReducer } from './reducers/userReducer';
 import { getMonthsReducer } from './reducers/utilsReducers';
 
 const initialState = {
@@ -18,6 +18,7 @@ const initialState = {
 const reducer = combineReducers({
     userSignin: signinReducer,
     register: registerReducer,
+    userSuscribe: suscribeUserReducer,
 
     expenseList: listExpensesReducer,
     expenseCreate: createExpenseReducer,

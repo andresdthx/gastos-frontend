@@ -16,7 +16,7 @@ export default function ModalAlert(props) {
     const [submit, setSubmit] = useState(false);
 
     const alertCreate = useSelector(state => state.alertCreate);
-    const { alert, error, loading } = alertCreate;
+    const { alert } = alertCreate;
 
     const alertActiveUpdate = useSelector(state => state.alertActiveUpdate);
     const { alert: alertSuccess } = alertActiveUpdate;
