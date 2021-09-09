@@ -5,6 +5,7 @@ import LoadingBox from '../components/utils/LoadingBox';
 import { MDBDataTableV5 } from 'mdbreact';
 import SelectDate from '../components/SelectDate';
 import { getMonths } from '../actions/utilsActions';
+import FlashOnIcon from '@material-ui/icons/FlashOn';
 
 export default function HomeScreen(props) {
     const dispatch = useDispatch();
@@ -136,15 +137,19 @@ export default function HomeScreen(props) {
                     {
                       expenses.map(item => (
                         <div key={item.expenseId} className="data-table-items">
-                          <div>{item.date ? convertDate(item.date.split('T').[0]).slice(0, 6) + '.' : ''}</div>
-                          <div>
-                            <div>
-                                <div className="category">{item.category.category}</div>
-                                <div className="subcategory">{item.subcategory.subcategory}</div>
-                            </div>
+
+                          <div className="data-date">
+                            <div>{item.date ? convertDate(item.date.split('T')[0]).slice(0, 6).split(' ')[1] : ''}</div>
+                            <div>{item.date ? convertDate(item.date.split('T')[0]).slice(0, 6).split(' ')[0] : ''}</div>
+                          </div>
+
+                          <div> 
+                            <div className="category">{item.category.category}</div>
+                            <div className="subcategory">{item.subcategory.subcategory}</div>
+                          </div>
 
                             <div>${new Intl.NumberFormat().format(item.value)}</div>
-                          </div>
+
                         </div>
                       ))
                     }
