@@ -5,7 +5,8 @@ import MessageBox from '../components/MessageBox';
 import LoadingBox from '../components/utils/LoadingBox';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import ModalAlert from '../components/ModalAlert';
+// import ModalAlert from '../components/ModalAlert';
+import DrawerAlert from '../components/Drawers/DrawerAlert';
 
 export default function AlertScreen() {
     const dispatch = useDispatch();
@@ -22,21 +23,34 @@ export default function AlertScreen() {
     const alertActiveUpdate = useSelector(state => state.alertActiveUpdate);
     const { alert } = alertActiveUpdate;
 
+    const [state, setState] = React.useState({ right: false });
+
     const handleActive = (e, item) => {
         dispatch(updateAlertActive({...item, active: e.target.checked}));
         setSend(true);
     }
 
+    const toggleDrawer = (anchor, open) => (event) => {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+          return;
+        }
+    
+        setIsOpen(true);
+        setState({ ...state, [anchor]: open });
+      };
+
     const handleEdit = (item) => {
         setEditAlert(item);
         setIsOpen(true);
         setEdit(true);
+        toggleDrawer('right', true);
+        console.log("hola")
     }
 
-    const handleOpen = () => {
-        setEdit(false);
-        setIsOpen(!modalIsOpen);
-    }
+    // const handleOpen = () => {
+    //     setEdit(false);
+    //     setIsOpen(!modalIsOpen);
+    // }
 
     useEffect(()=>{
         if (alerts) {
@@ -63,10 +77,18 @@ export default function AlertScreen() {
 
     return (
         <div>
-            <ModalAlert 
+            {/* <ModalAlert 
                 modalIsOpen={modalIsOpen}
                 setIsOpen={setIsOpen}
                 // successList={setSuccess}
+                editAlert={editAlert}
+                edit={edit}
+            /> */}
+            <DrawerAlert 
+                modalIsOpen={modalIsOpen}
+                setIsOpen={setIsOpen}
+                state={state}
+                setState={setState}
                 editAlert={editAlert}
                 edit={edit}
             />
@@ -81,7 +103,7 @@ export default function AlertScreen() {
 
                     <button
                         type="button"
-                        onClick={() => handleOpen()}
+                        onClick={toggleDrawer('right', true)}
                         className="btn primary"
                     >
                         Crear alerta

@@ -56,7 +56,6 @@ export const registerUser = (userData) => async(dispatch) => {
 export const subscribeUser = (suscription) => async (dispatch, getState) => {
     dispatch({ type: USER_SUSCRIBE_REQUEST });
     try {
-
         const { userSignin: { userInfo } } = getState();
 
         const { data } = await axios.post('/api/users/suscription', {

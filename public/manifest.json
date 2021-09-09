@@ -1,6 +1,6 @@
 {
   "short_name": "Dero",
-  "name": "Dero App",
+  "name": "Dero",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#ffffff",
+  "theme_color": "#080058",
   "background_color": "#080058"
 }

@@ -136,7 +136,7 @@ export default function HomeScreen(props) {
                     {
                       expenses.map(item => (
                         <div key={item.expenseId} className="data-table-items">
-                          <div>{item.date ? convertDate(item.date.split('T').[0]).slice(0, 6) : ''}.</div>
+                          <div>{item.date ? convertDate(item.date.split('T').[0]).slice(0, 6) + '.' : ''}</div>
                           <div>
                             <div>
                                 <div className="category">{item.category.category}</div>

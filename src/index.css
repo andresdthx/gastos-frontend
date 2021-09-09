@@ -83,6 +83,9 @@ border-bottom: 1px solid #838383;
   font-weight: 400;
   background-color: rgb(253, 252, 252);
 }
+.form-modal .btn{
+  margin-top: 1.5rem;
+}
 .btn {
   font-family: Roboto, serif;
   padding: 0.6rem;
@@ -92,7 +95,6 @@ border-bottom: 1px solid #838383;
   color: #ffffff;
   font-weight: bold;
   cursor: pointer;
-  margin: 0;
 }
 .btn:hover{
   box-shadow:none;
@@ -174,7 +176,6 @@ border-bottom: 1px solid #838383;
   margin-top: 0.5rem;
   padding: 0.5rem;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  border-left: 5px solid #0F0688;
   border-radius: 0.2rem;
   font-family: Roboto, serif;
 }
@@ -182,15 +183,19 @@ border-bottom: 1px solid #838383;
   font-size: 0.7rem;
   font-weight: 400;
   color: #505050;
+  padding-left: 0.2rem;
 }
 .data-table-items > div:nth-child(2){
   margin-top: 0.2rem;
+  padding-left: 0.2rem;
   display: flex;
   justify-content:space-between;
+  border-left: 4px solid #0F0688;
+  border-radius: 0.2rem;
   /* color: #3F3F40; */
 }
 .data-table-items > div:nth-child(2) > div:nth-child(1){
-  font-size: 1rem;
+  font-size: .85rem;
 }
 .category{
   font-weight: 400;
@@ -201,14 +206,14 @@ border-bottom: 1px solid #838383;
   font-size: 0.8rem;
 }
 .data-table-items > div:nth-child(2) > div:nth-child(2){
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 500;
 }
 .data-card div:first-child{
-font-size: 0.8rem;
+font-size: 0.7rem;
 }
 .data-card div:last-child{
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 500;
   }
 
@@ -246,6 +251,13 @@ table.table td:nth-child(3){
   margin: 0 auto;
   background-color: #ffffff;
   padding: 0.5rem 0.5rem;
+}
+.form-title{
+  font-size: 1.5rem;
+  text-align: center;
+}
+.form-title > div{
+  padding: .5rem;
 }
 .form-modal > div{
   display: flex;
@@ -417,6 +429,21 @@ table.table td:nth-child(3){
   max-width: 60rem;
   margin: 0 auto;
 }
+.MuiDrawer-paper{
+  width: 50%;
+}
+.drawer-header{
+  border-bottom: 1.5px solid #e9d2d2;
+  margin: 1rem 1.3rem;
+  /* padding: 1rem; */
+}
+.drawer-body{
+  height: 100vh;
+}
+.drawer-back{
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
 
 h2 {
   font-size: 26px;
@@ -524,6 +551,12 @@ h2 {
   }
   .responsive-table{
     width: 540px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .MuiDrawer-paper{
+    width: 100%;
   }
 }
 

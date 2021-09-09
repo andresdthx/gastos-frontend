@@ -25,6 +25,8 @@ import HomeIcon from '@material-ui/icons/Home';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import InsertChartIcon from '@material-ui/icons/InsertChart';
+import Badge from '@material-ui/core/Badge';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 const drawerWidth = 240;
 
@@ -58,8 +60,8 @@ const useStyles = makeStyles((theme) => ({
   },
   contentHeader:{
     color: 'white',
-    background: 'url(images/background/sidebar-2.jpg)',
-    backgroundSize: '900px 500px'
+    background: 'url(images/background/sidebar.jpg)',
+    backgroundSize: '100%'
   },
   button:{
     color: 'white'
@@ -151,9 +153,14 @@ export default function Sidebar() {
 
               <Typography className={classes.menuContent}>
                 <Link className={classes.iconsSidebar} to="/alert">
-                  <NotificationsIcon className={classes.menuItems} />
+                <Badge className={classes.menuItems} badgeContent={4} color="primary">
+                  <NotificationsIcon  />
+                </Badge>
                 </Link>
-                <PersonIcon className={classes.menuItems} onClick={handleClick} />
+                <Link to="/" onClick={handleClick} className={classes.iconsSidebar}>
+                  <PersonIcon />
+                  <ArrowDropDownIcon />
+                </Link>
                 <Menu
                   id="simple-menu"
                   anchorEl={anchorEl}
