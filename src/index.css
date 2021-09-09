@@ -169,7 +169,7 @@ border-bottom: 1px solid #838383;
 }
 .data-content{
   display: none;
-  padding:1rem;
+  padding: 0.7rem;
   padding-bottom: 5.5rem;
 }
 .data-table-items {
@@ -191,15 +191,23 @@ border-bottom: 1px solid #838383;
   border-bottom-left-radius: 0.3rem;
 
 }
+.data-table-items > div:nth-child(2){
+  margin-left: 0.5rem;
+}
 .data-table-items > div:nth-child(3){
   margin-left: auto;
+  font-size: 1.05rem;
   font-weight: 500;
 }
 .data-date > div:nth-child(1){
+  text-align: center;
   font-size: 0.6rem;
 }
 .data-date > div:nth-child(2){
-  font-size: 1.3em;
+  font-size: 1.5em;
+}
+.category{
+  font-size: 0.9rem;
 }
 .subcategory{
   font-weight: 300;
