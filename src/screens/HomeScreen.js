@@ -5,7 +5,6 @@ import LoadingBox from '../components/utils/LoadingBox';
 import { MDBDataTableV5 } from 'mdbreact';
 import SelectDate from '../components/SelectDate';
 import { getMonths } from '../actions/utilsActions';
-import FlashOnIcon from '@material-ui/icons/FlashOn';
 
 export default function HomeScreen(props) {
     const dispatch = useDispatch();

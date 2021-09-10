@@ -60,7 +60,7 @@ export const subscribeUser = (suscription) => async (dispatch, getState) => {
 
         const { data } = await axios.post('/api/users/suscription', {
             suscription: suscription,
-            userId: userInfo.id
+            userId: userInfo ? userInfo.id  : ''
         });
         dispatch({ type: USER_SUSCRIBE_SUCCESS, payload: data });
     } catch (error) {
