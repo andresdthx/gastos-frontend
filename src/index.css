@@ -135,6 +135,10 @@ border-bottom: 1px solid #838383;
   font-size: 1.1rem;
 }
 /* Home screen */
+.home-screen {
+  max-width: 40rem;
+  margin: 0 auto;
+}
 .home-screen .title{
   font-family: Roboto, serif;
   padding: 0.5rem;
@@ -253,7 +257,7 @@ table.table td:nth-child(3){
 
 /* form modal */
 .form-modal {
-  max-width: 30rem;
+  max-width: 25rem;
   margin: 0 auto;
   background-color: #ffffff;
   padding: 0.5rem 0.5rem;
@@ -436,7 +440,7 @@ table.table td:nth-child(3){
   margin: 0 auto;
 }
 .MuiDrawer-paper{
-  width: 50%;
+  width: 35%;
 }
 .drawer-header{
   border-bottom: 1.5px solid #e9d2d2;
