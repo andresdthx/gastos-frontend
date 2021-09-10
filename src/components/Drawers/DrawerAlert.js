@@ -4,7 +4,8 @@ import Select from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Divider from '@material-ui/core/Divider';
-import { createAlert, listAlerts, updateAlertActive } from '../../actions/alertActions';
+import LoadingBox from '../utils/LoadingBox';
+import { createAlert, listAlerts, listTypeAlerts, updateAlertActive } from '../../actions/alertActions';
 
 export default function DrawerAlert(props) {
 
@@ -13,6 +14,7 @@ export default function DrawerAlert(props) {
   const { setIsOpen, editAlert, edit } = props;
   const [days, setDays] = useState([]);
   const [selectDay, setSelectDay] = useState('');
+  const [selectType, setSelectType] = useState('');
   const [day, setDay] = useState('');
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
@@ -24,67 +26,77 @@ export default function DrawerAlert(props) {
   const alertActiveUpdate = useSelector(state => state.alertActiveUpdate);
   const { alert: alertSuccess } = alertActiveUpdate;
 
+  const alertTypeList = useSelector(state => state.alertTypeList);
+  const { typeAlerts, loading: loadingTypes, error: errorTypes } = alertTypeList;
+
   const { state, setState } = props;
 
   const toggleDrawer = (anchor, open) => (event) => {
+    console.log(event);
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-    // setIsOpen(false);
     setState({ ...state, [anchor]: open });
   };
 
   const handleSubmit = (e) => { 
-    e.preventDefault();
-    setSubmit(true);
-    if (edit) {
-        dispatch(updateAlertActive({
-            date: day,
-            alert: title,
-            message,
-            id:editAlert.id,
-            active:editAlert.active
-        }));
-    } else {
-        dispatch(createAlert({date: day, alert: title, message}));
+        e.preventDefault();
+        setSubmit(true);
+        if (edit) {
+            dispatch(updateAlertActive({
+                date: day,
+                alert: title,
+                message,
+                id:editAlert.id,
+                active:editAlert.active
+            }));
+        } else {
+            dispatch(createAlert({date: day, alert: title, message}));
+        }
     }
-}
 
-useEffect(()=>{
-    if (days.length < 1) {
-        let days = [];
-        [...Array(31).keys()].map(item => days.push({value: item + 1, label: item + 1}));
-        setDays(days);
-    }
-},[days]);
+    useEffect(()=>{
+        if (days.length < 1) {
+            let days = [];
+            [...Array(31).keys()].map(item => days.push({value: item + 1, label: item + 1}));
+            setDays(days);
+        }
+    },[days]);
 
-useEffect(()=>{
-    if ((alert && submit) || (alertSuccess && submit)){
-        dispatch(listAlerts());
-        setIsOpen(false);
-    }
-},[alert, submit, dispatch, setIsOpen, alertSuccess]);
+    useEffect(()=>{
+        dispatch(listTypeAlerts());
+    }, [dispatch])
 
-useEffect(()=>{
-    if (editAlert && edit) {
-       setTitle(editAlert.alert);
-       setMessage(editAlert.message);
-       setSelectDay({label: editAlert.date, value:editAlert.date});
-       setDay(editAlert.date); 
-    } else {
-        setTitle('');
-        setMessage('');
-        setSelectDay({ label: 1, value: 1 }); 
-        setDay(1); 
-    }
-},[editAlert, edit]);
+    useEffect(()=>{
+        if ((alert && submit) || (alertSuccess && submit)){
+            dispatch(listAlerts());
+            setIsOpen(false);
+        }
+    },[alert, submit, dispatch, setIsOpen, alertSuccess]);
+
+    useEffect(()=>{
+        if (editAlert && edit) {
+            const type = typeAlerts.filter(type => type.label === editAlert.priority)
+            setTitle(editAlert.alert);
+            setMessage(editAlert.message);
+            setSelectDay({label: editAlert.date, value:editAlert.date});
+            setSelectType(type);
+            setDay(editAlert.date); 
+        } else {
+            setTitle('');
+            setMessage('');
+            setSelectDay({ label: 1, value: 1 }); 
+            setDay(1); 
+            setSelectType({});
+        }
+    },[editAlert, edit, typeAlerts]);
 
   return (
     <div>
         <React.Fragment key={'right'}>
           <Drawer anchor={'right'} open={state['right']} onClose={toggleDrawer('right', false)}>
             <div className="drawer-header">
-              <ArrowBackIcon className="drawer-back" onClick={toggleDrawer('right', false)} />
+              <ArrowBackIcon id="close" className="drawer-back" onClick={toggleDrawer('right', false)} />
             </div>
             <div className="drawer-body">
             <form className="form-modal" onSubmit={handleSubmit}>
@@ -93,13 +105,20 @@ useEffect(()=>{
                         <Divider />
                     </div>
                     <div>
-                    <label>Titulo alerta</label>
-                    <input
-                        type="text"
-                        value={title}
-                        onChange={e => setTitle(e.target.value)}
-                        required 
-                    />
+                    <label>Prioridad</label>
+                    {
+                        loadingTypes ? <LoadingBox />
+                        :
+                        (
+                        <Select
+                            placeholder="Prioridad de la alerta"
+                            onChange={e => setTitle(e.value)}
+                            defaultValue={selectType}
+                            options={typeAlerts}
+                        />
+                        )
+                    }
+
                 </div>
                 <div>
                     <label>Descripcíon alerta</label>
@@ -119,7 +138,7 @@ useEffect(()=>{
                     />
                 </div>
                 <div>
-                    <button className="btn secundary" type="submit">{edit ? 'Actualizar' : 'Crear'}</button>
+                    <button onClick={toggleDrawer('right', false)} className="btn secundary" type="submit">{edit ? 'Actualizar' : 'Crear'}</button>
                 </div>
 
             </form>

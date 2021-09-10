@@ -1,6 +1,6 @@
 import { applyMiddleware, createStore, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import { createAlertReducer, listAlertsReducer, updateAlertReducer } from './reducers/alertReducers';
+import { createAlertReducer, listAlertsReducer, listTypeAlertsReducer, updateAlertReducer, deleteAlertReducer } from './reducers/alertReducers';
 import { createCategoryReducers, listCategoriesReducer } from './reducers/categoryReducers';
 import { createExpenseReducer, listExpensesReducer } from './reducers/expenseReducers';
 import { createSubcategoryReducer, listSubcategoriesReducer } from './reducers/subcategoryReducers';
@@ -32,6 +32,8 @@ const reducer = combineReducers({
     alertList: listAlertsReducer,
     alertActiveUpdate: updateAlertReducer,
     alertCreate: createAlertReducer,
+    alertTypeList: listTypeAlertsReducer,
+    alertDelete: deleteAlertReducer,
 
     monthsGet: getMonthsReducer
 });
