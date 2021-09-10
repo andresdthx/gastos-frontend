@@ -11,7 +11,7 @@ export default function DrawerAlert(props) {
 
   const dispatch = useDispatch();
 
-  const { setIsOpen, editAlert, edit } = props;
+  const { editAlert, edit, state, setState } = props;
   const [days, setDays] = useState([]);
   const [selectDay, setSelectDay] = useState('');
   const [selectType, setSelectType] = useState('');
@@ -27,16 +27,10 @@ export default function DrawerAlert(props) {
   const { alert: alertSuccess } = alertActiveUpdate;
 
   const alertTypeList = useSelector(state => state.alertTypeList);
-  const { typeAlerts, loading: loadingTypes, error: errorTypes } = alertTypeList;
+  const { typeAlerts, loading: loadingTypes } = alertTypeList;
 
-  const { state, setState } = props;
-
-  const toggleDrawer = (anchor, open) => (event) => {
-    console.log(event);
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
-    setState({ ...state, [anchor]: open });
+  const toggleDrawer = (open) => {
+      setState({ ...state, right: open });
   };
 
   const handleSubmit = (e) => { 
@@ -70,9 +64,8 @@ export default function DrawerAlert(props) {
     useEffect(()=>{
         if ((alert && submit) || (alertSuccess && submit)){
             dispatch(listAlerts());
-            setIsOpen(false);
         }
-    },[alert, submit, dispatch, setIsOpen, alertSuccess]);
+    },[alert, submit, dispatch, alertSuccess]);
 
     useEffect(()=>{
         if (editAlert && edit) {
@@ -94,9 +87,9 @@ export default function DrawerAlert(props) {
   return (
     <div>
         <React.Fragment key={'right'}>
-          <Drawer anchor={'right'} open={state['right']} onClose={toggleDrawer('right', false)}>
+          <Drawer anchor={'right'} open={state.right} onClose={() => toggleDrawer(false)}>
             <div className="drawer-header">
-              <ArrowBackIcon id="close" className="drawer-back" onClick={toggleDrawer('right', false)} />
+              <ArrowBackIcon id="close" className="drawer-back" onClick={() => toggleDrawer(false)} />
             </div>
             <div className="drawer-body">
             <form className="form-modal" onSubmit={handleSubmit}>
@@ -138,7 +131,7 @@ export default function DrawerAlert(props) {
                     />
                 </div>
                 <div>
-                    <button onClick={toggleDrawer('right', false)} className="btn secundary" type="submit">{edit ? 'Actualizar' : 'Crear'}</button>
+                    <button onClick={() => toggleDrawer(false)} className="btn secundary" type="submit">{edit ? 'Actualizar' : 'Crear'}</button>
                 </div>
 
             </form>

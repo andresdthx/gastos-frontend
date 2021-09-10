@@ -15,8 +15,7 @@ import Divider from '@material-ui/core/Divider';
 export default function DrawerExpense(props) {
 
   const dispatch = useDispatch();
-  const {  setIsOpen } = props;
-
+  
   const [description, setDescription] = useState('');
   const [value, setValue] = useState('');
   const [date, setDate] = useState('');
@@ -40,17 +39,10 @@ export default function DrawerExpense(props) {
 
   const { state, setState } = props;
 
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
-    // setIsOpen(false);
-    setState({ ...state, [anchor]: open });
+  const toggleDrawer = (open) => {
+      setState({ ...state, right: open });
   };
 
-  const closeModal = useCallback(() => {
-      setIsOpen(false);
-  },[setIsOpen]);
 
   const loadCategories = useCallback(() => {
       if (!categories) {
@@ -119,105 +111,100 @@ export default function DrawerExpense(props) {
       if (expense && submit) {
           let month = [today.split('-')[1]];
           dispatch(listExpenses( month, []));
-          closeModal();
       }
-  },[expense, dispatch, submit, closeModal, today]);
+  },[expense, dispatch, submit, today]);
 
   return (
-    <div>
-        <React.Fragment key={'right'}>
-          <Drawer anchor={'right'} open={state['right']} onClose={toggleDrawer('right', false)}>
+        <Drawer anchor={'right'} open={state.right} onClose={() => toggleDrawer(false)}>
             <div className="drawer-header">
-              <ArrowBackIcon className="drawer-back" onClick={toggleDrawer('right', false)} />
+                <ArrowBackIcon className="drawer-back" onClick={() => toggleDrawer(false)} />
             </div>
             <div className="drawer-body">
-              <form className="form-modal" onSubmit={handlerSubmit}>
-                      {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
-                      <div className="form-title">
+                <form className="form-modal" onSubmit={handlerSubmit}>
+                        {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
+                        <div className="form-title">
                         <div>Registrar gasto</div>
                         <Divider />
-                      </div>
+                        </div>
 
-                      <div>
-                          {
-                          loading ? <LoadingBox></LoadingBox>
-                          :
-                          error ? <MessageBox variant="danger">{error}</MessageBox>
-                          :(
-                          <div>
-                              <Select
-                              className="select"
-                              placeholder="Categorias"
-                              onChange={e => handlerCategory(e.value)}
-                              defaultValue={categories[0]}
-                              options={categories} />
-                              <AddIcon
-                                  onClick={() => setShowNewCateogry(!showNewCategory)}
-                                  className="fas fa-plus-circle"
-                              />
-                              { showNewCategory && <SubForm showNew={setShowNewCateogry} type={'category'} /> }
-                          </div>
-                          )}
-                      </div>
-                      <div>
-                          {
-                              loadingSubcategory ? <div
-                                                      className="new-category"
-                                                      onClick={() => setShowNewCateogry(!showNewCategory)}
-                                                  >Crear categoria</div>
-                              :
-                              errorSubcategory ? <MessageBox variant="danger">{errorSubcategory}</MessageBox>
-                              :(
-                              <div>
-                                  <Select
-                                      className="select"
-                                      placeholder="Subcategorias"
-                                      onChange={e => setSubcategory(e.value)}
-                                      defaultValue={subcategories[0]}
-                                      options={subcategories}
-                                  />
-                                  <AddIcon 
-                                      onClick={() => setShowNewSubcategory(!showNewSubcategory)}
-                                      className="fas fa-plus-circle"
-                                  />  
-                                  { showNewSubcategory && <SubForm showNew={setShowNewSubcategory} type={'subcategory'} categoryId={category} /> }
-                              </div>
-                          )}
-                      </div>
-                      <div>
-                          <input 
-                              type="number"
-                              onChange={e => setValue(e.target.value)}
-                              placeholder="Valor">
-                          </input>
-                      </div>
-                      <div>
-                          <input 
-                              type="text"
-                              onChange={e => setDescription(e.target.value)}
-                              placeholder="Descripcion">
-                          </input>
-                      </div>
-                      <div>
-                          <input
-                              value={today} 
-                              type="date"
-                              onChange={e => handletDate(e.target.value)}
-                              placeholder="Fecha">
-                          </input>
-                      </div>
-                      <div>
-                          {
-                              loadingSuccess ? <LoadingBox />
-                              :(
-                                  <button className="btn secundary" type="submit">Crear</button>
-                              )
-                          }
-                      </div>
+                        <div>
+                            {
+                            loading ? <LoadingBox></LoadingBox>
+                            :
+                            error ? <MessageBox variant="danger">{error}</MessageBox>
+                            :(
+                            <div>
+                                <Select
+                                className="select"
+                                placeholder="Categorias"
+                                onChange={e => handlerCategory(e.value)}
+                                defaultValue={categories[0]}
+                                options={categories} />
+                                <AddIcon
+                                    onClick={() => setShowNewCateogry(!showNewCategory)}
+                                    className="fas fa-plus-circle"
+                                />
+                                { showNewCategory && <SubForm showNew={setShowNewCateogry} type={'category'} /> }
+                            </div>
+                            )}
+                        </div>
+                        <div>
+                            {
+                                loadingSubcategory ? <div
+                                                        className="new-category"
+                                                        onClick={() => setShowNewCateogry(!showNewCategory)}
+                                                    >Crear categoria</div>
+                                :
+                                errorSubcategory ? <MessageBox variant="danger">{errorSubcategory}</MessageBox>
+                                :(
+                                <div>
+                                    <Select
+                                        className="select"
+                                        placeholder="Subcategorias"
+                                        onChange={e => setSubcategory(e.value)}
+                                        defaultValue={subcategories[0]}
+                                        options={subcategories}
+                                    />
+                                    <AddIcon 
+                                        onClick={() => setShowNewSubcategory(!showNewSubcategory)}
+                                        className="fas fa-plus-circle"
+                                    />  
+                                    { showNewSubcategory && <SubForm showNew={setShowNewSubcategory} type={'subcategory'} categoryId={category} /> }
+                                </div>
+                            )}
+                        </div>
+                        <div>
+                            <input 
+                                type="number"
+                                onChange={e => setValue(e.target.value)}
+                                placeholder="Valor">
+                            </input>
+                        </div>
+                        <div>
+                            <input 
+                                type="text"
+                                onChange={e => setDescription(e.target.value)}
+                                placeholder="Descripcion">
+                            </input>
+                        </div>
+                        <div>
+                            <input
+                                value={today} 
+                                type="date"
+                                onChange={e => handletDate(e.target.value)}
+                                placeholder="Fecha">
+                            </input>
+                        </div>
+                        <div>
+                            {
+                                loadingSuccess ? <LoadingBox />
+                                :(
+                                    <button className="btn secundary" type="submit">Crear</button>
+                                )
+                            }
+                        </div>
                 </form>
             </div>
-          </Drawer>
-        </React.Fragment>
-    </div>
+        </Drawer>
   );
 }

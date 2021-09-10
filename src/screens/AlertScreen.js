@@ -12,7 +12,6 @@ export default function AlertScreen() {
     const dispatch = useDispatch();
     const [rows, setRows] = useState([]);
     const [send, setSend] = useState(false);
-    const [modalIsOpen, setIsOpen] = useState(false);
     const [editAlert, setEditAlert] = useState();
     const [edit, setEdit] = useState(false);
     const [submitDelete, setSubmitDelete] = useState(false);
@@ -24,7 +23,7 @@ export default function AlertScreen() {
     const { alert } = alertActiveUpdate;
 
     const alertDelete = useSelector(state => state.alertDelete);
-    const { success, loading: loadingDelete } = alertDelete;
+    const { success } = alertDelete;
 
     const [state, setState] = React.useState({ right: false });
 
@@ -33,10 +32,7 @@ export default function AlertScreen() {
         setSend(true);
     }
 
-    const toggleDrawer = (anchor, open, item) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-          return;
-        }
+    const toggleDrawer = (open, item) => {
 
         if(item){
             setEditAlert(item);
@@ -44,9 +40,8 @@ export default function AlertScreen() {
         } else {
             setEditAlert({});
         }
-    
-        setIsOpen(true);
-        setState({ ...state, [anchor]: open });
+
+        setState({ ...state, right: open });
     };
 
     const handleDelete = (alertId) => {
@@ -104,8 +99,6 @@ export default function AlertScreen() {
     return (
         <div>
             <DrawerAlert 
-                modalIsOpen={modalIsOpen}
-                setIsOpen={setIsOpen}
                 state={state}
                 setState={setState}
                 editAlert={editAlert}
@@ -117,7 +110,7 @@ export default function AlertScreen() {
 
                 <button
                     type="button"
-                    onClick={toggleDrawer('right', true)}
+                    onClick={() => toggleDrawer(true)}
                     className="btn primary"
                 >
                     Crear alerta
@@ -147,7 +140,7 @@ export default function AlertScreen() {
                                     <div className="col col-4" data-label="Amount">{item.message}</div>
                                     <div className="col col-4" data-label="Payment Status">Día {item.date} de cada mes</div>
                                     <div className="col col-2" data-label="Payment Status">
-                                        <EditIcon onClick={toggleDrawer('right', true, item)} className="cursor-pointer" />
+                                        <EditIcon onClick={() => toggleDrawer(true, item)} className="cursor-pointer" />
                                         <DeleteIcon onClick={() => handleDelete(item.id)} className="cursor-pointer" />
                                     </div>
                                 </li> 

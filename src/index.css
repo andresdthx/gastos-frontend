@@ -441,18 +441,23 @@ table.table td:nth-child(3){
 }
 .MuiDrawer-paper{
   width: 35%;
+  /* padding: 0;
+  margin: 0; */
 }
 .drawer-header{
   border-bottom: 1.5px solid #e9d2d2;
-  margin: 1rem 1.3rem;
-  /* padding: 1rem; */
+  padding: 1rem;
+  background-color: #080058;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
 }
 .drawer-body{
   height: 100vh;
 }
 .drawer-back{
   cursor: pointer;
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
 }
 
 h2 {
@@ -506,6 +511,32 @@ h2 {
     flex-basis: 25%;
   }
 /* } */
+
+.card-notifcation{
+  display: flex;
+  padding: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  margin: 0.5rem;
+}
+.card-notifcation > div{
+  margin-left: 1rem;
+}
+.card-notifcation div:last-child div:first-child{
+  font-size: 1.1rem;
+}
+.card-notifcation div:last-child div:last-child{
+  font-weight: 200;
+}
+.card-alert-Alta{
+  background-color: red !important;
+}
+.card-alert-Media{
+  background-color: green !important;
+}
+
+.card-alert-Baja{
+  background-color: #BCBFFF !important;
+}
 
 @media only screen and (max-width: 450px) {
   .home {

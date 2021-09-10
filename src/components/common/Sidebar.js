@@ -29,6 +29,7 @@ import Badge from '@material-ui/core/Badge';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import UpdateIcon from '@material-ui/icons/Update';
+import DrawerNotification from '../Drawers/DrawerNotification';
 
 const drawerWidth = 240;
 
@@ -133,6 +134,12 @@ export default function Sidebar() {
     }
   };
 
+  const [state, setState] = React.useState({ right: false });
+
+  const toggleDrawer = (open) => {
+      setState({ ...state, right: open });
+  };
+
   return (
     <div>
       {
@@ -154,8 +161,8 @@ export default function Sidebar() {
               </IconButton>
 
               <Typography className={classes.menuContent}>
-                <Link className={classes.iconsSidebar} to="/alert">
-                <Badge className={classes.menuItems} badgeContent={4} color="primary">
+                <Link className={classes.iconsSidebar} to="#">
+                <Badge className={classes.menuItems} onClick={() => toggleDrawer(true)} badgeContent={4} color="primary">
                   <NotificationsIcon  />
                 </Badge>
                 </Link>
@@ -178,6 +185,11 @@ export default function Sidebar() {
               </Typography>
             </Toolbar>
           </AppBar>
+
+          <DrawerNotification
+                state={state}
+                setState={setState}
+          />
           
           <Drawer
             className={classes.drawer}

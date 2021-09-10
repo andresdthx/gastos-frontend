@@ -5,6 +5,7 @@ import AlertScreen from './screens/AlertScreen';
 import ChartScreen from './screens/ChartScreen';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
+import NotificationsScreen from './screens/NotificationsScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import RegisterScreen from './screens/RegisterScreen';
 
