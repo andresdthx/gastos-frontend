@@ -75,6 +75,7 @@ self.addEventListener('push', e => {
 
   self.registration.showNotification(data.title, {
     body: data.message,
-    icon: 'https://upload.wikimedia.org/wikipedia/commons/3/32/Circle-icons-hourglass.svg'
+    icon: 'https://pixabay.com/vectors/bell-notification-communication-1096280/'
+    // icon: 'images/background/sidebar.jpg'
   });
 })
