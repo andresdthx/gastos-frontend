@@ -27,6 +27,8 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import InsertChartIcon from '@material-ui/icons/InsertChart';
 import Badge from '@material-ui/core/Badge';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import UpdateIcon from '@material-ui/icons/Update';
 
 const drawerWidth = 240;
 
@@ -157,7 +159,7 @@ export default function Sidebar() {
                   <NotificationsIcon  />
                 </Badge>
                 </Link>
-                <Link to="/" onClick={handleClick} className={classes.iconsSidebar}>
+                <Link to="#" onClick={handleClick} className={classes.iconsSidebar}>
                   <PersonIcon />
                   <ArrowDropDownIcon />
                 </Link>
@@ -222,6 +224,14 @@ export default function Sidebar() {
                 <ListItem className={classes.list} onClick={handleDrawerClose} button>
                   <ListItemIcon><AttachMoneyIcon className={classes.icon} /></ListItemIcon>
                   <ListItemText primary="Ingresos" />
+                </ListItem>
+                <ListItem className={classes.list} onClick={handleDrawerClose} button>
+                  <ListItemIcon><UpdateIcon className={classes.icon} /></ListItemIcon>
+                  <ListItemText primary="Proximos gastos" />
+                </ListItem>
+                <ListItem className={classes.list} onClick={handleDrawerClose} button>
+                  <ListItemIcon><FormatListBulletedIcon className={classes.icon} /></ListItemIcon>
+                  <ListItemText primary="Pendientes" />
                 </ListItem>
             </List>
             <Divider />

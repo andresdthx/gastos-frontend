@@ -166,6 +166,8 @@ border-bottom: 1px solid #838383;
   border-radius: 0.2rem;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   text-align: left;
+  background-color: #0D0090;
+  color: #ffffff;
 }
 .data-content{
   display: none;
@@ -189,7 +191,6 @@ border-bottom: 1px solid #838383;
   padding: 0.3rem 0.9rem;
   border-top-left-radius: 0.3rem;
   border-bottom-left-radius: 0.3rem;
-
 }
 .data-table-items > div:nth-child(2){
   margin-left: 0.5rem;
@@ -207,7 +208,7 @@ border-bottom: 1px solid #838383;
   font-size: 1.5em;
 }
 .category{
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 .subcategory{
   font-weight: 300;
@@ -215,13 +216,13 @@ border-bottom: 1px solid #838383;
 }
 
 .data-card div:first-child{
-font-size: 0.7rem;
+  font-size: 0.7rem;
+  font-weight: 300;
 }
 .data-card div:last-child{
   font-size: 1.2rem;
-  font-weight: 500;
-  }
-
+  font-weight: 400;
+}
 .data-table{
   margin: 0.5rem;
   padding-top: 0.5rem;
