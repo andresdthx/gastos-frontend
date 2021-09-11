@@ -20,8 +20,10 @@ button {
   outline:none !important;
 }
 a {
-  text-decoration: none;
+  text-decoration: none ;
+  color: black;
 }
+
 .home{
   padding-top: 5rem;
   height: 100vh;
@@ -538,6 +540,51 @@ h2 {
   background-color: #BCBFFF !important;
 }
 
+.card-expense{
+  margin: 0.7rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  position: relative;
+  /* border: 1px solid black; */
+}
+.card-expense-header{
+  padding: 5rem 0 1rem 1rem;
+  background-color:#080058;
+  border-top-left-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
+}
+.card-expense-header div:first-child{
+  color: white;
+  font-size: 1.5rem;
+}
+.card-expense-header div:last-child{
+  font-weight: 200;
+  color: #d8d8d8;
+}
+.card-expense-body{
+  padding: 3rem 0 2rem 1rem;
+}
+.card-expense-body div:first-child{
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.card-expense-body div:last-child{
+  font-weight: 200;
+}
+.card-expense-edit{
+  right: 2rem;
+  top: 16rem;
+  position: absolute;
+}
+
+.card-expense-edit .MuiAvatar-circular{
+  background-color: #080058;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+.card-expense-edit svg{
+  font-size: 1.7rem;
+}
 @media only screen and (max-width: 450px) {
   .home {
     padding: 0;

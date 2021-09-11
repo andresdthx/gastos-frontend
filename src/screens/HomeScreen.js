@@ -5,6 +5,7 @@ import LoadingBox from '../components/utils/LoadingBox';
 import { MDBDataTableV5 } from 'mdbreact';
 import SelectDate from '../components/SelectDate';
 import { getMonths } from '../actions/utilsActions';
+import { Link } from 'react-router-dom';
 
 export default function HomeScreen(props) {
     const dispatch = useDispatch();
@@ -135,21 +136,23 @@ export default function HomeScreen(props) {
                 <div className="data-content">
                     {
                       expenses.map(item => (
-                        <div key={item.expenseId} className="data-table-items">
+                        // <Link to={`/expense/${item.expenseId}`}>
+                          <div key={item.expenseId} className="data-table-items">
 
-                          <div className="data-date">
-                            <div>{item.date ? convertDate(item.date.split('T')[0]).slice(0, 6).split(' ')[1] : ''}</div>
-                            <div>{item.date ? convertDate(item.date.split('T')[0]).slice(0, 6).split(' ')[0] : ''}</div>
+                            <div className="data-date">
+                              <div>{item.date ? convertDate(item.date.split('T')[0]).slice(0, 6).split(' ')[1] : ''}</div>
+                              <div>{item.date ? convertDate(item.date.split('T')[0]).slice(0, 6).split(' ')[0] : ''}</div>
+                            </div>
+
+                            <div> 
+                              <div className="category">{item.category.category}</div>
+                              <div className="subcategory">{item.subcategory.subcategory}</div>
+                            </div>
+
+                              <div>${new Intl.NumberFormat().format(item.value)}</div>
+
                           </div>
-
-                          <div> 
-                            <div className="category">{item.category.category}</div>
-                            <div className="subcategory">{item.subcategory.subcategory}</div>
-                          </div>
-
-                            <div>${new Intl.NumberFormat().format(item.value)}</div>
-
-                        </div>
+                        // </Link>
                       ))
                     }
                   </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Drawer from '@material-ui/core/Drawer';
 import Select from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,9 +29,14 @@ export default function DrawerAlert(props) {
   const alertTypeList = useSelector(state => state.alertTypeList);
   const { typeAlerts, loading: loadingTypes } = alertTypeList;
 
-  const toggleDrawer = (open) => {
-      setState({ ...state, right: open });
-  };
+    const toggleDrawer = (open) => {
+        setState({ ...state, right: open });
+    };
+
+    const handleClose = useCallback((open) => {
+        if(state.right)
+            setState({ ...state, right: open });
+    },[setState, state]);
 
   const handleSubmit = (e) => { 
         e.preventDefault();
@@ -63,9 +68,10 @@ export default function DrawerAlert(props) {
 
     useEffect(()=>{
         if ((alert && submit) || (alertSuccess && submit)){
+            handleClose(false);
             dispatch(listAlerts());
         }
-    },[alert, submit, dispatch, alertSuccess]);
+    },[alert, submit, dispatch, alertSuccess, handleClose]);
 
     useEffect(()=>{
         if (editAlert && edit) {

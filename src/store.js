@@ -2,7 +2,7 @@ import { applyMiddleware, createStore, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import { createAlertReducer, listAlertsReducer, listTypeAlertsReducer, updateAlertReducer, deleteAlertReducer } from './reducers/alertReducers';
 import { createCategoryReducers, listCategoriesReducer } from './reducers/categoryReducers';
-import { createExpenseReducer, listExpensesReducer } from './reducers/expenseReducers';
+import { createExpenseReducer, listExpenseReducer, listExpensesReducer } from './reducers/expenseReducers';
 import { createSubcategoryReducer, listSubcategoriesReducer } from './reducers/subcategoryReducers';
 import { registerReducer, signinReducer, suscribeUserReducer } from './reducers/userReducer';
 import { getMonthsReducer } from './reducers/utilsReducers';
@@ -20,6 +20,7 @@ const reducer = combineReducers({
     register: registerReducer,
     userSuscribe: suscribeUserReducer,
 
+    expList: listExpenseReducer,
     expenseList: listExpensesReducer,
     expenseCreate: createExpenseReducer,
 

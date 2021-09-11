@@ -32,7 +32,7 @@ export default function DrawerNotification(props) {
             <div className="drawer-body">
                 {
                     notifications.map(item => (
-                        <div className="card-notifcation">
+                        <div className="card-notifcation" key={item.title}>
                             <div>
                                 <Avatar className={`card-alert-${item.priority}`}>
                                     R

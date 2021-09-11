@@ -3,9 +3,10 @@ import Sidebar from './components/common/Sidebar';
 import FloatButton from './components/FloatButton';
 import AlertScreen from './screens/AlertScreen';
 import ChartScreen from './screens/ChartScreen';
+import ExpenseScreen from './screens/ExpenseScreen';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
-import NotificationsScreen from './screens/NotificationsScreen';
+// import NotificationsScreen from './screens/NotificationsScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import RegisterScreen from './screens/RegisterScreen';
 
@@ -21,6 +22,8 @@ function App() {
         <Route path="/alert" component={AlertScreen}></Route>
         <Route path="/profile" component={ProfileScreen}></Route>
         <Route path="/chart" component={ChartScreen}></Route>
+        <Route path="/expense/:id" component={ExpenseScreen}></Route>
+        <Route path="/create" component={FloatButton}></Route>
 
         <FloatButton />
     </BrowserRouter>

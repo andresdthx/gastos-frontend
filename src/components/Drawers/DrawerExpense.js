@@ -11,6 +11,7 @@ import AddIcon from '@material-ui/icons/Add';
 import SubForm from '../SubForm';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Divider from '@material-ui/core/Divider';
+import { Link } from 'react-router-dom';
 
 export default function DrawerExpense(props) {
 
@@ -37,12 +38,17 @@ export default function DrawerExpense(props) {
   const subcategoriesList = useSelector(state => state.subcategoriesList);
   const { subcategories, loading: loadingSubcategory, error: errorSubcategory } = subcategoriesList;
 
-  const { state, setState } = props;
+  const { state, setState, setIsOpen } = props;
 
   const toggleDrawer = (open) => {
       setState({ ...state, right: open });
   };
 
+  const handleClose = useCallback((open) => {
+      if(state.right)
+        setState({ ...state, right: open });
+        setIsOpen(false);
+  },[setState, state, setIsOpen]);
 
   const loadCategories = useCallback(() => {
       if (!categories) {
@@ -111,13 +117,16 @@ export default function DrawerExpense(props) {
       if (expense && submit) {
           let month = [today.split('-')[1]];
           dispatch(listExpenses( month, []));
+          handleClose(false);
       }
-  },[expense, dispatch, submit, today]);
+  },[expense, dispatch, submit, today, handleClose]);
 
   return (
         <Drawer anchor={'right'} open={state.right} onClose={() => toggleDrawer(false)}>
             <div className="drawer-header">
-                <ArrowBackIcon className="drawer-back" onClick={() => toggleDrawer(false)} />
+                <Link to="/">
+                    <ArrowBackIcon className="drawer-back" onClick={() => toggleDrawer(false)} />
+                </Link>
             </div>
             <div className="drawer-body">
                 <form className="form-modal" onSubmit={handlerSubmit}>
