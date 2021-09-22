@@ -218,36 +218,45 @@ export default function Sidebar() {
             </div>
 
             <List>
+
                 <Link className={classes.list} to="/">
                   <ListItem onClick={handleDrawerClose} button>
                     <ListItemIcon><HomeIcon className={classes.icon} /></ListItemIcon>
                     <ListItemText primary="Inicio" />
                   </ListItem>
                 </Link>
+
                 <Link className={classes.list} to="/chart">
                   <ListItem onClick={handleDrawerClose} button>
                     <ListItemIcon><InsertChartIcon className={classes.icon} /></ListItemIcon>
                     <ListItemText primary="Graficos" />
                   </ListItem>
                 </Link>
+
                 <Link className={classes.list} to="/alert">
                   <ListItem onClick={handleDrawerClose} button>
                     <ListItemIcon><NotificationsIcon className={classes.icon} /></ListItemIcon>
                     <ListItemText primary="Alertas" />
                   </ListItem>
                 </Link>
+
                 <ListItem className={classes.list} onClick={handleDrawerClose} button>
                   <ListItemIcon><AttachMoneyIcon className={classes.icon} /></ListItemIcon>
                   <ListItemText primary="Ingresos" />
                 </ListItem>
+
                 <ListItem className={classes.list} onClick={handleDrawerClose} button>
                   <ListItemIcon><UpdateIcon className={classes.icon} /></ListItemIcon>
                   <ListItemText primary="Proximos gastos" />
                 </ListItem>
+
+                <Link className={classes.list} to="/activity">
                 <ListItem className={classes.list} onClick={handleDrawerClose} button>
                   <ListItemIcon><FormatListBulletedIcon className={classes.icon} /></ListItemIcon>
                   <ListItemText primary="Pendientes" />
                 </ListItem>
+                </Link>
+                
             </List>
             <Divider />
           </Drawer>

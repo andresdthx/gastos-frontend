@@ -11,12 +11,12 @@ import ProfileScreen from './screens/ProfileScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ExpenseCreateScreen from './screens/ExpenseCreateScreen';
 import AlertCreateScreen from './screens/AlertCreateScreen';
+import ActivityScreen from './screens/ActivityScreen';
 
 function App() {
 
   return (
     <BrowserRouter>
-        
         <Sidebar></Sidebar>
         <Switch>
           <Route path="*">
@@ -49,6 +49,7 @@ function RouteGroup() {
           <Route path="/expenses/:id" component={ExpenseScreen}></Route>
           <Route path="/create" component={ExpenseCreateScreen}></Route>
           <Route path="/create-alert" component={AlertCreateScreen}></Route>
+          <Route path="/activity" component={ActivityScreen}></Route>
         </Switch>
       </CSSTransition>
     </TransitionGroup>

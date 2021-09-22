@@ -47,6 +47,7 @@ export default function ExpenseScreen(props) {
                     <div className="card-expense-header">
                         <div>{expense.category.label}</div>
                         <div>{expense.subcategory.label}</div>
+                        <div>{expense.description}</div>
                     </div>
                     <div className="card-expense-body">
                         <div>${expense.value}</div>
