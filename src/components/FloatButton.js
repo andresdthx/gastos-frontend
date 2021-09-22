@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import AddIcon from '@material-ui/icons/Add';
 import DrawerExpense from './Drawers/DrawerExpense';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function FloatButton(props) {
 
@@ -32,13 +32,13 @@ export default function FloatButton(props) {
             {
                 userInfo && 
                 (
-                    // <Link to ="/create">
+                    <Link to ="/create">
                         <div className="floating-button">
-                            <button className="btoncito" onClick={() => toggleDrawer(true)}>
+                            <button className="btoncito">
                                 <AddIcon />
                             </button>
                         </div>
-                    // </Link>
+                    </Link>
                 )
             }
         </div>

@@ -87,6 +87,9 @@ const useStyles = makeStyles((theme) => ({
   iconsSidebar:{
     color: '#FFFFFF'
   },
+  iconsMenu:{
+    color: '#000000'
+  },
   list:{
     color: '#000000'
   }
@@ -166,10 +169,10 @@ export default function Sidebar() {
                   <NotificationsIcon  />
                 </Badge>
                 </Link>
-                <Link to="#" onClick={handleClick} className={classes.iconsSidebar}>
+                <span to="/#" onClick={handleClick} className={classes.iconsSidebar}>
                   <PersonIcon />
                   <ArrowDropDownIcon />
-                </Link>
+                </span>
                 <Menu
                   id="simple-menu"
                   anchorEl={anchorEl}
@@ -178,7 +181,7 @@ export default function Sidebar() {
                   onClose={() => handleClose()}
                 >
                   <Link to="/profile">
-                    <MenuItem onClick={() => handleClose()}>Perfil</MenuItem>
+                    <MenuItem onClick={() => handleClose()} className={classes.iconsMenu}>Perfil</MenuItem>
                   </Link>
                   <MenuItem onClick={() => handleClose('logout')}>Cerrar sesión</MenuItem>
                 </Menu>
@@ -193,9 +196,9 @@ export default function Sidebar() {
           
           <Drawer
             className={classes.drawer}
-            variant="persistent"
             anchor="left"
             open={open}
+            onClose={handleDrawerClose}
             classes={{
               paper: classes.drawerPaper,
             }}

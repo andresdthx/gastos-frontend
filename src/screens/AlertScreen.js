@@ -105,7 +105,7 @@ export default function AlertScreen() {
                 edit={edit}
             />
 
-            <div className="container">
+            <div className="container page-container page">
                 <h2>Alertas<small></small></h2>
 
                 <button

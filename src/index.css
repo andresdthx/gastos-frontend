@@ -21,7 +21,8 @@ button {
 }
 a {
   text-decoration: none ;
-  color: black;
+  color: white;
+  /* color: black; */
 }
 
 .home{
@@ -585,6 +586,24 @@ h2 {
 .card-expense-edit svg{
   font-size: 1.7rem;
 }
+
+.fade-enter{
+  opacity: 0;
+}
+.fade-exit{
+  opacity: 1;
+}
+.fade-enter-active{
+  opacity: 1;
+}
+.fade-exit-active{
+  opacity: 0;
+}
+.fade-enter-active,
+.fade-exit-active{
+  transition: opacity 500ms;
+}
+
 @media only screen and (max-width: 450px) {
   .home {
     padding: 0;

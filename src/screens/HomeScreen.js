@@ -40,6 +40,10 @@ export default function HomeScreen(props) {
       return newDate;
     }
 
+    const handleRedirect = (expenseId) => {
+        props.history.push(`/expenses/${expenseId}`);
+    }
+
     useEffect(()=> {
       if(!months) dispatch(getMonths());
     },[dispatch, months]);
@@ -137,7 +141,7 @@ export default function HomeScreen(props) {
                     {
                       expenses.map(item => (
                         // <Link to={`/expense/${item.expenseId}`}>
-                          <div key={item.expenseId} className="data-table-items">
+                          <div key={item.expenseId} className="data-table-items" onClick={() => handleRedirect(item.expenseId)}>
 
                             <div className="data-date">
                               <div>{item.date ? convertDate(item.date.split('T')[0]).slice(0, 6).split(' ')[1] : ''}</div>
