@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { listExpense } from '../actions/expenseActions';
-import { getMonths } from '../actions/utilsActions';
-import MessageBox from '../components/MessageBox';
-import LoadingBox from '../components/utils/LoadingBox';
+import { listExpense } from '../../actions/expenseActions';
+import { getMonths } from '../../actions/utilsActions';
+import MessageBox from '../../components/MessageBox';
+import LoadingBox from '../../components/utils/LoadingBox';
 import EditIcon from '@material-ui/icons/Edit';
 import { Avatar } from '@material-ui/core';
 

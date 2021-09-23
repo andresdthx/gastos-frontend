@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import AddIcon from '@material-ui/icons/Add';
-import DrawerExpense from './Drawers/DrawerExpense';
 import { Link } from 'react-router-dom';
 
 export default function FloatButton(props) {
@@ -9,30 +8,29 @@ export default function FloatButton(props) {
     const userSignin = useSelector(state => state.userSignin);
     const { userInfo } = userSignin;
 
-    const [state, setState] = React.useState({ right: false });
-    const [isOpen, setIsOpen] = useState(false);
+    const [url, setUrl] = useState('');
 
-    const toggleDrawer = (open) => {
-        setIsOpen(true);
-        setState({ ...state, right: open });
-    };
+    useEffect(()=>{
+        const path = props.props.location.pathname;
+        switch (path) {
+            case '/':
+                setUrl('/expenses-create');
+                break;
+            case '/activities':
+                setUrl('/activities-create');
+                break;
+        
+            default:
+                break;
+        }
+    }, [props]);
 
     return (
         <div>
             {
-                isOpen && (
-                    <DrawerExpense
-                        state={state}
-                        setIsOpen={setIsOpen}
-                        setState={setState}
-                    />
-                )
-            }
-
-            {
                 userInfo && 
                 (
-                    <Link to ="/create">
+                    <Link to = {url}>
                         <div className="floating-button">
                             <button className="btoncito">
                                 <AddIcon />

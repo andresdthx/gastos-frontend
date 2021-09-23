@@ -1,4 +1,4 @@
-import { GET_MONTHS_FAIL, GET_MONTHS_REQUEST, GET_MONTHS_SUCCESS } from "../constants/utilsConstants";
+import { GET_MONTHS_FAIL, GET_MONTHS_REQUEST, GET_MONTHS_SUCCESS, SET_NOTIFICATIONS_FAIL, SET_NOTIFICATIONS_REQUEST, SET_NOTIFICATIONS_SUCCESS } from "../constants/utilsConstants";
 
 export const getMonthsReducer = (state = { loading: true }, action) => {
     switch (action.type) {
@@ -12,4 +12,18 @@ export const getMonthsReducer = (state = { loading: true }, action) => {
         default:
             return state;
     }
+}
+
+export const setNotificationReducer = (state = { loading: true }, action) => {
+    switch (action.type) {
+        case SET_NOTIFICATIONS_REQUEST:
+            return { loading: true };
+        case SET_NOTIFICATIONS_SUCCESS:
+            return { loading: false, notification: action.payload };
+        case SET_NOTIFICATIONS_FAIL:
+            return { loading: false, error: action.payload };
+    
+        default:
+            return state;
+    } 
 }

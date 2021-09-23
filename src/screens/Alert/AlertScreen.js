@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteAlert, listAlerts, updateAlertActive } from '../actions/alertActions';
-import MessageBox from '../components/MessageBox';
-import LoadingBox from '../components/utils/LoadingBox';
+import { deleteAlert, listAlerts, updateAlertActive } from '../../actions/alertActions';
+import MessageBox from '../../components/MessageBox';
+import LoadingBox from '../../components/utils/LoadingBox';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import DrawerAlert from '../components/Drawers/DrawerAlert';
+import DrawerAlert from '../../components/Drawers/DrawerAlert';
 import Swal from 'sweetalert2'
 
 export default function AlertScreen() {

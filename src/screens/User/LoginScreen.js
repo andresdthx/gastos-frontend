@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { signin } from '../actions/userActions';
+import { signin } from '../../actions/userActions';
 import { Link } from 'react-router-dom';
-import LoadingBox from '../components/utils/LoadingBox';
-import MessageBox from '../components/MessageBox';
+import LoadingBox from '../../components/utils/LoadingBox';
+import MessageBox from '../../components/MessageBox';
 
 export default function LoginScreen(props) {
 

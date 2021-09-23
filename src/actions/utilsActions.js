@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_MONTHS_FAIL, GET_MONTHS_REQUEST, GET_MONTHS_SUCCESS } from "../constants/utilsConstants"
+import { GET_MONTHS_FAIL, GET_MONTHS_REQUEST, GET_MONTHS_SUCCESS, SET_NOTIFICATIONS_FAIL, SET_NOTIFICATIONS_REQUEST, SET_NOTIFICATIONS_SUCCESS } from "../constants/utilsConstants"
 
 export const getMonths = () => async (dispatch) => {
     dispatch({ type: GET_MONTHS_REQUEST });
@@ -14,6 +14,19 @@ export const getMonths = () => async (dispatch) => {
             error.response && error.response.data.response
             ? error.response.data.message
             : error.message
+        });
+    }
+}
+
+export const setNotifications = (data) => (dispatch) => {
+    dispatch({ type:SET_NOTIFICATIONS_REQUEST });
+    try {
+        const notification = { title: data.title, body: data.message, watched: false }
+        localStorage.setItem('notification', JSON.stringify(notification));
+        dispatch({ type: SET_NOTIFICATIONS_SUCCESS, payload: notification });
+    } catch (error) {
+        dispatch({
+            type: SET_NOTIFICATIONS_FAIL, payload: 'Error getting path'
         });
     }
 }

@@ -1,29 +1,28 @@
 import {BrowserRouter, Route, Switch, useLocation } from 'react-router-dom';
 import Sidebar from './components/common/Sidebar';
-import FloatButton from './components/FloatButton';
-import AlertScreen from './screens/AlertScreen';
+import AlertScreen from './screens/Alert/AlertScreen';
 import ChartScreen from './screens/ChartScreen';
-import ExpenseScreen from './screens/ExpenseScreen';
+import ExpenseScreen from './screens/Expense/ExpenseScreen';
 import HomeScreen from './screens/HomeScreen';
-import LoginScreen from './screens/LoginScreen';
+import LoginScreen from './screens/User/LoginScreen';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import ProfileScreen from './screens/ProfileScreen';
-import RegisterScreen from './screens/RegisterScreen';
-import ExpenseCreateScreen from './screens/ExpenseCreateScreen';
-import AlertCreateScreen from './screens/AlertCreateScreen';
-import ActivityScreen from './screens/ActivityScreen';
+import ProfileScreen from './screens/User/ProfileScreen';
+import RegisterScreen from './screens/User/RegisterScreen';
+import ExpenseCreateScreen from './screens/Expense/ExpenseCreateScreen';
+import AlertCreateScreen from './screens/Alert/AlertCreateScreen';
+import ActivityScreen from './screens/Activity/ActivityScreen';
+import ActivityCreateScreen from './screens/Activity/ActivityCreateScreen';
 
 function App() {
 
   return (
     <BrowserRouter>
-        <Sidebar></Sidebar>
+        <Sidebar />
         <Switch>
           <Route path="*">
             <RouteGroup />
           </Route>
         </Switch>
-        <FloatButton />
     </BrowserRouter>
   );
 }
@@ -41,15 +40,20 @@ function RouteGroup() {
       >
         <Switch location={location}>
           <Route path="/" component={HomeScreen} exact></Route>
+
           <Route path="/login" component={LoginScreen}></Route>
           <Route path="/register" component={RegisterScreen}></Route>
-          <Route path="/alert" component={AlertScreen}></Route>
           <Route path="/profile" component={ProfileScreen}></Route>
           <Route path="/chart" component={ChartScreen}></Route>
+
           <Route path="/expenses/:id" component={ExpenseScreen}></Route>
-          <Route path="/create" component={ExpenseCreateScreen}></Route>
-          <Route path="/create-alert" component={AlertCreateScreen}></Route>
-          <Route path="/activity" component={ActivityScreen}></Route>
+          <Route path="/expenses-create" component={ExpenseCreateScreen} exact></Route>
+
+          <Route path="/activities" component={ActivityScreen}></Route>
+          <Route path="/activities-create" component={ActivityCreateScreen}></Route>
+
+          <Route path="/alerts" component={AlertScreen}></Route>
+          <Route path="/alerts-create" component={AlertCreateScreen}></Route>
         </Switch>
       </CSSTransition>
     </TransitionGroup>

@@ -12,6 +12,8 @@ import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { StaleWhileRevalidate } from 'workbox-strategies';
+import { setNotifications } from "./actions/utilsActions";
+import store from './store';
 
 clientsClaim();
 
@@ -77,4 +79,6 @@ self.addEventListener('push', e => {
     body: data.message,
     icon: 'logo192.png',
   });
+
+  store.dispatch(setNotifications(data)); 
 })

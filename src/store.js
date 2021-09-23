@@ -5,12 +5,17 @@ import { createCategoryReducers, listCategoriesReducer } from './reducers/catego
 import { createExpenseReducer, listExpenseReducer, listExpensesReducer } from './reducers/expenseReducers';
 import { createSubcategoryReducer, listSubcategoriesReducer } from './reducers/subcategoryReducers';
 import { registerReducer, signinReducer, suscribeUserReducer } from './reducers/userReducer';
-import { getMonthsReducer } from './reducers/utilsReducers';
+import { getMonthsReducer, setNotificationReducer } from './reducers/utilsReducers';
 
 const initialState = {
     userSignin:{
         userInfo: localStorage.getItem('userInfo')
         ? JSON.parse(localStorage.getItem('userInfo'))
+        : null
+    },
+    setNotification:{
+        notification: localStorage.getItem('notification')
+        ? JSON.parse(localStorage.getItem('notification'))
         : null
     }
 };
@@ -36,7 +41,8 @@ const reducer = combineReducers({
     alertTypeList: listTypeAlertsReducer,
     alertDelete: deleteAlertReducer,
 
-    monthsGet: getMonthsReducer
+    monthsGet: getMonthsReducer,
+    setNotification: setNotificationReducer
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

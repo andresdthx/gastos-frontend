@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -75,11 +75,7 @@ const useStyles = makeStyles((theme) => ({
   accountContent:{
     width: '5rem',
     margin: '0.5rem',
-    // marginTop: '-2.5rem',
-    // marginBottom: '2.5rem',
     textAlign: 'center',
-    // margin: '0 auto',
-    // border: '1px solid black'
   },
   accountIcon:{
     fontSize: '4rem'
@@ -102,9 +98,13 @@ export default function Sidebar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [notifications, setNotifications] = React.useState(0);
 
   const userSignin = useSelector(state => state.userSignin);
   const { userInfo } = userSignin;
+
+  const setNotification = useSelector(state => state.setNotification);
+  const { notification } = setNotification;
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -143,6 +143,18 @@ export default function Sidebar() {
       setState({ ...state, right: open });
   };
 
+  useEffect(()=>{
+    var total = 0;
+    if(notification){
+      total = notification.map(function(item) {
+        var tl = 0;
+        if(!item.watched) tl++;
+        return tl;
+      });
+    }
+    setNotifications(total);
+  }, [notification, setNotification]);
+
   return (
     <div>
       {
@@ -165,7 +177,7 @@ export default function Sidebar() {
 
               <Typography className={classes.menuContent}>
                 <Link className={classes.iconsSidebar} to="#">
-                <Badge className={classes.menuItems} onClick={() => toggleDrawer(true)} badgeContent={4} color="primary">
+                <Badge className={classes.menuItems} onClick={() => toggleDrawer(true)} badgeContent={notifications} color="primary">
                   <NotificationsIcon  />
                 </Badge>
                 </Link>
@@ -250,7 +262,7 @@ export default function Sidebar() {
                   <ListItemText primary="Proximos gastos" />
                 </ListItem>
 
-                <Link className={classes.list} to="/activity">
+                <Link className={classes.list} to="/activities">
                 <ListItem className={classes.list} onClick={handleDrawerClose} button>
                   <ListItemIcon><FormatListBulletedIcon className={classes.icon} /></ListItemIcon>
                   <ListItemText primary="Pendientes" />

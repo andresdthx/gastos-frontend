@@ -5,7 +5,7 @@ import LoadingBox from '../components/utils/LoadingBox';
 import { MDBDataTableV5 } from 'mdbreact';
 import SelectDate from '../components/SelectDate';
 import { getMonths } from '../actions/utilsActions';
-import { Link } from 'react-router-dom';
+import FloatButton from '../components/FloatButton';
 
 export default function HomeScreen(props) {
     const dispatch = useDispatch();
@@ -162,6 +162,7 @@ export default function HomeScreen(props) {
                   </div>
               </div>
             )}
+            <FloatButton props={props} />
         </div>
     )
 }

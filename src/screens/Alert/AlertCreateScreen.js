@@ -4,8 +4,8 @@ import Select from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Divider from '@material-ui/core/Divider';
-import LoadingBox from '../components/utils/LoadingBox';
-import { createAlert, listAlerts, listTypeAlerts, updateAlertActive } from '../actions/alertActions';
+import LoadingBox from '../../components/utils/LoadingBox';
+import { createAlert, listAlerts, listTypeAlerts, updateAlertActive } from '../../actions/alertActions';
 
 export default function AlertCreateScreen(props) {
 
