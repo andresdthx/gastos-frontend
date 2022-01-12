@@ -41,7 +41,7 @@ export default function HomeScreen(props) {
     let month = newDate.getMonth() + 1;
 
     month = month < 10 ? `0${month}` : `${month}`;
-    setMonth(month);
+    return [month]
   }
 
   useEffect(() => {
