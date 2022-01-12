@@ -13,7 +13,6 @@ export default function SelectDate(props) {
 
     const { month } = props;
     const [monthSelect, setMonthSelect] = useState();
-    const [monthsSelect, setMonthsSelect] = useState();
     const [agrupadores, setAgrupadores] = useState();
     const [groupesSelect, setSelectGroupes] = useState([]);
 
@@ -22,7 +21,6 @@ export default function SelectDate(props) {
         items.map(item => months.push(item.value));
 
         localStorage.setItem('months', JSON.stringify(months));
-        setMonthsSelect(months);
         dispatch(listExpenses(months, groupesSelect));
     }
 
@@ -31,7 +29,7 @@ export default function SelectDate(props) {
         items.map(item => groupers.push(item.value));
 
         setSelectGroupes(groupers);
-        dispatch(listExpenses(monthsSelect, groupers));
+        dispatch(listExpenses(JSON.parse(localStorage.getItem('months')), groupers));
     }
 
     useEffect(() => {
