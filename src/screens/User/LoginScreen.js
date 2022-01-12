@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signin } from '../../actions/userActions';
-import { Link } from 'react-router-dom';
+import { Link, useHistory  } from 'react-router-dom';
 import LoadingBox from '../../components/utils/LoadingBox';
 import MessageBox from '../../components/MessageBox';
 
 export default function LoginScreen(props) {
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const userSignin = useSelector(state => state.userSignin);
     const { userInfo, error, loading } = userSignin;
@@ -21,10 +22,9 @@ export default function LoginScreen(props) {
     }
 
     useEffect(()=>{
-        if(userInfo) {
-            props.history.push("/")
-        }
-    }, [userInfo, props])
+        if(userInfo) history.push("/");
+    }, [userInfo, history])
+    
     return (
         <div className="home">
             

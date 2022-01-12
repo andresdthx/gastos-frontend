@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import Select from 'react-select';
 import Drawer from '@material-ui/core/Drawer';
 import MessageBox from '../../components/MessageBox';
 import LoadingBox from '../../components/utils/LoadingBox';
-import Select from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 import { listCategories } from '../../actions/categoryActions';
 import { createExpense, listExpenses } from '../../actions/expenseActions';
@@ -16,18 +16,19 @@ import { Link } from 'react-router-dom';
 export default function ExpenseCreateScreen(props) {
 
     const dispatch = useDispatch();
-    
+
     const [description, setDescription] = useState('');
     const [value, setValue] = useState('');
     const [date, setDate] = useState('');
     const [category, setCategory] = useState('');
+    const [categorySelect, setCategorySelect] = useState('');
     const [subcategory, setSubcategory] = useState('');
     const [today, setToday] = useState('');
 
     const [submit, setSubmit] = useState(false);
     const [showNewCategory, setShowNewCateogry] = useState(false);
     const [showNewSubcategory, setShowNewSubcategory] = useState(false);
-    const [state, setState] = useState({ right: true});
+    const [state, setState] = useState({ right: true });
 
     const categoriesList = useSelector(state => state.categoriesList);
     const { loading, error, categories } = categoriesList;
@@ -44,22 +45,23 @@ export default function ExpenseCreateScreen(props) {
     };
 
     const handleClose = useCallback((open) => {
-        if(state.right)
+        if (state.right)
             props.history.push('/');
-            setState({ ...state, right: open });
-    },[setState, state, props]);
+        setState({ ...state, right: open });
+    }, [setState, state, props]);
 
     const loadCategories = useCallback(() => {
         if (!categories) {
             dispatch(listCategories());
         } else {
             if (categories.length > 0) {
-                setCategory(categories[0].value);
+                setCategory(localStorage.getItem('category'));
             }
         }
-    },[categories, dispatch]);
+    }, [categories, dispatch]);
 
     const handlerCategory = (e) => {
+        localStorage.setItem('category', e);
         setCategory(e);
     }
 
@@ -95,32 +97,36 @@ export default function ExpenseCreateScreen(props) {
         setDate(e);
     }
 
-    useEffect(()=>{
-        if (category) {
-            dispatch(listSubcategories(category));
-        }
+    useEffect(() => {
+        if (category) dispatch(listSubcategories(category));
     }, [category, dispatch]);
 
-    useEffect(()=>{
+    useEffect(() => {
+        if (!categorySelect && categories) {
+            setCategorySelect(categories.filter(item => item.value === parseInt(localStorage.getItem('category')))[0])
+        }
+    }, [categorySelect, categories])
+
+    useEffect(() => {
         if (subcategories)
-            if(subcategories.length > 0)
+            if (subcategories.length > 0)
                 setSubcategory(subcategories[0].value);
     }, [subcategories]);
 
-    useEffect(()=>{
+    useEffect(() => {
         getDate();
         loadCategories();
     }, [loadCategories]);
 
-    useEffect(()=>{
+    useEffect(() => {
         if (expense && submit) {
             let month = [today.split('-')[1]];
-            dispatch(listExpenses( month, []));
+            dispatch(listExpenses(month, []));
             handleClose(false);
         }
-    },[expense, dispatch, submit, today, handleClose]);
+    }, [expense, dispatch, submit, today, handleClose]);
 
-  return (
+    return (
         <Drawer anchor={'right'} open={state.right} onClose={() => toggleDrawer(false)}>
             <div className="drawer-header">
                 <Link to="/">
@@ -129,90 +135,93 @@ export default function ExpenseCreateScreen(props) {
             </div>
             <div className="drawer-body">
                 <form className="form-modal" onSubmit={handlerSubmit}>
-                        {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
-                        <div className="form-title">
+                    {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>}
+                    <div className="form-title">
                         <div>Registrar gasto</div>
                         <Divider />
-                        </div>
+                    </div>
 
-                        <div>
-                            {
+                    <div>
+                        {
                             loading ? <LoadingBox></LoadingBox>
-                            :
-                            error ? <MessageBox variant="danger">{error}</MessageBox>
-                            :(
-                            <div>
-                                <Select
-                                className="select"
-                                placeholder="Categorias"
-                                onChange={e => handlerCategory(e.value)}
-                                defaultValue={categories[0]}
-                                options={categories} />
-                                <AddIcon
-                                    onClick={() => setShowNewCateogry(!showNewCategory)}
-                                    className="fas fa-plus-circle"
-                                />
-                                { showNewCategory && <SubForm showNew={setShowNewCateogry} type={'category'} /> }
-                            </div>
-                            )}
-                        </div>
-                        <div>
-                            {
-                                loadingSubcategory ? <div
-                                                        className="new-category"
-                                                        onClick={() => setShowNewCateogry(!showNewCategory)}
-                                                    ></div>
+                                :
+                                error ? <MessageBox variant="danger">{error}</MessageBox>
+                                    : (
+                                        <div>
+
+                                            {categorySelect && (<>
+                                                <Select
+                                                    className="select"
+                                                    placeholder="Categorias"
+                                                    onChange={e => handlerCategory(e.value)}
+                                                    defaultValue={categorySelect}
+                                                    options={categories} />
+                                                <AddIcon
+                                                    onClick={() => setShowNewCateogry(!showNewCategory)}
+                                                    className="fas fa-plus-circle"
+                                                />
+                                            </>)}
+                                            {showNewCategory && <SubForm showNew={setShowNewCateogry} type={'category'} />}
+                                        </div>
+                                    )}
+                    </div>
+                    <div>
+                        {
+                            loadingSubcategory ? <div
+                                className="new-category"
+                                onClick={() => setShowNewCateogry(!showNewCategory)}
+                            ></div>
                                 :
                                 errorSubcategory ? <MessageBox variant="danger">{errorSubcategory}</MessageBox>
-                                :(
-                                <div>
-                                    <Select
-                                        className="select"
-                                        placeholder="Subcategorias"
-                                        onChange={e => setSubcategory(e.value)}
-                                        defaultValue={subcategories[0]}
-                                        options={subcategories}
-                                    />
-                                    <AddIcon 
-                                        onClick={() => setShowNewSubcategory(!showNewSubcategory)}
-                                        className="fas fa-plus-circle"
-                                    />  
-                                    { showNewSubcategory && <SubForm showNew={setShowNewSubcategory} type={'subcategory'} categoryId={category} /> }
-                                </div>
-                            )}
-                        </div>
-                        <div>
-                            <input 
-                                type="number"
-                                onChange={e => setValue(e.target.value)}
-                                placeholder="Valor">
-                            </input>
-                        </div>
-                        <div>
-                            <input 
-                                type="text"
-                                onChange={e => setDescription(e.target.value)}
-                                placeholder="Descripcion">
-                            </input>
-                        </div>
-                        <div>
-                            <input
-                                value={today} 
-                                type="date"
-                                onChange={e => handletDate(e.target.value)}
-                                placeholder="Fecha">
-                            </input>
-                        </div>
-                        <div>
-                            {
-                                loadingSuccess ? <LoadingBox />
-                                :(
+                                    : (
+                                        <div>
+                                            <Select
+                                                className="select"
+                                                placeholder="Subcategorias"
+                                                onChange={e => setSubcategory(e.value)}
+                                                defaultValue={subcategories[0]}
+                                                options={subcategories}
+                                            />
+                                            <AddIcon
+                                                onClick={() => setShowNewSubcategory(!showNewSubcategory)}
+                                                className="fas fa-plus-circle"
+                                            />
+                                            {showNewSubcategory && <SubForm showNew={setShowNewSubcategory} type={'subcategory'} categoryId={category} />}
+                                        </div>
+                                    )}
+                    </div>
+                    <div>
+                        <input
+                            type="number"
+                            onChange={e => setValue(e.target.value)}
+                            placeholder="Valor">
+                        </input>
+                    </div>
+                    <div>
+                        <input
+                            type="text"
+                            onChange={e => setDescription(e.target.value)}
+                            placeholder="Descripcion">
+                        </input>
+                    </div>
+                    <div>
+                        <input
+                            value={today}
+                            type="date"
+                            onChange={e => handletDate(e.target.value)}
+                            placeholder="Fecha">
+                        </input>
+                    </div>
+                    <div>
+                        {
+                            loadingSuccess ? <LoadingBox />
+                                : (
                                     <button className="btn secundary" type="submit">Crear</button>
                                 )
-                            }
-                        </div>
+                        }
+                    </div>
                 </form>
             </div>
         </Drawer>
-  );
+    );
 }

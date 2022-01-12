@@ -21,6 +21,7 @@ export default function SelectDate(props) {
         let months = [];
         items.map(item => months.push(item.value));
 
+        localStorage.setItem('months', JSON.stringify(months));
         setMonthsSelect(months);
         dispatch(listExpenses(months, groupesSelect));
     }
@@ -33,50 +34,54 @@ export default function SelectDate(props) {
         dispatch(listExpenses(monthsSelect, groupers));
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(listExpenses([month], []));
-    },[dispatch, month]);
+    }, [dispatch, month]);
 
-    useEffect(()=>{
-        if (!agrupadores) 
+    useEffect(() => {
+        if (!agrupadores)
             setAgrupadores([
-                {value:'category', label:'Categoria'},
-                {value:'subcategory', label:'Subcategoria'},
+                { value: 'category', label: 'Categoria' },
+                { value: 'subcategory', label: 'Subcategoria' },
             ]);
-    },[agrupadores]);
+    }, [agrupadores]);
 
-    useEffect(()=>{
-        if(months){
-            var result = months.filter(item => item.value === month);
+    useEffect(() => {
+        if (months) {
+            const result = [];
+            months.forEach(item =>
+                month.forEach(m => {
+                    if (m === item.value) result.push(item)
+                })
+            )
 
             if (!monthSelect) setMonthSelect(result);
-            if (!monthsSelect) setMonthsSelect([result[0].value]);
 
         } else {
             dispatch(getMonths());
         }
-    },[dispatch, months, monthSelect, month, monthsSelect]);
+    }, [dispatch, months, monthSelect, month]);
 
     return (
         <div className="selects-datable">
-            { months && monthSelect && (
+            {months && monthSelect && (
                 <Select
-                className="select"
-                placeholder="Mes"
-                isMulti
-                onChange={e => handlerMonth(e)}
-                defaultValue={monthSelect}
-                options={months} />
+                    className="select"
+                    placeholder="Mes"
+                    isMulti
+                    onChange={e => handlerMonth(e)}
+                    defaultValue={monthSelect}
+                    options={months} />
             )}
 
-            { months && monthSelect && (
+            {months && monthSelect && (
                 <Select
-                className="select"
-                placeholder="Agrupar por..."
-                isMulti
-                onChange={e => handlerGrouper(e)}
-                // defaultValue={monthSelect}
-                options={agrupadores} />
+                    className="select"
+                    placeholder="Agrupar por..."
+                    isMulti
+                    onChange={e => handlerGrouper(e)}
+                    // defaultValue={monthSelect}
+                    options={agrupadores} />
             )}
         </div>
     )

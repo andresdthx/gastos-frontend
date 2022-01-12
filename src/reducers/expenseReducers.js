@@ -1,4 +1,4 @@
-import { EXPENSE_CREATE_FAIL, EXPENSE_CREATE_REQUEST, EXPENSE_CREATE_SUCCESS, EXPENSE_LIST_FAIL, EXPENSE_LIST_REQUEST, EXPENSE_LIST_SUCCESS, EXP_LIST_FAIL, EXP_LIST_REQUEST, EXP_LIST_SUCCESS } from "../constants/expenseConstants";
+import { EXPENSE_CREATE_FAIL, EXPENSE_CREATE_REQUEST, EXPENSE_CREATE_SUCCESS, EXPENSE_DELETE_FAIL, EXPENSE_DELETE_REQUEST, EXPENSE_DELETE_SUCCESS, EXPENSE_LIST_FAIL, EXPENSE_LIST_REQUEST, EXPENSE_LIST_SUCCESS, EXP_LIST_FAIL, EXP_LIST_REQUEST, EXP_LIST_SUCCESS } from "../constants/expenseConstants";
 
 export const listExpensesReducer = (state = { loading: true }, action) =>{
     switch (action.type) {
@@ -35,6 +35,20 @@ export const createExpenseReducer = (state = { loading: false }, action) => {
         case EXPENSE_CREATE_SUCCESS:
             return { loading: false, expense: action.payload };
         case EXPENSE_CREATE_FAIL:
+            return { loading: false, error: action.payload };
+    
+        default:
+            return state;
+    }
+}
+
+export const deleteExpenseReducer = (state = { loading: false }, action) => {
+    switch (action.type) {
+        case EXPENSE_DELETE_REQUEST:
+            return { loading: true };
+        case EXPENSE_DELETE_SUCCESS:
+            return { loading: false, expense: action.payload };
+        case EXPENSE_DELETE_FAIL:
             return { loading: false, error: action.payload };
     
         default:

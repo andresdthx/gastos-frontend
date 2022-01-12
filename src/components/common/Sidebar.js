@@ -143,17 +143,17 @@ export default function Sidebar() {
       setState({ ...state, right: open });
   };
 
-  useEffect(()=>{
-    var total = 0;
-    if(notification){
-      total = notification.map(function(item) {
-        var tl = 0;
-        if(!item.watched) tl++;
-        return tl;
-      });
-    }
-    setNotifications(total);
-  }, [notification, setNotification]);
+  // useEffect(()=>{
+  //   var total = 0;
+  //   if(notification){
+  //     total = notification.map(function(item) {
+  //       var tl = 0;
+  //       if(!item.watched) tl++;
+  //       return tl;
+  //     });
+  //   }
+  //   setNotifications(total);
+  // }, [notification, setNotification]);
 
   return (
     <div>
@@ -245,7 +245,7 @@ export default function Sidebar() {
                   </ListItem>
                 </Link>
 
-                <Link className={classes.list} to="/alert">
+                <Link className={classes.list} to="/alerts">
                   <ListItem onClick={handleDrawerClose} button>
                     <ListItemIcon><NotificationsIcon className={classes.icon} /></ListItemIcon>
                     <ListItemText primary="Alertas" />

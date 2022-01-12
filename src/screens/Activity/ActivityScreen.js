@@ -1,8 +1,10 @@
 import { Avatar } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FloatButton from '../../components/FloatButton';
+import { listActivities } from '../../actions/activityActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 const initialActivities = [
     {
@@ -30,7 +32,16 @@ const reorder = (list, startIndex, endIndex) => {
 }
 export default function ActivityScreen(props) {
 
+    const dispatch = useDispatch();
+
+    const activitiesList = useSelector(state => state.activitiesList);
+    const { loading, activities: activitiesLoad, error } = activitiesList;
+
     const [activities, setActivities] = useState(initialActivities);
+
+    useEffect(()=>{
+        if(!activitiesLoad) dispatch(listActivities());
+    }, [dispatch, activitiesLoad]);
 
     return (
         <div>
@@ -47,15 +58,15 @@ export default function ActivityScreen(props) {
                             {...droppableProvided.droppableProps}
                             ref={droppableProvided.innerRef}
                         >
-                            {activities.map((item, index) => (
-                                    <Draggable key={item.id} draggableId={item.id} index={index}>
+                            {activitiesLoad.map((item, index) => (
+                                    <Draggable key={item.activityId.toString()} draggableId={item.activityId.toString()} index={index}>
                                         {(draggableProvided) => (
                                             <div className="dragger-container"
                                                 {...draggableProvided.draggableProps}
                                                 ref={draggableProvided.innerRef}
                                                 {...draggableProvided.dragHandleProps}
                                             >
-                                                <Avatar className={`avatar-dragger-${item.color}`}>
+                                                <Avatar className={`avatar-dragger-${item.typesalert.typeAlert}`}>
                                                     {item.activity.charAt(0)}
                                                 </Avatar>
 

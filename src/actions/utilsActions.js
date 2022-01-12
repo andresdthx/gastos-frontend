@@ -21,12 +21,13 @@ export const getMonths = () => async (dispatch) => {
 export const setNotifications = (data) => (dispatch) => {
     dispatch({ type:SET_NOTIFICATIONS_REQUEST });
     try {
-        const notification = { title: data.title, body: data.message, watched: false }
+        console.log(data);
+        let notification = [{ title: 'ojo con eso', body: data.message, watched: false }];
         localStorage.setItem('notification', JSON.stringify(notification));
         dispatch({ type: SET_NOTIFICATIONS_SUCCESS, payload: notification });
     } catch (error) {
         dispatch({
-            type: SET_NOTIFICATIONS_FAIL, payload: 'Error getting path'
+            type: SET_NOTIFICATIONS_FAIL, payload: 'Error getting notifications'
         });
     }
 }

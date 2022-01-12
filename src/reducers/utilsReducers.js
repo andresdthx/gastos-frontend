@@ -19,7 +19,7 @@ export const setNotificationReducer = (state = { loading: true }, action) => {
         case SET_NOTIFICATIONS_REQUEST:
             return { loading: true };
         case SET_NOTIFICATIONS_SUCCESS:
-            return { loading: false, notification: action.payload };
+            return { loading: false, notification: [action.payload]};
         case SET_NOTIFICATIONS_FAIL:
             return { loading: false, error: action.payload };
     

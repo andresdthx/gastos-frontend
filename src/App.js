@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Switch, useLocation } from 'react-router-dom';
+import {BrowserRouter, Route, Switch, useLocation, HashRouter } from 'react-router-dom';
 import Sidebar from './components/common/Sidebar';
 import AlertScreen from './screens/Alert/AlertScreen';
 import ChartScreen from './screens/ChartScreen';
@@ -16,14 +16,14 @@ import ActivityCreateScreen from './screens/Activity/ActivityCreateScreen';
 function App() {
 
   return (
-    <BrowserRouter>
+    <HashRouter>
         <Sidebar />
         <Switch>
           <Route path="*">
             <RouteGroup />
           </Route>
         </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

@@ -19,6 +19,9 @@ export default function FloatButton(props) {
             case '/activities':
                 setUrl('/activities-create');
                 break;
+            case '/alerts':
+                setUrl('/alerts-create');
+                break;
         
             default:
                 break;

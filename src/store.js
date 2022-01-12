@@ -1,8 +1,9 @@
 import { applyMiddleware, createStore, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
+import { createActivityReducer, listActivityReducer } from './reducers/activityReducers';
 import { createAlertReducer, listAlertsReducer, listTypeAlertsReducer, updateAlertReducer, deleteAlertReducer } from './reducers/alertReducers';
 import { createCategoryReducers, listCategoriesReducer } from './reducers/categoryReducers';
-import { createExpenseReducer, listExpenseReducer, listExpensesReducer } from './reducers/expenseReducers';
+import { createExpenseReducer, deleteExpenseReducer, listExpenseReducer, listExpensesReducer } from './reducers/expenseReducers';
 import { createSubcategoryReducer, listSubcategoriesReducer } from './reducers/subcategoryReducers';
 import { registerReducer, signinReducer, suscribeUserReducer } from './reducers/userReducer';
 import { getMonthsReducer, setNotificationReducer } from './reducers/utilsReducers';
@@ -28,6 +29,7 @@ const reducer = combineReducers({
     expList: listExpenseReducer,
     expenseList: listExpensesReducer,
     expenseCreate: createExpenseReducer,
+    expenseDelete: deleteExpenseReducer,
 
     categoryCreate: createCategoryReducers,
     categoriesList: listCategoriesReducer,
@@ -42,7 +44,10 @@ const reducer = combineReducers({
     alertDelete: deleteAlertReducer,
 
     monthsGet: getMonthsReducer,
-    setNotification: setNotificationReducer
+    setNotification: setNotificationReducer,
+
+    activityCreate: createActivityReducer,
+    activitiesList: listActivityReducer
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

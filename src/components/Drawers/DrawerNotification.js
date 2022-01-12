@@ -28,18 +28,18 @@ export default function DrawerNotification(props) {
         setState({ ...state, right: open });
     };
 
-    useEffect(()=>{
-        var notifications = [];
-        if(notification){
-          notification.map(item => notifications.push({
-              title: item.title,
-              body: item.body,
-              watched: 1
-          }));
-        }
-        localStorage.setItem('notification', JSON.stringify(notifications));
-        setNotifications(notifications);
-      }, [notification, setNotification]);
+    // useEffect(()=>{
+        // var notifications = [];
+        // if(notification){
+        //   notification.map(item => notifications.push({
+        //       title: item.title,
+        //       body: item.body,
+        //       watched: 1
+        //   }));
+        // }
+        // localStorage.setItem('notification', JSON.stringify(notifications));
+        // setNotifications(notification);
+    //   }, [notification, setNotification]);
 
     return (
         <Drawer anchor={'right'} open={state.right} onClose={() => toggleDrawer(false)}>

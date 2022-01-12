@@ -7,8 +7,9 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DrawerAlert from '../../components/Drawers/DrawerAlert';
 import Swal from 'sweetalert2'
+import FloatButton from '../../components/FloatButton';
 
-export default function AlertScreen() {
+export default function AlertScreen(props) {
     const dispatch = useDispatch();
     const [rows, setRows] = useState([]);
     const [send, setSend] = useState(false);
@@ -150,6 +151,7 @@ export default function AlertScreen() {
                 </div>
                 )}
             </div>
+            <FloatButton props={props} />
         </div>
     )
 }
