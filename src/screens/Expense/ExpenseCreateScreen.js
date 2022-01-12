@@ -55,8 +55,8 @@ export default function ExpenseCreateScreen(props) {
             dispatch(listCategories());
         } else {
             if (categories.length > 0) {
-                const category = localStorage.getItem('category') ? localStorage.getItem('category') : categories[0]
-                setCategory(category);
+                const cat = localStorage.getItem('category') ? localStorage.getItem('category') : categories[0].value
+                setCategory(cat);
             }
         }
     }, [categories, dispatch]);
@@ -104,8 +104,8 @@ export default function ExpenseCreateScreen(props) {
 
     useEffect(() => {
         if (!categorySelect && categories) {
-            const category = localStorage.getItem('category') ? parseInt(localStorage.getItem('category')) : categories[0]
-            setCategorySelect(categories.filter(item => item.value === category)[0])
+            const cat = localStorage.getItem('category') ? parseInt(localStorage.getItem('category')) : categories[0].value
+            setCategorySelect(categories.filter(item => item.value === cat)[0])
         }
     }, [categorySelect, categories])
 
