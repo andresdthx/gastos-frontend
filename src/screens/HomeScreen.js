@@ -36,6 +36,14 @@ export default function HomeScreen(props) {
     props.history.push(`/expenses/${expenseId}`);
   }
 
+  const getDate = () => {
+    let newDate = new Date()
+    let month = newDate.getMonth() + 1;
+
+    month = month < 10 ? `0${month}` : `${month}`;
+    setMonth(month);
+  }
+
   useEffect(() => {
     if (!months) dispatch(getMonths());
   }, [dispatch, months]);
@@ -97,7 +105,8 @@ export default function HomeScreen(props) {
       setDatatable({ columns, rows });
     }
     if (!month) {
-      setMonth(JSON.parse(localStorage.getItem('months')))
+      const date = JSON.parse(localStorage.getItem('months')) ? JSON.parse(localStorage.getItem('months')) : getDate()
+      setMonth(date)
     }
     setSuccess(false);
   }, [dispatch, props, userInfo, success, expenses, month]);
