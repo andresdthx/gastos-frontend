@@ -69,7 +69,7 @@ export default function ExpenseScreen(props) {
                         <div>{expense.description}</div>
                     </div>
                     <div className="card-expense-body">
-                        <div>${expense.value}</div>
+                        <div>${new Intl.NumberFormat().format(expense.value)}</div>
                         { months && ( 
                             <div>{convertDate(expense.date.split('T')[0])}</div>
                         )}

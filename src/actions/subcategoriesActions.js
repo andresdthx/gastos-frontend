@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SUBCATEGORY_CREATE_FAIL, SUBCATEGORY_CREATE_REQUEST, SUBCATEGORY_CREATE_SUCCESS, SUBCATEGORY_LIST_FAIL, SUBCATEGORY_LIST_REQUEST, SUBCATEGORY_LIST_SUCCESS } from "../constants/subcategoriesConstants"
+import { SUBCATEGORY_CREATE_FAIL, SUBCATEGORY_CREATE_REQUEST, SUBCATEGORY_CREATE_SUCCESS, SUBCATEGORY_LIST_BY_CATEGORY_FAIL, SUBCATEGORY_LIST_BY_CATEGORY_REQUEST, SUBCATEGORY_LIST_BY_CATEGORY_SUCCESS, SUBCATEGORY_LIST_FAIL, SUBCATEGORY_LIST_REQUEST, SUBCATEGORY_LIST_SUCCESS } from "../constants/subcategoriesConstants"
 
 export const listSubcategories = (categoryId) => async (dispatch) => {
     dispatch({ type: SUBCATEGORY_LIST_REQUEST });
@@ -9,6 +9,22 @@ export const listSubcategories = (categoryId) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: SUBCATEGORY_LIST_FAIL,
+            payload: 
+            error.response && error.response.data.response
+            ? error.response.data.message
+            : error.message
+        });
+    }
+}
+
+export const listSubcategoriesByCategory = (categoryId) => async (dispatch) => {
+    dispatch({ type: SUBCATEGORY_LIST_BY_CATEGORY_REQUEST });
+    try {
+        const { data } = await axios.get(`/api/subcategoriesByCategory/${categoryId}`);
+        dispatch({ type: SUBCATEGORY_LIST_BY_CATEGORY_SUCCESS, payload: data })
+    } catch (error) {
+        dispatch({
+            type: SUBCATEGORY_LIST_BY_CATEGORY_FAIL,
             payload: 
             error.response && error.response.data.response
             ? error.response.data.message

@@ -1,4 +1,4 @@
-import { SUBCATEGORY_CREATE_FAIL, SUBCATEGORY_CREATE_REQUEST, SUBCATEGORY_CREATE_SUCCESS, SUBCATEGORY_LIST_FAIL, SUBCATEGORY_LIST_REQUEST, SUBCATEGORY_LIST_SUCCESS } from "../constants/subcategoriesConstants";
+import { SUBCATEGORY_CREATE_FAIL, SUBCATEGORY_CREATE_REQUEST, SUBCATEGORY_CREATE_SUCCESS, SUBCATEGORY_LIST_BY_CATEGORY_FAIL, SUBCATEGORY_LIST_BY_CATEGORY_REQUEST, SUBCATEGORY_LIST_BY_CATEGORY_SUCCESS, SUBCATEGORY_LIST_FAIL, SUBCATEGORY_LIST_REQUEST, SUBCATEGORY_LIST_SUCCESS } from "../constants/subcategoriesConstants";
 
 export const listSubcategoriesReducer = (state = { loading: true }, action) =>{
     switch (action.type) {
@@ -12,6 +12,20 @@ export const listSubcategoriesReducer = (state = { loading: true }, action) =>{
         default:
             return state;
     }
+}
+
+export const listSubcategoriesByCategoriesReducer = ( state = { loading: false }, action) => {
+    switch (action.type) {
+        case SUBCATEGORY_LIST_BY_CATEGORY_REQUEST:
+            return { loading: true };
+        case SUBCATEGORY_LIST_BY_CATEGORY_SUCCESS:
+            return { loading: false, subcategories: action.payload };
+        case SUBCATEGORY_LIST_BY_CATEGORY_FAIL:
+            return { loading: false, error: action.payload };
+    
+        default:
+            return state;
+    } 
 }
 
 export const createSubcategoryReducer = (state = { loading: true }, action) => {

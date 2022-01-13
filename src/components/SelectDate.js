@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { listExpenses } from '../actions/expenseActions';
-import { getMonths } from '../actions/utilsActions';
+import { getMonths, setFilters } from '../actions/utilsActions';
 
 export default function SelectDate(props) {
 
@@ -10,6 +10,9 @@ export default function SelectDate(props) {
 
     const monthsGet = useSelector(state => state.monthsGet);
     const { months } = monthsGet;
+
+    const filtersSet = useSelector(state => state.filtersSet);
+    const { filters } = filtersSet;
 
     const { month } = props;
     const [monthSelect, setMonthSelect] = useState();
@@ -27,9 +30,8 @@ export default function SelectDate(props) {
     const handlerGrouper = (items) => {
         let groupers = [];
         items.map(item => groupers.push(item.value));
-
+        dispatch(setFilters(groupers));
         setSelectGroupes(groupers);
-        dispatch(listExpenses(JSON.parse(localStorage.getItem('months')), groupers));
     }
 
     useEffect(() => {
@@ -37,12 +39,24 @@ export default function SelectDate(props) {
     }, [dispatch, month]);
 
     useEffect(() => {
-        if (!agrupadores)
+        if (!agrupadores) {
             setAgrupadores([
                 { value: 'category', label: 'Categoria' },
                 { value: 'subcategory', label: 'Subcategoria' },
             ]);
-    }, [agrupadores]);
+        }
+    }, [agrupadores, filters]);
+
+    useEffect(() => {
+        if(filters && agrupadores) {
+            const result = [];
+            filters.forEach(filter => {
+                result.push(agrupadores.filter(agrupador => agrupador.value === filter)[0])
+            })
+            setSelectGroupes(result)
+        }
+
+    }, [filters, agrupadores])
 
     useEffect(() => {
         if (months) {
@@ -72,13 +86,13 @@ export default function SelectDate(props) {
                     options={months} />
             )}
 
-            {months && monthSelect && (
+            {months && groupesSelect && (
                 <Select
                     className="select"
                     placeholder="Agrupar por..."
                     isMulti
                     onChange={e => handlerGrouper(e)}
-                    // defaultValue={monthSelect}
+                    defaultValue={groupesSelect}
                     options={agrupadores} />
             )}
         </div>

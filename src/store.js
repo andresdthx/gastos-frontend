@@ -6,7 +6,7 @@ import { createCategoryReducers, listCategoriesReducer } from './reducers/catego
 import { createExpenseReducer, deleteExpenseReducer, listExpenseReducer, listExpensesReducer } from './reducers/expenseReducers';
 import { createSubcategoryReducer, listSubcategoriesReducer } from './reducers/subcategoryReducers';
 import { registerReducer, signinReducer, suscribeUserReducer } from './reducers/userReducer';
-import { getMonthsReducer, setNotificationReducer } from './reducers/utilsReducers';
+import { getMonthsReducer, setFiltersReducer, setNotificationReducer } from './reducers/utilsReducers';
 
 const initialState = {
     userSignin:{
@@ -17,6 +17,11 @@ const initialState = {
     setNotification:{
         notification: localStorage.getItem('notification')
         ? JSON.parse(localStorage.getItem('notification'))
+        : null
+    },
+    filtersSet: {
+        filters: localStorage.getItem('filters')
+        ? JSON.parse(localStorage.getItem('filters'))
         : null
     }
 };
@@ -45,6 +50,7 @@ const reducer = combineReducers({
 
     monthsGet: getMonthsReducer,
     setNotification: setNotificationReducer,
+    filtersSet: setFiltersReducer,
 
     activityCreate: createActivityReducer,
     activitiesList: listActivityReducer

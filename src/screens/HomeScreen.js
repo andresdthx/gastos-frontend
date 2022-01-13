@@ -6,6 +6,9 @@ import { MDBDataTableV5 } from 'mdbreact';
 import SelectDate from '../components/SelectDate';
 import { getMonths, setNotifications } from '../actions/utilsActions';
 import FloatButton from '../components/FloatButton';
+import ExpenseDetails from '../components/ExpenseDetails';
+import CategoryDetails from '../components/Accordion/CategoryDetails';
+import SubcategoryDetails from '../components/Accordion/SubcategoryDetails';
 
 export default function HomeScreen(props) {
   const dispatch = useDispatch();
@@ -13,6 +16,7 @@ export default function HomeScreen(props) {
   const [success, setSuccess] = useState(false);
   const [datatable, setDatatable] = useState({});
   const [month, setMonth] = useState();
+  const [filter, setFilter] = useState();
 
   const userSignin = useSelector(state => state.userSignin);
   const { userInfo } = userSignin;
@@ -23,6 +27,9 @@ export default function HomeScreen(props) {
   const expenseList = useSelector(state => state.expenseList);
   const { loading, expenses, error } = expenseList;
 
+  const filtersSet = useSelector(state => state.filtersSet);
+  const { filters } = filtersSet;
+
   const convertDate = (date) => {
     let month = date.split('-')[1];
     let day = date.split('-')[2];
@@ -32,9 +39,17 @@ export default function HomeScreen(props) {
     return newDate;
   }
 
-  const handleRedirect = (expenseId) => {
-    props.history.push(`/expenses/${expenseId}`);
-  }
+  // const handlerInfo = () => {
+  //   const filters = JSON.parse(localStorage.getItem('filters'));
+  //   if (filters.includes('subcategory')) {
+  //     setFilter('subcategory')
+  //   } else if (filters.includes('category')) {
+  //     setFilter('category')
+  //   } else {
+  //     setFilter('empty')
+  //     // props.history.push(`/expenses/${expenseId}`);
+  //   }
+  // }
 
   const getDate = () => {
     let newDate = new Date()
@@ -51,6 +66,18 @@ export default function HomeScreen(props) {
   // useEffect(()=>{
   //   dispatch(setNotifications({title: 'ojo con eso manito', message: 'pagat internet'}));
   // }, [dispatch]);
+
+  useEffect(() => {
+    if (filters) {
+      if (filters.includes('subcategory')) {
+        setFilter('subcategory')
+      } else if (filters.includes('category')) {
+        setFilter('category')
+      } else {
+        setFilter('empty')
+      }
+    }
+  }, [filters])
 
   useEffect(() => {
     if (!userInfo) props.history.push("/login");
@@ -146,25 +173,9 @@ export default function HomeScreen(props) {
                 </div>
                 <div className="data-content">
                   {
-                    expenses.map(item => (
-                      // <Link to={`/expense/${item.expenseId}`}>
-                      <div key={item.expenseId} className="data-table-items" onClick={() => handleRedirect(item.expenseId)}>
-
-                        <div className="data-date">
-                          <div>{item.date ? convertDate(item.date.split('T')[0]).slice(0, 6).split(' ')[1] : ''}</div>
-                          <div>{item.date ? convertDate(item.date.split('T')[0]).slice(0, 6).split(' ')[0] : ''}</div>
-                        </div>
-
-                        <div>
-                          <div className="category">{item.category.category}</div>
-                          <div className="subcategory">{item.subcategory.subcategory}</div>
-                        </div>
-
-                        <div>${new Intl.NumberFormat().format(item.value)}</div>
-
-                      </div>
-                      // </Link>
-                    ))
+                    filter === 'category' ? <CategoryDetails expenses={expenses} props={props}/> :
+                      filter === 'subcategory' ? <SubcategoryDetails expenses={expenses} /> :
+                        <ExpenseDetails expenses={expenses} props={props}/>
                   }
                 </div>
               </div>
