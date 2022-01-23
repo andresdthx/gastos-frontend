@@ -9,20 +9,30 @@ export default function CategoryDetails(props) {
     const { expenses: expensesProps, props: prop } = props;
     const [expenses, setExpenses] = useState([]);
 
-    const handleReduce = (items) => {
+    const handleCategoryReduce = (items) => {
         return items.reduce((prev, item) => {
             const head = `${item.category.categoryId}`
             const value = prev[head] ? prev[head][0] : 0
             const sub = prev[head] ? prev[head][3] : []
+
+            // const heatSub = sub[item.subcategory.subcategory]
+            // const value = 
             sub.push({
                 subcategory: item.subcategory.subcategory,
                 value: parseInt(item.value),
                 expenseId: item.expenseId
             })
+            console.log(sub)
             prev[head] = [value + parseInt(item.value), item.category.category, item.category.categoryId, sub]
             return prev
         }, [])
     }
+
+    // const handleSubcategoryReduce = (items) => {
+    //     return items.reduce((prev, item) => {
+
+    //     })
+    // }
 
     // const handleSubcategory = (items) => {
     //     return items.reduce((prev, item) => {
@@ -40,10 +50,10 @@ export default function CategoryDetails(props) {
     // }
 
     useEffect(() => {
-        const result = handleReduce(expensesProps)
-
-        console.log(result)
-        setExpenses(result)
+        const categories = handleCategoryReduce(expensesProps);
+        // const subcategories = handleSubcategoryReduce(categories);
+        console.log(expensesProps)
+        setExpenses(categories)
     }, [expensesProps])
 
     const handleRedirect = (expenseId) => {

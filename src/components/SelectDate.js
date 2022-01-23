@@ -17,21 +17,20 @@ export default function SelectDate(props) {
     const { month } = props;
     const [monthSelect, setMonthSelect] = useState();
     const [agrupadores, setAgrupadores] = useState();
-    const [groupesSelect, setSelectGroupes] = useState([]);
+    const [groupesSelect, setSelectGroupes] = useState();
 
     const handlerMonth = (items) => {
         let months = [];
         items.map(item => months.push(item.value));
 
         localStorage.setItem('months', JSON.stringify(months));
-        dispatch(listExpenses(months, groupesSelect));
+        dispatch(listExpenses(months, filters));
     }
 
     const handlerGrouper = (items) => {
         let groupers = [];
         items.map(item => groupers.push(item.value));
         dispatch(setFilters(groupers));
-        setSelectGroupes(groupers);
     }
 
     useEffect(() => {
@@ -45,17 +44,16 @@ export default function SelectDate(props) {
                 { value: 'subcategory', label: 'Subcategoria' },
             ]);
         }
-    }, [agrupadores, filters]);
+    }, [agrupadores]);
 
     useEffect(() => {
-        if(filters && agrupadores) {
+        if (filters && agrupadores) {
             const result = [];
             filters.forEach(filter => {
                 result.push(agrupadores.filter(agrupador => agrupador.value === filter)[0])
             })
             setSelectGroupes(result)
         }
-
     }, [filters, agrupadores])
 
     useEffect(() => {
@@ -86,7 +84,8 @@ export default function SelectDate(props) {
                     options={months} />
             )}
 
-            {months && groupesSelect && (
+
+            {groupesSelect &&
                 <Select
                     className="select"
                     placeholder="Agrupar por..."
@@ -94,7 +93,8 @@ export default function SelectDate(props) {
                     onChange={e => handlerGrouper(e)}
                     defaultValue={groupesSelect}
                     options={agrupadores} />
-            )}
+            }
+
         </div>
     )
 }
