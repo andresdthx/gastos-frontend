@@ -110,7 +110,7 @@ export default function ModalComponent(props) {
     useEffect(()=>{
         if (expense && submit) {
             let month = [today.split('-')[1]];
-            dispatch(listExpenses( month, []));
+            dispatch(listExpenses( month));
             closeModal();
         }
     },[expense, dispatch, submit, closeModal, today]);

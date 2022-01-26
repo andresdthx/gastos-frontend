@@ -116,7 +116,7 @@ export default function DrawerExpense(props) {
   useEffect(()=>{
       if (expense && submit) {
           let month = [today.split('-')[1]];
-          dispatch(listExpenses( month, []));
+          dispatch(listExpenses( month));
           handleClose(false);
       }
   },[expense, dispatch, submit, today, handleClose]);

@@ -15,49 +15,30 @@ export default function CategoryDetails(props) {
             const value = prev[head] ? prev[head][0] : 0
             const sub = prev[head] ? prev[head][3] : []
 
-            // const heatSub = sub[item.subcategory.subcategory]
-            // const value = 
-            sub.push({
-                subcategory: item.subcategory.subcategory,
-                value: parseInt(item.value),
-                expenseId: item.expenseId
-            })
-            console.log(sub)
+            const headSub = item.subcategory.subcategoryId
+            const valueSub = sub[headSub] ? sub[headSub][0] : 0
+            const exp = sub[headSub] ? sub[headSub][2] : []
+
+            exp.push(item.expenseId)
+
+            sub[headSub] = [valueSub + parseInt(item.value), item.subcategory.subcategory, exp]
             prev[head] = [value + parseInt(item.value), item.category.category, item.category.categoryId, sub]
             return prev
         }, [])
     }
 
-    // const handleSubcategoryReduce = (items) => {
-    //     return items.reduce((prev, item) => {
-
-    //     })
-    // }
-
-    // const handleSubcategory = (items) => {
-    //     return items.reduce((prev, item) => {
-    //         const head = `${item.subcategory}`
-    //         const value = prev[head] ? prev[head][0] : 0
-    //         const sub = prev[head] ? prev[head][3] : []
-    //         sub.push({
-    //             subcategory: item.subcategory.subcategory,
-    //             value: parseInt(item.value),
-    //             expenseId: item.expenseId
-    //         })
-    //         prev[head] = [value + parseInt(item.value), item.category.category, item.category.categoryId, sub]
-    //         return prev
-    //     }, [])
-    // }
-
     useEffect(() => {
-        const categories = handleCategoryReduce(expensesProps);
-        // const subcategories = handleSubcategoryReduce(categories);
-        console.log(expensesProps)
-        setExpenses(categories)
+        const result = handleReorder(handleCategoryReduce(expensesProps))
+        console.log(result)
+        setExpenses(result)
     }, [expensesProps])
 
     const handleRedirect = (expenseId) => {
         prop.history.push(`/expenses/${expenseId}`)
+    }
+
+    const handleReorder = (items) => {
+        return items.sort((a, b) => b[0] - a[0])
     }
 
     return (
@@ -74,14 +55,14 @@ export default function CategoryDetails(props) {
                 </AccordionSummary>
                 <AccordionDetails >
                     <Typography className='accordion-body'>
-                        {expense[3].map(item => (
+                        {handleReorder(expense[3]).map(item => (
                             <div
-                                key={item.expenseId}
+                                key={item[2]}
                                 className='accordion-body-description'
-                                onClick={() => handleRedirect(item.expenseId)}
+                                onClick={() => handleRedirect(item[2])}
                             >
-                                <div>{item.subcategory}</div>
-                                <div>${new Intl.NumberFormat().format(item.value)}</div>
+                                <div>{item[1][0].toUpperCase() + item[1].substr(1)}</div>
+                                <div>${new Intl.NumberFormat().format(item[0])}</div>
                             </div>
                         ))}
                     </Typography>

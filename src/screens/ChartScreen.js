@@ -13,7 +13,7 @@ export default function ChartScreen() {
 
     useEffect(()=>{
         if (!expenses){
-            dispatch(listExpenses(['09'], ['category']));
+            dispatch(listExpenses(['09']));
         } else {
             let labels = [];
             let data = [];

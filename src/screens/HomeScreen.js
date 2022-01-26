@@ -122,7 +122,7 @@ export default function HomeScreen(props) {
             width: 270,
           });
         expenses.forEach(item => rows.push({
-          category: item.category.category,
+          category: item.category.category[0],
           subcategory: item.subcategory.subcategory,
           description: item.description ? item.description : '',
           value: new Intl.NumberFormat().format(item.value),

@@ -29,8 +29,16 @@ export default function ExpenseDetails(props) {
                 </div>
 
                 <div>
-                    <div className="category">{expense.category.category}</div>
-                    <div className="subcategory">{expense.subcategory.subcategory}</div>
+                    <div className="category">
+                        {
+                            expense.category.category[0].toUpperCase() + expense.category.category.substr(1)
+                        }
+                    </div>
+                    <div className="subcategory">
+                        {
+                            expense.subcategory.subcategory[0].toUpperCase() + expense.subcategory.subcategory.substr(1)
+                        }
+                    </div>
                 </div>
 
                 <div>${new Intl.NumberFormat().format(expense.value)}</div>

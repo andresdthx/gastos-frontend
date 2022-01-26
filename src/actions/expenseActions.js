@@ -1,13 +1,12 @@
 import axios from "axios";
 import { EXPENSE_CREATE_FAIL, EXPENSE_CREATE_REQUEST, EXPENSE_CREATE_SUCCESS, EXPENSE_DELETE_FAIL, EXPENSE_DELETE_REQUEST, EXPENSE_DELETE_SUCCESS, EXPENSE_LIST_FAIL, EXPENSE_LIST_REQUEST, EXPENSE_LIST_SUCCESS, EXP_LIST_FAIL, EXP_LIST_REQUEST, EXP_LIST_SUCCESS } from "../constants/expenseConstants"
 
-export const listExpenses = (months, groupers) => async(dispatch, getState) =>{
+export const listExpenses = (months) => async(dispatch, getState) =>{
     dispatch({ type: EXPENSE_LIST_REQUEST });
     const { userSignin : { userInfo }} = getState();
     try {
         const { data } = await axios.post(`/api/expenses/${userInfo.id}`,{
             months: months,
-            groupers: groupers,
         }, {
             headers:{
                 Authorization: `Bearer ${userInfo.token}`

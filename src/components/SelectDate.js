@@ -24,7 +24,7 @@ export default function SelectDate(props) {
         items.map(item => months.push(item.value));
 
         localStorage.setItem('months', JSON.stringify(months));
-        dispatch(listExpenses(months, filters));
+        dispatch(listExpenses(months));
     }
 
     const handlerGrouper = (items) => {
@@ -34,7 +34,7 @@ export default function SelectDate(props) {
     }
 
     useEffect(() => {
-        dispatch(listExpenses([month], []));
+        dispatch(listExpenses([month]));
     }, [dispatch, month]);
 
     useEffect(() => {
