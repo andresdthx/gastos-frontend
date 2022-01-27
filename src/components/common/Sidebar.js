@@ -61,32 +61,32 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
     height: '10vh'
   },
-  contentHeader:{
+  contentHeader: {
     color: 'white',
     background: 'url(images/background/sidebar.jpg)',
     backgroundSize: '100%'
   },
-  button:{
+  button: {
     color: 'white'
   },
-  icon:{
+  icon: {
     color: '#080058'
   },
-  accountContent:{
+  accountContent: {
     width: '5rem',
     margin: '0.5rem',
     textAlign: 'center',
   },
-  accountIcon:{
+  accountIcon: {
     fontSize: '4rem'
   },
-  iconsSidebar:{
+  iconsSidebar: {
     color: '#FFFFFF'
   },
-  iconsMenu:{
+  iconsMenu: {
     color: '#000000'
   },
-  list:{
+  list: {
     color: '#000000'
   }
 }));
@@ -131,7 +131,7 @@ export default function Sidebar() {
       case 'logout':
         handlerSignout();
         break;
-    
+
       default:
         break;
     }
@@ -140,7 +140,7 @@ export default function Sidebar() {
   const [state, setState] = React.useState({ right: false });
 
   const toggleDrawer = (open) => {
-      setState({ ...state, right: open });
+    setState({ ...state, right: open });
   };
 
   // useEffect(()=>{
@@ -159,77 +159,77 @@ export default function Sidebar() {
     <div>
       {
         userInfo && (
-        <div className={classes.root}>
-          <CssBaseline />
-          <AppBar
-            position="relative"
-          >
-            <Toolbar>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                edge="start"
-                className={clsx(classes.menuButton, open && classes.hide)}
-              >
-                <MenuIcon />
-              </IconButton>
-
-              <Typography className={classes.menuContent}>
-                <Link className={classes.iconsSidebar} to="#">
-                <Badge className={classes.menuItems} onClick={() => toggleDrawer(true)} badgeContent={notifications} color="primary">
-                  <NotificationsIcon  />
-                </Badge>
-                </Link>
-                <span to="/#" onClick={handleClick} className={classes.iconsSidebar}>
-                  <PersonIcon />
-                  <ArrowDropDownIcon />
-                </span>
-                <Menu
-                  id="simple-menu"
-                  anchorEl={anchorEl}
-                  keepMounted
-                  open={Boolean(anchorEl)}
-                  onClose={() => handleClose()}
+          <div className={classes.root}>
+            <CssBaseline />
+            <AppBar
+              position="relative"
+            >
+              <Toolbar>
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  onClick={handleDrawerOpen}
+                  edge="start"
+                  className={clsx(classes.menuButton, open && classes.hide)}
                 >
-                  <Link to="/profile">
-                    <MenuItem onClick={() => handleClose()} className={classes.iconsMenu}>Perfil</MenuItem>
-                  </Link>
-                  <MenuItem onClick={() => handleClose('logout')}>Cerrar sesión</MenuItem>
-                </Menu>
-              </Typography>
-            </Toolbar>
-          </AppBar>
-
-          <DrawerNotification
-                state={state}
-                setState={setState}
-          />
-          
-          <Drawer
-            className={classes.drawer}
-            anchor="left"
-            open={open}
-            onClose={handleDrawerClose}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-          >
-            <div className={classes.contentHeader}>
-              <div className={classes.drawerHeader}>
-                <IconButton className={classes.button} onClick={handleDrawerClose}>
-                  {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                  <MenuIcon />
                 </IconButton>
+
+                <Typography className={classes.menuContent}>
+                  <Link className={classes.iconsSidebar} to="#">
+                    <Badge className={classes.menuItems} onClick={() => toggleDrawer(true)} badgeContent={notifications} color="primary">
+                      <NotificationsIcon />
+                    </Badge>
+                  </Link>
+                  <span to="/#" onClick={handleClick} className={classes.iconsSidebar}>
+                    <PersonIcon />
+                    <ArrowDropDownIcon />
+                  </span>
+                  <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={() => handleClose()}
+                  >
+                    <Link to="/profile">
+                      <MenuItem onClick={() => handleClose()} className={classes.iconsMenu}>Perfil</MenuItem>
+                    </Link>
+                    <MenuItem onClick={() => handleClose('logout')}>Cerrar sesión</MenuItem>
+                  </Menu>
+                </Typography>
+              </Toolbar>
+            </AppBar>
+
+            <DrawerNotification
+              state={state}
+              setState={setState}
+            />
+
+            <Drawer
+              className={classes.drawer}
+              anchor="left"
+              open={open}
+              onClose={handleDrawerClose}
+              classes={{
+                paper: classes.drawerPaper,
+              }}
+            >
+              <div className={classes.contentHeader}>
+                <div className={classes.drawerHeader}>
+                  <IconButton className={classes.button} onClick={handleDrawerClose}>
+                    {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                  </IconButton>
+                </div>
+
+
+                <List className={classes.accountContent}>
+                  <AccountCircleIcon className={classes.accountIcon} />
+                  {userInfo.username}
+                </List>
               </div>
 
-
-              <List className={classes.accountContent}>
-                <AccountCircleIcon className={classes.accountIcon}  />
-                {userInfo.username}
-              </List>
-            </div>
-
-            <List>
+              <List>
 
                 <Link className={classes.list} to="/">
                   <ListItem onClick={handleDrawerClose} button>
@@ -257,23 +257,25 @@ export default function Sidebar() {
                   <ListItemText primary="Ingresos" />
                 </ListItem>
 
-                <ListItem className={classes.list} onClick={handleDrawerClose} button>
-                  <ListItemIcon><UpdateIcon className={classes.icon} /></ListItemIcon>
-                  <ListItemText primary="Proximos gastos" />
-                </ListItem>
+                <Link className={classes.list} to="/entries">
+                  <ListItem className={classes.list} onClick={handleDrawerClose} button>
+                    <ListItemIcon><UpdateIcon className={classes.icon} /></ListItemIcon>
+                    <ListItemText primary="Proximos gastos" />
+                  </ListItem>
+                </Link>
 
                 <Link className={classes.list} to="/activities">
-                <ListItem className={classes.list} onClick={handleDrawerClose} button>
-                  <ListItemIcon><FormatListBulletedIcon className={classes.icon} /></ListItemIcon>
-                  <ListItemText primary="Pendientes" />
-                </ListItem>
+                  <ListItem className={classes.list} onClick={handleDrawerClose} button>
+                    <ListItemIcon><FormatListBulletedIcon className={classes.icon} /></ListItemIcon>
+                    <ListItemText primary="Pendientes" />
+                  </ListItem>
                 </Link>
-                
-            </List>
-            <Divider />
-          </Drawer>
-        </div>
-      )}
+
+              </List>
+              <Divider />
+            </Drawer>
+          </div>
+        )}
     </div>
   );
 }

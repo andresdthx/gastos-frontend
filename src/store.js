@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import { createActivityReducer, listActivityReducer } from './reducers/activityReducers';
 import { createAlertReducer, listAlertsReducer, listTypeAlertsReducer, updateAlertReducer, deleteAlertReducer } from './reducers/alertReducers';
 import { createCategoryReducers, listCategoriesReducer } from './reducers/categoryReducers';
+import { createEntryReducer, listEntriesReducer } from './reducers/entryReducer';
 import { createExpenseReducer, deleteExpenseReducer, listExpenseReducer, listExpensesReducer } from './reducers/expenseReducers';
 import { createSubcategoryReducer, listSubcategoriesReducer } from './reducers/subcategoryReducers';
 import { registerReducer, signinReducer, suscribeUserReducer } from './reducers/userReducer';
@@ -53,7 +54,10 @@ const reducer = combineReducers({
     filtersSet: setFiltersReducer,
 
     activityCreate: createActivityReducer,
-    activitiesList: listActivityReducer
+    activitiesList: listActivityReducer,
+
+    entryCreate: createEntryReducer,
+    entriesList: listEntriesReducer
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -10,7 +10,7 @@ export default function FloatButton(props) {
 
     const [url, setUrl] = useState('');
 
-    useEffect(()=>{
+    useEffect(() => {
         const path = props.props.location.pathname;
         switch (path) {
             case '/':
@@ -22,7 +22,10 @@ export default function FloatButton(props) {
             case '/alerts':
                 setUrl('/alerts-create');
                 break;
-        
+            case '/entries':
+                setUrl('/entries-create');
+                break;
+
             default:
                 break;
         }
@@ -31,9 +34,9 @@ export default function FloatButton(props) {
     return (
         <div>
             {
-                userInfo && 
+                userInfo &&
                 (
-                    <Link to = {url}>
+                    <Link to={url}>
                         <div className="floating-button">
                             <button className="btoncito">
                                 <AddIcon />
