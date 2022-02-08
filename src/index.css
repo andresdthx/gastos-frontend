@@ -670,16 +670,15 @@ li {
   font-weight: 500;
 }
 .accordion-body {
-  /* display: flex; */
   width: 100%;
   justify-content: space-between;
   flex-wrap: wrap;
 }
 .accordion-body-description {
-  font-size: .85rem;
+  font-size: 0.85rem;
   display: flex;
   justify-content: space-between;
-  margin-bottom: .1rem;
+  margin-bottom: 0.1rem;
 }
 .accordion-body-description div:first-child {
   font-weight: 300;
@@ -687,46 +686,123 @@ li {
 .accordion-body-description div:last-child {
   font-weight: 500;
 }
-.entry-card{
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+.entry-card {
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
   margin-top: 1.4rem;
-
-  /* border-top: 0.3rem solid #ABC6FF; */
   border-radius: 0.2rem;
 }
 .entry-card-title {
   padding-bottom: 2rem;
-  background-color: #C0C0C0;
+  padding-top: 1rem;
   color: #000000;
+  border: 1px solid rgba(24, 21, 21, 0.2);
   border-top-right-radius: 0.3rem;
   border-top-left-radius: 0.3rem;
+
+  text-align: right;
 }
-.entry-card-title-content{
-  font-size: 1.8rem;
-  margin-left: 0.5rem;
+.entry-card-title-content {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  margin-bottom: -1rem;
+  color: #181515;
 }
-.entry-card-info{
+.entry-card-info {
   display: flex;
-  justify-content:space-around;
+  justify-content: space-around;
   color: #ffffff;
-  background-color: #737171;
+  background-color: #181515;
   border-bottom-right-radius: 0.3rem;
   border-bottom-left-radius: 0.3rem;
   padding: 0.2rem;
-}
-.entry-card-info div{ 
+  padding-bottom: 0.8rem;
+  position: relative;
   text-align: center;
 }
-.entry-card-info > div > div:nth-child(1){ 
+
+.entry-card-info::before {
+  z-index: 0;
+  content: "";
+  position: absolute;
+  top: 0px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: inherit;
+  border-bottom-right-radius: 0.3rem;
+  border-bottom-left-radius: 0.3rem;
+
+  transform: skewY(4deg);
+  -webkit-transform-origin: 100%;
+  -moz-transform-origin: 100%;
+  -ms-transform-origin: 100%;
+  -o-transform-origin: 100%;
+  transform-origin: 100%;
+}
+.entry-card-info div {
+  z-index: 1;
+  text-align: center;
+}
+.entry-card-info > div > div:nth-child(1) {
   font-weight: 500;
 }
-
-.entry-card-info > div > div:nth-child(2){ 
+.entry-card-info > div > div:nth-child(2) {
   font-weight: 300;
 }
 
+.next-expenses-card {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.2rem;
+  border-bottom: 0.1rem solid #002ba5;
+  margin: 0 2rem;
+}
+
+body {
+  background-color: #1f2328;
+}
+.next-expense-content {
+  padding: 0.7rem;
+}
+.next-expense-table {
+  width: 100%;
+}
+
+.next-expense-table tr td,
+.next-expense-table th {
+  padding: 0.5rem;
+  width: 100%;
+}
+.next-expense-table tr td:nth-child(2) {
+  text-align: right;
+}
+.next-expense-table tr td:nth-child(3) {
+  text-align: center;
+}
+.next-expense-table tr:nth-child(even) {
+  background-color: #eeeeee;
+}
+.next-expense-table-confirmated{
+  font-weight: bold !important;
+  border-left: .15rem solid #000E27;
+}
+.next-expense-table-confirmated td {
+  font-weight: bold !important;
+}
+.next-expense-table-estimated {
+  margin-top: 0.3rem !important;
+  background-color: #040911;
+  color: #ffffff;
+}
+.next-expense-table-confirmed {
+  background-color: #000E27 !important;
+  color: #ffffff;
+}
+.next-expense-table-confirmed td {
+margin-top: 1rem;
+}
 @media only screen and (max-width: 450px) {
   .home {
     padding: 0;

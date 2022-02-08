@@ -14,6 +14,8 @@ import ActivityScreen from './screens/Activity/ActivityScreen';
 import ActivityCreateScreen from './screens/Activity/ActivityCreateScreen';
 import EntryScreen from './screens/Entry/EntryScreen';
 import EntryCreateScreen from './screens/Entry/EntryCreateScreen';
+import NextExpenseScreen from './screens/nextExpense/NextExpenseScreen';
+import NextExpenseCreateScreen from './screens/nextExpense/NextExpenseCreateScreen';
 
 function App() {
 
@@ -59,6 +61,9 @@ function RouteGroup() {
 
           <Route path="/entries" component={EntryScreen}></Route>
           <Route path="/entries-create" component={EntryCreateScreen}></Route>
+
+          <Route path="/next-expenses/:id" component={NextExpenseScreen}></Route>
+          <Route path="/next-expenses-create" component={NextExpenseCreateScreen}></Route>
         </Switch>
       </CSSTransition>
     </TransitionGroup>

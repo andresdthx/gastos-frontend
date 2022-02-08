@@ -12,6 +12,7 @@ export default function FloatButton(props) {
 
     useEffect(() => {
         const path = props.props.location.pathname;
+
         switch (path) {
             case '/':
                 setUrl('/expenses-create');
@@ -27,8 +28,12 @@ export default function FloatButton(props) {
                 break;
 
             default:
+                if(path.includes('/next-expenses')){
+                    setUrl('/next-expenses-create');
+                } 
                 break;
         }
+
     }, [props]);
 
     return (

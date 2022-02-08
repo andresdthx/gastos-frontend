@@ -5,25 +5,26 @@ import { createAlertReducer, listAlertsReducer, listTypeAlertsReducer, updateAle
 import { createCategoryReducers, listCategoriesReducer } from './reducers/categoryReducers';
 import { createEntryReducer, listEntriesReducer } from './reducers/entryReducer';
 import { createExpenseReducer, deleteExpenseReducer, listExpenseReducer, listExpensesReducer } from './reducers/expenseReducers';
+import { createNextExpenseReducer, listNextExpensesReducer, updateNextExpenseReducer } from './reducers/nextExpenseReducer';
 import { createSubcategoryReducer, listSubcategoriesReducer } from './reducers/subcategoryReducers';
 import { registerReducer, signinReducer, suscribeUserReducer } from './reducers/userReducer';
 import { getMonthsReducer, setFiltersReducer, setNotificationReducer } from './reducers/utilsReducers';
 
 const initialState = {
-    userSignin:{
+    userSignin: {
         userInfo: localStorage.getItem('userInfo')
-        ? JSON.parse(localStorage.getItem('userInfo'))
-        : null
+            ? JSON.parse(localStorage.getItem('userInfo'))
+            : null
     },
-    setNotification:{
+    setNotification: {
         notification: localStorage.getItem('notification')
-        ? JSON.parse(localStorage.getItem('notification'))
-        : null
+            ? JSON.parse(localStorage.getItem('notification'))
+            : null
     },
     filtersSet: {
         filters: localStorage.getItem('filters')
-        ? JSON.parse(localStorage.getItem('filters'))
-        : null
+            ? JSON.parse(localStorage.getItem('filters'))
+            : null
     }
 };
 
@@ -42,7 +43,7 @@ const reducer = combineReducers({
 
     subcategoriesList: listSubcategoriesReducer,
     subcategoryCreate: createSubcategoryReducer,
-    
+
     alertList: listAlertsReducer,
     alertActiveUpdate: updateAlertReducer,
     alertCreate: createAlertReducer,
@@ -57,7 +58,11 @@ const reducer = combineReducers({
     activitiesList: listActivityReducer,
 
     entryCreate: createEntryReducer,
-    entriesList: listEntriesReducer
+    entriesList: listEntriesReducer,
+
+    nextExpenseCreate: createNextExpenseReducer,
+    nextExpensesList: listNextExpensesReducer,
+    nextExpenseUpdate: updateNextExpenseReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -34,7 +34,7 @@ export default function SelectDate(props) {
     }
 
     useEffect(() => {
-        dispatch(listExpenses([month]));
+        dispatch(listExpenses(month));
     }, [dispatch, month]);
 
     useEffect(() => {

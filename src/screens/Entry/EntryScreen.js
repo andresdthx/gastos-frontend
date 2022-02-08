@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { listEntries } from '../../actions/entryActions';
 import { getMonths } from '../../actions/utilsActions';
+import { convertValue } from '../../common/utils';
 import FloatButton from '../../components/FloatButton';
 import MessageBox from '../../components/MessageBox';
 import LoadingBox from '../../components/utils/LoadingBox';
@@ -21,8 +22,13 @@ export default function EntryScreen(props) {
     if (months) return months.filter(month => month.value === number)[0].label
   }
 
+  const handleRedirect = (entryId) => {
+    props.history.push(`/next-expenses/${entryId}`)
+  }
+
   useEffect(() => {
-    if (!entries) dispatch(listEntries())
+    if (!entries)
+      dispatch(listEntries())
   }, [entries, dispatch])
 
   useEffect(() => {
@@ -33,28 +39,27 @@ export default function EntryScreen(props) {
     <div>
       {
         loading ? <LoadingBox /> :
-        error ? <MessageBox variant="danger">{error}</MessageBox> :
-        entries &&
-          (
-            entries.map(entry => (
-              <div className="entry-card">
-                <div className='entry-card-title'>
-                  <div className='entry-card-title-content'>{getMonth(entry.date.split('-')[0])}</div>
-                </div>
-                <div className='entry-card-info'>
-                  <div>
-                    <div>174.000</div>
-                    <div>Total</div>
+          error ? <MessageBox variant="danger">{error}</MessageBox> :
+            entries &&
+            (
+              entries.map(entry => (
+                <div key={entry.entryId} className="entry-card" onClick={() => handleRedirect(entry.entryId)}>
+                  <div className='entry-card-title'>
+                    <div className='entry-card-title-content'>{getMonth(entry.date.split('-')[0])}</div>
                   </div>
-                  <div>
-                    <div>{entry.entry}</div>
-                    <div>Ingresos</div>
+                  <div className='entry-card-info'>
+                    <div>
+                      <div>{convertValue(entry.nextExpense.reduce((a,b) => a + parseInt(b.value), 0))}</div>
+                      <div>Gasto estimado</div>
+                    </div>
+                    <div>
+                      <div>{convertValue(entry.entry)}</div>
+                      <div>Ingresos</div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
-          )
-
+              ))
+            )
       }
       <FloatButton props={props} />
     </div>

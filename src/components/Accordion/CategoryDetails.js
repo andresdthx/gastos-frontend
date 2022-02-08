@@ -29,7 +29,6 @@ export default function CategoryDetails(props) {
 
     useEffect(() => {
         const result = handleReorder(handleCategoryReduce(expensesProps))
-        console.log(result)
         setExpenses(result)
     }, [expensesProps])
 
