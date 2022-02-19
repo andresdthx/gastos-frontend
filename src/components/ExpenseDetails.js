@@ -1,19 +1,20 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
+import { convertDate } from '../common/utils';
 
 export default function ExpenseDetails(props) {
     const monthsGet = useSelector(state => state.monthsGet);
     const { months } = monthsGet;
     const { expenses, props: prop } = props;
 
-    const convertDate = (date) => {
-        let month = date.split('-')[1];
-        let day = date.split('-')[2];
+    // const convertDate = (date) => {
+    //     let month = date.split('-')[1];
+    //     let day = date.split('-')[2];
 
-        let result = months.filter(expense => expense.value === month);
-        let newDate = `${day} ${result[0].label}`;
-        return newDate;
-    }
+    //     let result = months.filter(expense => expense.value === month);
+    //     let newDate = `${day} ${result[0].label}`;
+    //     return newDate;
+    // }
 
     const handleRedirect = (expenseId) => {
         prop.history.push(`/expenses/${expenseId}`)
@@ -24,8 +25,8 @@ export default function ExpenseDetails(props) {
             <div key={expense.expenseId} className="data-table-items" onClick={() => handleRedirect(expense.expenseId)}>
 
                 <div className="data-date">
-                    <div>{expense.date ? convertDate(expense.date.split('T')[0]).slice(0, 6).split(' ')[1] : ''}</div>
-                    <div>{expense.date ? convertDate(expense.date.split('T')[0]).slice(0, 6).split(' ')[0] : ''}</div>
+                    <div>{expense.date ? convertDate(expense.date, months)[1] : ''}</div>
+                    <div>{expense.date ? convertDate(expense.date, months)[0] : ''}</div>
                 </div>
 
                 <div>

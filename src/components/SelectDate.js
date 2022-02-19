@@ -1,100 +1,104 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Select from 'react-select';
-import { listExpenses } from '../actions/expenseActions';
-import { getMonths, setFilters } from '../actions/utilsActions';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Select from "react-select";
+import { listExpenses } from "../actions/expenseActions";
+import { getMonths, setFilters } from "../actions/utilsActions";
 
 export default function SelectDate(props) {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
+  const monthsGet = useSelector((state) => state.monthsGet);
+  const { months } = monthsGet;
 
-    const monthsGet = useSelector(state => state.monthsGet);
-    const { months } = monthsGet;
+  const filtersSet = useSelector((state) => state.filtersSet);
+  const { filters } = filtersSet;
 
-    const filtersSet = useSelector(state => state.filtersSet);
-    const { filters } = filtersSet;
+  const { month } = props;
+  const [monthSelect, setMonthSelect] = useState();
+  const [agrupadores, setAgrupadores] = useState();
+  const [groupesSelect, setSelectGroupes] = useState([]);
 
-    const { month } = props;
-    const [monthSelect, setMonthSelect] = useState();
-    const [agrupadores, setAgrupadores] = useState();
-    const [groupesSelect, setSelectGroupes] = useState();
+  const handlerMonth = (items) => {
+    let months = [];
+    items.map((item) => months.push(item.value));
 
-    const handlerMonth = (items) => {
-        let months = [];
-        items.map(item => months.push(item.value));
+    localStorage.setItem("months", JSON.stringify(months));
+    dispatch(listExpenses(months));
+  };
 
-        localStorage.setItem('months', JSON.stringify(months));
-        dispatch(listExpenses(months));
+  const handlerGrouper = (items) => {
+    let groupers = [];
+    items.map((item) => groupers.push(item.value));
+    dispatch(setFilters(groupers));
+  };
+
+  useEffect(() => {
+    dispatch(listExpenses(month));
+  }, [dispatch, month]);
+
+  useEffect(() => {
+    if (!agrupadores) {
+      setAgrupadores([
+        { value: "category", label: "Categoria" },
+        { value: "subcategory", label: "Subcategoria" },
+      ]);
     }
+  }, [agrupadores]);
 
-    const handlerGrouper = (items) => {
-        let groupers = [];
-        items.map(item => groupers.push(item.value));
-        dispatch(setFilters(groupers));
+  useEffect(() => {
+    if (filters && agrupadores) {
+      const result = [];
+      filters.forEach((filter) => {
+        result.push(
+          agrupadores.filter((agrupador) => agrupador.value === filter)[0]
+        );
+      });
+      setSelectGroupes(result);
     }
+  }, [filters, agrupadores]);
 
-    useEffect(() => {
-        dispatch(listExpenses(month));
-    }, [dispatch, month]);
+  useEffect(() => {
+    if (months) {
+      const result = [];
+      months.forEach((item) =>
+        month.forEach((m) => {
+          if (m === item.value) result.push(item);
+        })
+      );
 
-    useEffect(() => {
-        if (!agrupadores) {
-            setAgrupadores([
-                { value: 'category', label: 'Categoria' },
-                { value: 'subcategory', label: 'Subcategoria' },
-            ]);
-        }
-    }, [agrupadores]);
+      if (!monthSelect) setMonthSelect(result);
+    } else {
+      dispatch(getMonths());
+    }
+  }, [dispatch, months, monthSelect, month]);
 
-    useEffect(() => {
-        if (filters && agrupadores) {
-            const result = [];
-            filters.forEach(filter => {
-                result.push(agrupadores.filter(agrupador => agrupador.value === filter)[0])
-            })
-            setSelectGroupes(result)
-        }
-    }, [filters, agrupadores])
+  return (
+    <div className="selects-datable">
+      {months && monthSelect && (
+        <Select
+          isSearchable={false}
+          isClearable={false}
+          className="select"
+          placeholder="Mes"
+          isMulti
+          onChange={(e) => handlerMonth(e)}
+          defaultValue={monthSelect}
+          options={months}
+        />
+      )}
 
-    useEffect(() => {
-        if (months) {
-            const result = [];
-            months.forEach(item =>
-                month.forEach(m => {
-                    if (m === item.value) result.push(item)
-                })
-            )
-
-            if (!monthSelect) setMonthSelect(result);
-
-        } else {
-            dispatch(getMonths());
-        }
-    }, [dispatch, months, monthSelect, month]);
-
-    return (
-        <div className="selects-datable">
-            {months && monthSelect && (
-                <Select
-                    className="select"
-                    placeholder="Mes"
-                    isMulti
-                    onChange={e => handlerMonth(e)}
-                    defaultValue={monthSelect}
-                    options={months} />
-            )}
-
-
-            {groupesSelect &&
-                <Select
-                    className="select"
-                    placeholder="Agrupar por..."
-                    isMulti
-                    onChange={e => handlerGrouper(e)}
-                    defaultValue={groupesSelect}
-                    options={agrupadores} />
-            }
-
-        </div>
-    )
+      {groupesSelect && (
+        <Select
+          className="select"
+          isSearchable={false}
+          isClearable={false}
+          placeholder="Agrupar por..."
+          isMulti
+          onChange={(e) => handlerGrouper(e)}
+          defaultValue={groupesSelect}
+          options={agrupadores}
+        />
+      )}
+    </div>
+  );
 }

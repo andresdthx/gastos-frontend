@@ -5,24 +5,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FloatButton from '../../components/FloatButton';
 import { listActivities } from '../../actions/activityActions';
 import { useDispatch, useSelector } from 'react-redux';
-
-const initialActivities = [
-    {
-        id: "1",
-        color: "red",
-        activity: 'Ver maricadas'
-    },
-    {
-        id: "2",
-        color: "blue",
-        activity: 'Corregir trabajo'
-    },
-    {
-        id: "3",
-        color: "green",
-        activity: 'Salir temprano'
-    }
-]
+import LoadingBox from '../../components/utils/LoadingBox';
+import MessageBox from '../../components/MessageBox';
 
 const reorder = (list, startIndex, endIndex) => {
     const result  = [...list];
@@ -37,57 +21,70 @@ export default function ActivityScreen(props) {
     const activitiesList = useSelector(state => state.activitiesList);
     const { loading, activities: activitiesLoad, error } = activitiesList;
 
-    const [activities, setActivities] = useState(initialActivities);
+    const [activities, setActivities] = useState();
 
     useEffect(()=>{
-        if(!activitiesLoad) dispatch(listActivities());
+        if(!activitiesLoad) {
+            dispatch(listActivities());
+        } else {
+            setActivities(activitiesLoad)
+        }
     }, [dispatch, activitiesLoad]);
 
     return (
         <div>
-            <DragDropContext onDragEnd={(result) => {
-                const { source, destination } = result;
-                if (!destination) return;
-                if(source.index === destination.index) return;
-                setActivities(prevActivities => reorder(prevActivities, source.index, destination.index));
-            }}>
-                <div className="dragger-title">Actividades</div>
-                <Droppable droppableId="activities">
-                    {(droppableProvided) => (
-                        <div 
-                            {...droppableProvided.droppableProps}
-                            ref={droppableProvided.innerRef}
-                        >
-                            {activitiesLoad.map((item, index) => (
-                                    <Draggable key={item.activityId.toString()} draggableId={item.activityId.toString()} index={index}>
-                                        {(draggableProvided) => (
-                                            <div className="dragger-container"
-                                                {...draggableProvided.draggableProps}
-                                                ref={draggableProvided.innerRef}
-                                                {...draggableProvided.dragHandleProps}
-                                            >
-                                                <Avatar className={`avatar-dragger-${item.typesalert.typeAlert}`}>
-                                                    {item.activity.charAt(0)}
-                                                </Avatar>
+            {
+                loading ? <LoadingBox /> 
+                :
+                error ? <MessageBox variant="danger">{error}</MessageBox>
+                :
+                activities && (
+                    <DragDropContext onDragEnd={(result) => {
+                        const { source, destination } = result;
+                        if (!destination) return;
+                        if(source.index === destination.index) return;
+                        setActivities(prevActivities => reorder(prevActivities, source.index, destination.index));
+                    }}>
+                        <div className="dragger-title">Actividades</div>
+                        <Droppable droppableId="activities">
+                            {(droppableProvided) => (
+                                <div 
+                                    {...droppableProvided.droppableProps}
+                                    ref={droppableProvided.innerRef}
+                                >
+                                    {activities.map((item, index) => (
+                                            <Draggable key={item.activityId.toString()} draggableId={item.activityId.toString()} index={index}>
+                                                {(draggableProvided) => (
+                                                    <div className="dragger-container"
+                                                        {...draggableProvided.draggableProps}
+                                                        ref={draggableProvided.innerRef}
+                                                        {...draggableProvided.dragHandleProps}
+                                                    >
+                                                        <Avatar className={`avatar-dragger-${item.activity.typeAlert}`}>
+                                                            {item.activity.charAt(0)}
+                                                        </Avatar>
+        
+                                                        <div>
+                                                            {item.activity}
+                                                        </div>
+                                                        
+                                                        <div>
+                                                            <DeleteIcon />
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </Draggable>
+                                            
+                                    ))}
+                                    {droppableProvided.placeholder}
+                                </div>
+                            )}
+        
+                        </Droppable>
+                    </DragDropContext>
+                )
+            }
 
-                                                <div>
-                                                    {item.activity}
-                                                </div>
-                                                
-                                                <div>
-                                                    <DeleteIcon />
-                                                </div>
-                                            </div>
-                                        )}
-                                    </Draggable>
-                                    
-                            ))}
-                            {droppableProvided.placeholder}
-                        </div>
-                    )}
-
-                </Droppable>
-            </DragDropContext>
             <FloatButton props={props} />
         </div>
     )

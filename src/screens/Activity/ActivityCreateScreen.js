@@ -18,12 +18,12 @@ export default function ActivityCreateScreen(props) {
 
     const dispatch = useDispatch();
 
-    const [state, setState] = useState({ right: true});
+    const [state, setState] = useState({ right: true });
     const [activity, setActivity] = useState('');
     const [date, setDate] = useState('');
 
     const toggleDrawer = (open) => {
-        props.history.push('/');
+        props.history.push('/activities');
         setState({ ...state, right: open });
     };
 
@@ -34,15 +34,13 @@ export default function ActivityCreateScreen(props) {
     return (
         <Drawer anchor={'right'} open={state.right} onClose={() => toggleDrawer(false)}>
             <div className="drawer-header">
-                <Link to="/">
-                    <ArrowBackIcon className="drawer-back" onClick={() => toggleDrawer(false)} />
-                </Link>
+                <ArrowBackIcon className="drawer-back" onClick={() => toggleDrawer(false)} />
             </div>
             <div className="drawer-body">
                 <div>Crear actividad</div>
                 <form className="form-modal" onSubmit={handlerSubmit}>
                     <div>
-                        <input 
+                        <input
                             type="text"
                             onChange={e => setActivity(e.target.value)}
                             placeholder="Actividad">
