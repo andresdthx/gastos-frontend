@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import { listExpenses } from "../actions/expenseActions";
-import { getMonths, setFilters } from "../actions/utilsActions";
+import { getMonths } from "../actions/utilsActions";
 
 export default function SelectDate(props) {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ export default function SelectDate(props) {
   const handlerGrouper = (items) => {
     let groupers = [];
     items.map((item) => groupers.push(item.value));
-    dispatch(setFilters(groupers));
+    // dispatch(setFilters(groupers));
   };
 
   useEffect(() => {

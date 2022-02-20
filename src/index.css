@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css?family=Kaushan+Script|Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Kaushan+Script|Roboto&display=swap|Bebas+Neue|Lobster");
+@import url("https://fonts.googleapis.com/css?family=Bebas+Neue&effect=neon|outline|emboss|shadow-multiple");
 
 body,
 html {
@@ -147,7 +148,7 @@ a {
 .home-screen .title {
   font-family: Roboto, serif;
   padding: 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 /* datatable */
 .mdb-datatable {
@@ -163,7 +164,7 @@ a {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 0.5rem;
+  padding: 1rem;
 }
 .data-card {
   display: block;
@@ -171,13 +172,32 @@ a {
   max-width: 40rem;
   width: 40rem;
   margin-top: 0.5rem;
-  padding: 0.5rem;
+  padding: 4rem .5rem .5rem 1rem;
   border-radius: 0.2rem;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   text-align: left;
   background-color: #0d0090;
   color: #ffffff;
+  position: relative;
 }
+.data-card div:nth-child(1) {
+  font-size: .9rem;
+  font-weight: 300;
+}
+.data-card div:nth-child(2) {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+.data-card div:nth-child(3) {
+  right: -1rem;
+  top: 0;
+  position: absolute;
+}
+.data-card > div > svg {
+  font-size: 10rem;
+  opacity: .2;
+}
+
 .data-content {
   display: none;
   padding: 0.7rem;
@@ -222,15 +242,6 @@ a {
 .subcategory {
   font-weight: 300;
   font-size: 0.8rem;
-}
-
-.data-card div:first-child {
-  font-size: 0.7rem;
-  font-weight: 300;
-}
-.data-card div:last-child {
-  font-size: 1.2rem;
-  font-weight: 400;
 }
 .data-table {
   margin: 0.5rem;
@@ -784,9 +795,9 @@ body {
 .next-expense-table tr:nth-child(even) {
   background-color: #eeeeee;
 }
-.next-expense-table-confirmated{
+.next-expense-table-confirmated {
   font-weight: bold !important;
-  border-left: .15rem solid #000E27;
+  border-left: 0.15rem solid #000e27;
 }
 .next-expense-table-confirmated td {
   font-weight: bold !important;
@@ -797,11 +808,110 @@ body {
   color: #ffffff;
 }
 .next-expense-table-confirmed {
-  background-color: #000E27 !important;
+  background-color: #000e27 !important;
   color: #ffffff;
 }
 .next-expense-table-confirmed td {
-margin-top: 1rem;
+  margin-top: 1rem;
+}
+.container {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 100%;
+  box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+  margin-top: 1rem;
+}
+.container-2 {
+  background-color: #0d0090;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 100%;
+  box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+  margin-top: 1rem;
+}
+.months-content {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 0.5rem;
+  justify-content: center;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+.months-content > div {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 100%;
+  text-align: center;
+  background-color: #BFC1FF;
+  color: #000000;
+  font-size: 1.2rem;
+  padding-top: 0.5rem;
+  font-family: "Bebas Neue", serif;
+  transition: color 0.2s;
+}
+.months-content-selected {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+  border: 3px solid black !important;
+  padding-top: 0.3rem !important;
+  font-weight: bold !important;
+}
+/* 
+.months-content > div:nth-child(1) {
+  background-color: #09f;
+}
+.months-content > div:nth-child(2) {
+  background-color: #b95c06;
+}
+.months-content > div:nth-child(3) {
+  background-color: #09f;
+}
+.months-content > div:nth-child(4) {
+  background-color: #2dff57;
+}
+.months-content > div:nth-child(5) {
+  background-color: #ff2d66;
+}
+.months-content > div:nth-child(6) {
+  background-color: #94418f;
+}
+.months-content > div:nth-child(7) {
+  background-color: #5b3903;
+}
+.months-content > div:nth-child(8) {
+  background-color: #333883;
+}
+.months-content > div:nth-child(9) {
+  background-color: #ff0000;
+}
+.months-content > div:nth-child(10) {
+  background-color: #000000;
+}
+.months-content > div:nth-child(11) {
+  background-color: #ffb260;
+}
+.months-content > div:nth-child(12) {
+  background-color: #60d8ff;
+} */
+.months-content > div > img {
+  color: #002ba5;
+  margin-top: 0.3rem;
+  /* padding: 1rem; */
+  width: 2rem;
+}
+
+.filter-content > button {
+  width: 100%;
+  border: none;
+  padding: .5rem;
+  font-family: "Bebas Neue", serif;
+  font-size: 1.2rem;
+  background-color: #0d0090;
+  color: #ffffff;
+  border-radius: .2rem;
 }
 @media only screen and (max-width: 450px) {
   .home {
