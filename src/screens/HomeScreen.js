@@ -10,8 +10,6 @@ import CategoryDetails from "../components/Accordion/CategoryDetails";
 import { convertValue } from "../common/utils";
 import DateSelect from "../components/DateSelect";
 import FilterBotton from "../components/FilterBotton";
-import { listExpenses } from "../actions/expenseActions";
-import AttachMoney from "@material-ui/icons/AttachMoney";
 
 export default function HomeScreen(props) {
   const dispatch = useDispatch();
@@ -124,7 +122,7 @@ export default function HomeScreen(props) {
     <div className="home-screen">
       <div className="title">Hola, {userInfo.username}</div>
 
-      <DateSelect month={month} />
+      {month && <DateSelect month={month} />}
 
       <FilterBotton />
 
@@ -144,7 +142,13 @@ export default function HomeScreen(props) {
                 )}
               </div>
               <div>
-                <AttachMoney />
+                <div class="data-card-circle"></div>
+              </div>
+              <div>
+                <div class="data-card-circle-2"></div>
+              </div>
+              <div>
+                <div class="data-card-circle-3"></div>
               </div>
             </div>
           </div>
