@@ -15,7 +15,8 @@ export default function DateSelect(props) {
   const { month } = props;
 
   const handleSelectMonth = (month) => {
-    return monthsStorage.includes(month);
+    if (monthsStorage) 
+      return monthsStorage.includes(month);
   };
 
   const handlePickMonth = (month) => {
