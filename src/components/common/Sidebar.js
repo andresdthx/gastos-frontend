@@ -63,14 +63,14 @@ const useStyles = makeStyles((theme) => ({
   },
   contentHeader: {
     color: "white",
-    background: "url(images/background/sidebar.jpg)",
+    background: "url(images/background/sidebar-2.jpg)",
     backgroundSize: "100%",
   },
   button: {
     color: "white",
   },
   icon: {
-    color: "#080058",
+    color: "#B2002E",
   },
   accountContent: {
     width: "5rem",

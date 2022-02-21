@@ -120,7 +120,7 @@ export default function HomeScreen(props) {
 
   return (
     <div className="home-screen">
-      <div className="title">Hola, {userInfo.username}</div>
+      <div className="title">Mis gastos</div>
 
       {month && <DateSelect month={month} />}
 

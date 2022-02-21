@@ -57,14 +57,12 @@ export default function NextExpenseScreen(props) {
                   <tr>
                     <th>Gasto</th>
                     <th>Valor</th>
-                    {/* <th>Marcar</th> */}
                   </tr>
                   {
                     nextExpenses.map(nextExpense => (
                       <tr className={nextExpense.check && "next-expense-table-confirmated"} onClick={() => handleNextExpense(nextExpense.nextExpenseId, !nextExpense.check)}>
                         <td>{nextExpense.name}</td>
                         <td>{convertValue(nextExpense.value)}</td>
-                        {/* <td><iput type="checkbox" id="cbox1" value="first_checkbox" /></td> */}
                       </tr>
                     ))
                   }

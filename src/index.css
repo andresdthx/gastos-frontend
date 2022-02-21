@@ -149,12 +149,12 @@ a {
   height: 80px;
   width: 110px;
   border-radius: 0 0 100% 0;
-  background-color: #541425;
+  background-color: #E8E8E8;
   opacity: 1;
   font-family: Roboto, serif;
   padding: 0.5rem;
   font-size: 1.2rem;
-  color: #f1f1f1;
+  color: #000000;
   text-shadow: 1px 1px 2px #1a1919;
 }
 /* datatable */
@@ -178,7 +178,6 @@ a {
   border: none;
   max-width: 40rem;
   width: 40rem;
-  margin-top: 0.5rem;
   padding: 5rem .5rem .5rem 1rem;
   border-radius: 1rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
@@ -245,7 +244,7 @@ a {
 
 .data-content {
   display: none;
-  padding: 0.7rem;
+  padding: .7rem 1rem 0 1rem;
   padding-bottom: 5.5rem;
 }
 .data-table-items {
@@ -737,66 +736,46 @@ li {
   margin-bottom: 0.1rem;
 }
 .accordion-body-description div:first-child {
+  padding: 0.2rem;
+  font-size: .9rem;
   font-weight: 300;
 }
 .accordion-body-description div:last-child {
   font-weight: 500;
 }
+.accordion-body-expense {
+  padding: 0 1rem 0 1rem;
+}
 .entry-card {
-  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
-  margin-top: 1.4rem;
-  border-radius: 0.2rem;
+  margin: 1.5rem;
+  border-radius: 1rem;
+  position: relative;
+  max-width: 500px;
+  background-color: #B2002E;
 }
 .entry-card-title {
   padding-bottom: 2rem;
   padding-top: 1rem;
   color: #000000;
-  border: 1px solid rgba(24, 21, 21, 0.2);
-  border-top-right-radius: 0.3rem;
-  border-top-left-radius: 0.3rem;
 
   text-align: right;
 }
 .entry-card-title-content {
   font-size: 1.5rem;
-  margin-right: 1rem;
-  margin-bottom: -1rem;
-  color: #181515;
+  position: relative;
+  z-index: 5;
+  color: #ffffff;
+  padding: 1rem;
 }
 .entry-card-info {
   display: flex;
-  justify-content: space-around;
+  justify-content:space-between;
   color: #ffffff;
-  background-color: #181515;
-  border-bottom-right-radius: 0.3rem;
-  border-bottom-left-radius: 0.3rem;
-  padding: 0.2rem;
-  padding-bottom: 0.8rem;
+  padding: 1rem;
   position: relative;
   text-align: center;
 }
 
-.entry-card-info::before {
-  z-index: 0;
-  content: "";
-  position: absolute;
-  top: 0px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: inherit;
-  border-bottom-right-radius: 0.3rem;
-  border-bottom-left-radius: 0.3rem;
-
-  transform: skewY(4deg);
-  -webkit-transform-origin: 100%;
-  -moz-transform-origin: 100%;
-  -ms-transform-origin: 100%;
-  -o-transform-origin: 100%;
-  transform-origin: 100%;
-}
 .entry-card-info div {
   z-index: 1;
   text-align: center;
@@ -807,6 +786,21 @@ li {
 .entry-card-info > div > div:nth-child(2) {
   font-weight: 300;
 }
+.entry-card > div:nth-child(3) {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+}
+.entry-card > div:nth-child(4) {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.entry-card > div:nth-child(5) {
+  position: absolute;
+  bottom: 0;
+}
+
 
 .next-expenses-card {
   display: flex;
@@ -964,6 +958,10 @@ body {
   background-color: #B2002E;
   color: #ffffff;
   border-radius: 1rem;
+}
+
+.MuiAccordionDetails-root{
+  padding: 8px 0 16px !important;
 }
 @media only screen and (max-width: 450px) {
   .home {
