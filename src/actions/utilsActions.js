@@ -6,6 +6,9 @@ import {
   SET_GROUP_FAIL,
   SET_GROUP_REQUEST,
   SET_GROUP_SUCCESS,
+  SET_MONTH_FAIL,
+  SET_MONTH_REQUEST,
+  SET_MONTH_SUCCESS,
   SET_NOTIFICATIONS_FAIL,
   SET_NOTIFICATIONS_REQUEST,
   SET_NOTIFICATIONS_SUCCESS,
@@ -37,6 +40,23 @@ export const setGroup = (filters) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: SET_GROUP_FAIL,
+      payload:
+        error.response && error.response.data.response
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const setMonth = (months) => async (dispatch) => {
+  dispatch({ type: SET_MONTH_REQUEST });
+
+  try {
+    localStorage.setItem("months", JSON.stringify(months));
+    dispatch({ type: SET_MONTH_SUCCESS, payload: months });
+  } catch (error) {
+    dispatch({
+      type: SET_MONTH_FAIL,
       payload:
         error.response && error.response.data.response
           ? error.response.data.message

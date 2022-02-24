@@ -2,12 +2,12 @@ import {
   GET_MONTHS_FAIL,
   GET_MONTHS_REQUEST,
   GET_MONTHS_SUCCESS,
-  SET_FILTERS_FAIL,
-  SET_FILTERS_REQUEST,
-  SET_FILTERS_SUCCESS,
   SET_GROUP_FAIL,
   SET_GROUP_REQUEST,
   SET_GROUP_SUCCESS,
+  SET_MONTH_FAIL,
+  SET_MONTH_REQUEST,
+  SET_MONTH_SUCCESS,
   SET_NOTIFICATIONS_FAIL,
   SET_NOTIFICATIONS_REQUEST,
   SET_NOTIFICATIONS_SUCCESS,
@@ -55,13 +55,13 @@ export const setGroupReducer = (state = { loading: true }, action) => {
   }
 };
 
-export const getMonthsStorageReducer = (state = { loading: true }, action) => {
+export const setMonthReducer = (state = { loading: true }, action) => {
   switch (action.type) {
-    case SET_FILTERS_REQUEST:
+    case SET_MONTH_REQUEST:
       return { loading: true };
-    case SET_FILTERS_SUCCESS:
-      return { loading: false, filters: action.payload };
-    case SET_FILTERS_FAIL:
+    case SET_MONTH_SUCCESS:
+      return { loading: false, monthsStorage: action.payload };
+    case SET_MONTH_FAIL:
       return { loading: false, error: action.payload };
 
     default:

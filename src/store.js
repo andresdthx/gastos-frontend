@@ -44,6 +44,7 @@ import {
   getMonthsReducer,
   getMonthsStorageReducer,
   setGroupReducer,
+  setMonthReducer,
   setNotificationReducer,
 } from "./reducers/utilsReducers";
 
@@ -63,7 +64,7 @@ const initialState = {
       ? JSON.parse(localStorage.getItem("group"))
       : null,
   },
-  monthsGetStorage: {
+  monthsSet: {
     months: localStorage.getItem("months")
       ? JSON.parse(localStorage.getItem("months"))
       : null,
@@ -94,9 +95,9 @@ const reducer = combineReducers({
   alertDelete: deleteAlertReducer,
 
   monthsGet: getMonthsReducer,
-  monthsGetStorage: getMonthsStorageReducer,
   setNotification: setNotificationReducer,
   groupSet: setGroupReducer,
+  monthsSet: setMonthReducer,
 
   activityCreate: createActivityReducer,
   activitiesList: listActivityReducer,

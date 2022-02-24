@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Bar } from "react-chartjs-2";
+import { Bar, Doughnut } from "react-chartjs-2";
 import { useDispatch, useSelector } from "react-redux";
 import { listExpensesByDate } from "../actions/expenseActions";
 import { getMonths } from "../actions/utilsActions";
@@ -25,7 +25,7 @@ export default function ChartScreen() {
     responsive: true,
     plugins: {
       legend: {
-        display: false,
+        display: true,
       },
     },
   };
@@ -52,7 +52,7 @@ export default function ChartScreen() {
   return (
     <div>
       {labels && data && (
-        <Bar
+        <Doughnut
           datasetIdKey="id"
           options={options}
           data={{
