@@ -19,15 +19,20 @@ export default function DateSelect(props) {
   };
 
   const handlePickMonth = (month) => {
-    if (!handleSelectMonth(month)) {
-      monthsStorage.push(month);
-    } else {
-      for (var i = 0; i < monthsStorage.length; i++) {
-        if (monthsStorage[i] === month) monthsStorage.splice(i, 1);
+
+    if(monthsStorage) {
+      if (!handleSelectMonth(month)) {
+        monthsStorage.push(month);
+      } else {
+        for (var i = 0; i < monthsStorage.length; i++) {
+          if (monthsStorage[i] === month) monthsStorage.splice(i, 1);
+        }
       }
+      dispatch(setMonth(monthsStorage))
+    } else {
+      dispatch(setMonth([month]))
     }
 
-    localStorage.setItem("months", JSON.stringify(monthsStorage));
     dispatch(listExpenses(monthsStorage));
   };
 
@@ -39,10 +44,10 @@ export default function DateSelect(props) {
     dispatch(listExpenses(month));
   }, [dispatch, month]);
 
-  useEffect(() => {
-    if (!monthsStorage) dispatch(setMonth([]))
-    console.log(monthsStorage)
-  }, [monthsStorage, dispatch]);
+  // useEffect(() => {
+  //   if (!monthsStorage) dispatch(setMonth([]))
+  //   console.log(monthsStorage)
+  // }, [monthsStorage, dispatch]);
 
   return (
     <div className="container">
@@ -53,7 +58,7 @@ export default function DateSelect(props) {
               onClick={() => handlePickMonth(month.value)}
               key={month.value}
               className={
-                handleSelectMonth(month.value) ? "months-content-selected" : ""
+                handleSelectMonth(month.value) && "months-content-selected" 
               }
             >
               {month.label.slice(0, 3)}

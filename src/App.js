@@ -1,5 +1,4 @@
-import {BrowserRouter, Route, Switch, useLocation, HashRouter } from 'react-router-dom';
-import Sidebar from './components/common/Sidebar';
+import { Route, Switch, useLocation, HashRouter } from 'react-router-dom';
 import AlertScreen from './screens/Alert/AlertScreen';
 import ChartScreen from './screens/ChartScreen';
 import ExpenseScreen from './screens/Expense/ExpenseScreen';
@@ -16,12 +15,13 @@ import EntryScreen from './screens/Entry/EntryScreen';
 import EntryCreateScreen from './screens/Entry/EntryCreateScreen';
 import NextExpenseScreen from './screens/nextExpense/NextExpenseScreen';
 import NextExpenseCreateScreen from './screens/nextExpense/NextExpenseCreateScreen';
+import SidebarMenu from './components/SidebarMenu';
 
 function App() {
 
   return (
     <HashRouter>
-        <Sidebar />
+        <SidebarMenu />
         <Switch>
           <Route path="*">
             <RouteGroup />

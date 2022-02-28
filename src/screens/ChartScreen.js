@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Bar, Doughnut } from "react-chartjs-2";
+import { Bar, Doughnut, Line } from "react-chartjs-2";
 import { useDispatch, useSelector } from "react-redux";
 import { listExpensesByDate } from "../actions/expenseActions";
 import { getMonths } from "../actions/utilsActions";
@@ -22,10 +22,15 @@ export default function ChartScreen() {
         borderWidth: 2,
       },
     },
+    scales: {
+      y:{
+        display: false,
+      }
+    },
     responsive: true,
     plugins: {
       legend: {
-        display: true,
+        display: false,
       },
     },
   };
@@ -51,25 +56,39 @@ export default function ChartScreen() {
 
   return (
     <div>
-      {labels && data && (
-        <Doughnut
-          datasetIdKey="id"
-          options={options}
-          data={{
-            labels: labels,
-            datasets: [
-              {
-                label: "Gastos",
-                data: data,
-                backgroundColor: [
-                  "rgba(255, 99, 132, 0.8)",
-                  "rgba(53, 162, 235, 0.8)",
-                ],
-              },
-            ],
-          }}
-        />
-      )}
+      <div>
+        {labels && data && (
+          <Bar
+            datasetIdKey="id"
+            options={options}
+            data={{
+              labels: labels,
+              datasets: [
+                {
+                  label: "Gastos",
+                  data: data,
+                  backgroundColor: [
+                    "rgba(255, 99, 132, 0.8)",
+                    "rgba(53, 162, 235, 0.8)",
+                  ],
+                },
+              ],
+            }}
+          />
+        )}
+      </div>
+      <div>
+        <ul>
+          {expenses &&
+            expenses.map((expense) => (
+              <>
+                <li>{convertDate(expense.date, months)[1]}</li>
+                <li>{expense.total}</li>
+              </>
+            ))}
+          <li></li>
+        </ul>
+      </div>
     </div>
   );
 }

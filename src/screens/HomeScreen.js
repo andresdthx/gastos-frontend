@@ -10,6 +10,7 @@ import CategoryDetails from "../components/Accordion/CategoryDetails";
 import { convertValue } from "../common/utils";
 import DateSelect from "../components/DateSelect";
 import FilterBotton from "../components/FilterBotton";
+import SidebarMenu from "../components/SidebarMenu";
 
 export default function HomeScreen(props) {
   const dispatch = useDispatch();
@@ -120,7 +121,15 @@ export default function HomeScreen(props) {
 
   return (
     <div className="home-screen">
-      <div className="title">Mis gastos</div>
+      <div className="home-screen-info-content">
+        <div className="info-content-title">
+          <div>Mis gastos</div>
+          <span>resumen</span>
+        </div>
+        <div className="info-content-date">
+          <div>28 Feb, 2022</div>
+        </div>
+      </div>
 
       {month && <DateSelect month={month} />}
 

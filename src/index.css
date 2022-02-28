@@ -23,7 +23,8 @@ button {
 }
 a {
   text-decoration: none;
-  color: white;
+  color: #a7a6a6;
+  /* color: white; */
   /* color: black; */
 }
 
@@ -145,17 +146,24 @@ a {
   max-width: 40rem;
   margin: 0 auto;
 }
-.home-screen .title {
-  height: 80px;
-  width: 110px;
-  border-radius: 0 0 100% 0;
-  background-color: #E8E8E8;
-  opacity: 1;
+.home-screen-info-content{
+  width: 100%;
   font-family: Roboto, serif;
-  padding: 0.5rem;
-  font-size: 1.2rem;
-  color: #000000;
-  text-shadow: 1px 1px 2px #1a1919;
+  padding: 3rem 1rem 1rem 1rem;
+  background-color: #ffffff;
+}
+.info-content-title > div {
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+.info-content-title > span {
+  font-size: 0.8rem;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.info-content-date{
+  margin-top: 1rem;
+  font-size: 1rem;
 }
 /* datatable */
 .mdb-datatable {
@@ -478,7 +486,7 @@ table.table td:nth-child(3) {
 
 /* floating-button */
 .floating-button {
-  bottom: 3%;
+  bottom: 10%;
   right: 3%;
   position: fixed;
 }
@@ -538,13 +546,18 @@ h2 {
   margin-top: 1rem;
   /* width: 100%; */
 }
+ul {
+  /* display: inline-block; */
+}
 li {
-  border-radius: 3px;
+  /* display: inline; */
+  /* border-radius: 3px; */
   /* padding: 25px 30px; */
-  padding: 1rem 0.5rem;
+  /* padding: 1rem 0.5rem; */
   display: flex;
   justify-content: space-between;
-  margin-bottom: 25px;
+  /* float: right; */
+  /* margin-bottom: 25px; */
   /* width: 100%;
     position: relative; */
 }
@@ -962,6 +975,42 @@ body {
 
 .MuiAccordionDetails-root{
   padding: 8px 0 16px !important;
+}
+
+.sidebar-menu-container{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  /* padding: .3rem; */
+}
+.sidebar-menu{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  padding: .5rem;
+  /* margin: .3rem; */
+  /* border-radius: 2rem; */
+  /* background-color: #B2002E; */
+  color: #a7a6a6;
+}
+.sidebar-menu > li {
+  text-decoration: none;
+  cursor: pointer;
+  /* border: 1px solid black; */
+  padding: .5rem;
+  border-radius: 2rem;
+  display: inline;
+}
+.sidebar-menu-selected{
+  background-color:#B2002E;
+}
+.sidebar-menu-selected > a {
+  color: #ffffff !important;
 }
 @media only screen and (max-width: 450px) {
   .home {
