@@ -12,6 +12,9 @@ import {
   SET_NOTIFICATIONS_FAIL,
   SET_NOTIFICATIONS_REQUEST,
   SET_NOTIFICATIONS_SUCCESS,
+  SET_VIEWER_FAIL,
+  SET_VIEWER_REQUEST,
+  SET_VIEWER_SUCCESS,
 } from "../constants/utilsConstants";
 
 export const getMonths = () => async (dispatch) => {
@@ -64,6 +67,23 @@ export const setMonth = (months) => async (dispatch) => {
     });
   }
 };
+
+export const setViewer = (type) => async (dispatch) => {
+  dispatch({ type: SET_VIEWER_REQUEST})
+
+  try {
+    localStorage.setItem('viewer', type);
+    dispatch({ type: SET_VIEWER_SUCCESS, payload: type})
+  } catch (error) {
+    dispatch({
+      type: SET_VIEWER_FAIL,
+      payload:
+        error.response && error.response.data.response
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+}
 
 export const setNotifications = (data) => (dispatch) => {
   dispatch({ type: SET_NOTIFICATIONS_REQUEST });

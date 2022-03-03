@@ -11,6 +11,9 @@ import {
   SET_NOTIFICATIONS_FAIL,
   SET_NOTIFICATIONS_REQUEST,
   SET_NOTIFICATIONS_SUCCESS,
+  SET_VIEWER_FAIL,
+  SET_VIEWER_REQUEST,
+  SET_VIEWER_SUCCESS,
 } from "../constants/utilsConstants";
 
 export const getMonthsReducer = (state = { loading: true }, action) => {
@@ -62,6 +65,20 @@ export const setMonthReducer = (state = { loading: true }, action) => {
     case SET_MONTH_SUCCESS:
       return { loading: false, monthsStorage: action.payload };
     case SET_MONTH_FAIL:
+      return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export const setViewerReducer = (state = { loading: true }, action) => {
+  switch (action.type) {
+    case SET_VIEWER_REQUEST:
+      return { loading: true };
+    case SET_VIEWER_SUCCESS:
+      return { loading: false, view: action.payload };
+    case SET_VIEWER_FAIL:
       return { loading: false, error: action.payload };
 
     default:

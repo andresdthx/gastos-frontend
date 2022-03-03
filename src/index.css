@@ -163,9 +163,24 @@ a {
   margin-bottom: 0;
 }
 .info-content-date{
+  display: flex;
   margin-top: 1rem;
   font-size: 1.1rem;
   font-weight: 400;
+  justify-content: space-between;
+}
+.info-content-date > div:nth-child(2){
+  display: flex;
+}
+.info-content-date div:nth-child(2) > div {
+  margin-left: .5rem;
+  padding: .1rem;
+}
+
+.info-content-date-selected {
+  background-color: #B2002E;
+  border-radius: .2rem;
+  color: #ffffff;
 }
 /* datatable */
 .mdb-datatable {

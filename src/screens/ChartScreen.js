@@ -77,7 +77,7 @@ export default function ChartScreen() {
           />
         )}
       </div>
-      <div>
+      {/* <div>
         <ul>
           {expenses &&
             expenses.map((expense) => (
@@ -88,7 +88,7 @@ export default function ChartScreen() {
             ))}
           <li></li>
         </ul>
-      </div>
+      </div> */}
     </div>
   );
 }
