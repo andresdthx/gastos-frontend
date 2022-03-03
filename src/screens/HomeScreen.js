@@ -7,10 +7,10 @@ import { getMonths, setNotifications } from "../actions/utilsActions";
 import FloatButton from "../components/FloatButton";
 import ExpenseDetails from "../components/ExpenseDetails";
 import CategoryDetails from "../components/Accordion/CategoryDetails";
-import { convertValue } from "../common/utils";
+import { convertValue, getDateUtils } from "../common/utils";
 import DateSelect from "../components/DateSelect";
 import FilterBotton from "../components/FilterBotton";
-import SidebarMenu from "../components/SidebarMenu";
+import CalendarIcon from "@material-ui/icons/CalendarToday";
 
 export default function HomeScreen(props) {
   const dispatch = useDispatch();
@@ -127,7 +127,10 @@ export default function HomeScreen(props) {
           <span>resumen</span>
         </div>
         <div className="info-content-date">
-          <div>28 Feb, 2022</div>
+          <div>
+            {/* <CalendarIcon /> */}
+            {getDateUtils().day} {getDateUtils().month}, {getDateUtils().year}
+          </div>
         </div>
       </div>
 
@@ -151,13 +154,13 @@ export default function HomeScreen(props) {
                 )}
               </div>
               <div>
-                <div class="data-card-circle"></div>
+                <div className="data-card-circle"></div>
               </div>
               <div>
-                <div class="data-card-circle-2"></div>
+                <div className="data-card-circle-2"></div>
               </div>
               <div>
-                <div class="data-card-circle-3"></div>
+                <div className="data-card-circle-3"></div>
               </div>
             </div>
           </div>

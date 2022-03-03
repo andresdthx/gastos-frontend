@@ -44,11 +44,6 @@ export default function DateSelect(props) {
     dispatch(listExpenses(month));
   }, [dispatch, month]);
 
-  // useEffect(() => {
-  //   if (!monthsStorage) dispatch(setMonth([]))
-  //   console.log(monthsStorage)
-  // }, [monthsStorage, dispatch]);
-
   return (
     <div className="container">
       {months && (
@@ -58,7 +53,7 @@ export default function DateSelect(props) {
               onClick={() => handlePickMonth(month.value)}
               key={month.value}
               className={
-                handleSelectMonth(month.value) && "months-content-selected" 
+                handleSelectMonth(month.value) ? "months-content-selected" : undefined
               }
             >
               {month.label.slice(0, 3)}

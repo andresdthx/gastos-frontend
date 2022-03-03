@@ -65,7 +65,7 @@ const initialState = {
       : null,
   },
   monthsSet: {
-    months: localStorage.getItem("months")
+    monthsStorage: localStorage.getItem("months")
       ? JSON.parse(localStorage.getItem("months"))
       : null,
   },
