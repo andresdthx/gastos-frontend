@@ -17,7 +17,7 @@ import {
   EXP_LIST_SUCCESS,
 } from "../constants/expenseConstants";
 
-export const listExpenses = (months) => async (dispatch, getState) => {
+export const listExpenses = (months, year) => async (dispatch, getState) => {
   dispatch({ type: EXPENSE_LIST_REQUEST });
   const {
     userSignin: { userInfo },
@@ -27,6 +27,7 @@ export const listExpenses = (months) => async (dispatch, getState) => {
       `/api/expenses/${userInfo.id}`,
       {
         months: months,
+        year: year,
       },
       {
         headers: {

@@ -47,6 +47,7 @@ import {
   setMonthReducer,
   setNotificationReducer,
   setViewerReducer,
+  setYearReducer,
 } from "./reducers/utilsReducers";
 
 const initialState = {
@@ -69,6 +70,11 @@ const initialState = {
     monthsStorage: localStorage.getItem("months")
       ? JSON.parse(localStorage.getItem("months"))
       : null,
+  },
+  yearSet: {
+    year: localStorage.getItem('year')
+    ? localStorage.getItem('year')
+    : null,
   },
   viewerSet: {
     view: localStorage.getItem("viewer")
@@ -104,6 +110,7 @@ const reducer = combineReducers({
   setNotification: setNotificationReducer,
   groupSet: setGroupReducer,
   monthsSet: setMonthReducer,
+  yearSet: setYearReducer,
   viewerSet: setViewerReducer,
 
   activityCreate: createActivityReducer,

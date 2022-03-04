@@ -9,8 +9,9 @@ html {
   font-family: Roboto, serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fafafa !important;
+  background-color: #541425 !important;
 }
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -25,8 +26,6 @@ button {
 a {
   text-decoration: none;
   color: #a7a6a6;
-  /* color: white; */
-  /* color: black; */
 }
 
 .home {
@@ -148,13 +147,31 @@ a {
   margin: 0 auto;
 }
 .home-screen-info-content{
-  width: 100%;
   font-family: Roboto, serif;
   padding: 3rem 1rem 1rem 1rem;
+  position: relative;
   background-color: #ffffff;
+  background-color: #B2002E;
+  margin: 1rem;
+  border-radius: .5rem;
 }
+.data-card-circle-home {
+  height: 100%;
+  width: 70%;
+  border-radius: .5rem 0 100% .5rem;
+  background-color: #541425;
+  opacity: 1;
+  position:absolute;
+  top: 0;
+  left: 0;
+}
+.info-content-title, .info-content-date{
+  position: relative;
+  z-index: 1;
+  color: #ffffff;
+}
+
 .info-content-title > div {
-  font-weight: bold;
   font-size: 1.7rem;
 }
 .info-content-title > span {
@@ -178,7 +195,7 @@ a {
 }
 
 .info-content-date-selected {
-  background-color: #B2002E;
+  background-color: #541425;
   border-radius: .2rem;
   color: #ffffff;
 }
@@ -210,17 +227,18 @@ a {
   background-color: #B2002E;
   color: #ffffff;
   position: relative;
+  border: .1rem solid #B2002E;
 }
 .data-card div:nth-child(1) {
   font-size: .9rem;
   font-weight: 300;
-  z-index: 4;
+  z-index: 5;
   position: relative;
 }
 .data-card div:nth-child(2) {
   font-size: 1.5rem;
   font-weight: 400;
-  z-index: 4;
+  z-index: 5;
   position: relative;
 }
 .data-card div:nth-child(3) {
@@ -239,6 +257,8 @@ a {
   left: 0;
   bottom: 0;
   z-index: 3;
+  /* width: 50%;
+  height: 100%; */
   position: absolute;
 }
 .data-card > div > svg {
@@ -246,8 +266,8 @@ a {
   opacity: .2;
 }
 .data-card-circle {
-  height: 80px;
-  width: 130px;
+  height: 120px;
+  width: 150px;
   border-radius: 1rem 0 100% 0;
   background-color: #541425;
   opacity: 1;
@@ -256,7 +276,7 @@ a {
   height: 110px;
   width: 170px;
   border-radius: 100% 0 1rem 0;
-  background-color: #EDC1CC;
+  background-color: #541425;
   opacity: 1;
 }
 .data-card-circle-3 {
@@ -279,7 +299,8 @@ a {
   font-family: Roboto, serif;
   display: flex;
   align-items: center;
-  background-color: #ffffff;
+  background-color: #7a3145;
+  color: #e0dede;
 }
 .data-table-items > div {
   padding: 0.3rem;
@@ -298,6 +319,7 @@ a {
   margin-left: auto;
   font-size: 1.05rem;
   font-weight: 500;
+  margin-right: .5rem;
 }
 .data-date > div:nth-child(1) {
   text-align: center;
@@ -305,6 +327,7 @@ a {
 }
 .data-date > div:nth-child(2) {
   font-size: 1.5em;
+  font-weight: 400;
 }
 .category {
   font-size: 1rem;
@@ -511,7 +534,7 @@ table.table td:nth-child(3) {
 }
 .floating-button > button {
   cursor: pointer;
-  background: #B2002E;
+  background: #eb2153;
   border: none;
   width: 3rem;
   height: 3rem;
@@ -524,7 +547,6 @@ table.table td:nth-child(3) {
   color: #ffffff;
 }
 
-.container,
 .container-table {
   max-width: 60rem;
   margin: 0 auto;
@@ -887,12 +909,14 @@ body {
 }
 .container {
   background-color: #ffffff;
-  padding: 1rem;
+  /* padding: 1rem; */
   border-radius: 0.5rem;
-  width: 100%;
-  box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+  /* box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px; */
   margin-top: 1rem;
   z-index: 1;
+  /* margin: 1rem; */
+  width: auto !important;
+  background-color: #541425;
 }
 .container-2 {
   background-color: #B2002E;
@@ -902,40 +926,50 @@ body {
   box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
   margin-top: 1rem;
 }
+.year-content {
+  width: 6rem;
+  margin-bottom: 1rem;
+  /* background-color: #E8E8E8; */
+}
+.year-content .css-yk16xz-control{
+  border-radius: .5rem;
+  background-color: #7a3145;
+  font-weight: 500;
+  border-style: none;
+  color: #ffffff;
+}
+.year-content .css-yk16xz-control:focus{
+  outline: none !important;
+}
+.year-content .css-tlfecz-indicatorContainer{
+  color: black !important;
+}
+.year-content .css-1uccc91-singleValue, .year-content .css-tj5bde-Svg{
+  color: #ffffff;
+}
 .months-content {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  /* grid-gap: 0.5rem; */
-  /* justify-content: center; */
   width: 100%;
   padding: 0;
   margin: 0;
   text-align: center;
-  background-color: #E8E8E8;
-  color: #000000;
+  background-color: #7a3145;
+  color: #ffffff;
   border-radius: .5rem;
 }
 .months-content > div {
-  border: .01rem solid #ffffff;
+  border: .01rem solid #541425;
   font-family: "Bebas Neue", serif;
   font-size: 1.2rem;
-  /* margin: 1rem; */
   padding: .5rem;
-  /* padding: 1rem; */
-  /* width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 100%;
-  text-align: center;
-  background-color: #BFC1FF;
-  color: #000000;
-  padding-top: 0.5rem;
-  transition: color 0.2s; */
 }
 .months-content-selected {
-  color: #000000 !important;
-  background-color: #ffffff !important;
+  background-color: #541425 !important;
   padding-top: -0.1rem !important;
   font-weight: bold !important;
+  border: none !important;
+  border-style: none !important;
 }
 /* 
 .months-content > div:nth-child(1) {
@@ -987,7 +1021,7 @@ body {
   padding: .5rem;
   font-family: "Bebas Neue", serif;
   font-size: 1.2rem;
-  background-color: #B2002E;
+  background-color: #7a3145;
   color: #ffffff;
   border-radius: 1rem;
 }
@@ -1009,7 +1043,7 @@ body {
   overflow: hidden;
   justify-content: space-between;
   width: 100%;
-  background-color: #ffffff;
+  background-color: #541425;
   display: flex;
   padding: .5rem .5rem 2rem .5rem;
   position: relative;
@@ -1033,6 +1067,7 @@ body {
 .sidebar-menu-selected > a {
   color: #ffffff !important;
 }
+
 @media only screen and (max-width: 450px) {
   .home {
     padding: 0;
@@ -1081,7 +1116,33 @@ body {
     overflow-x: scroll;
   }
 }
-
+.chart-container{
+  margin-top: 1rem;
+  padding: 1rem;
+  color: #ffffff;
+  /* background-color: #ffffff; */
+}
+.chart-container-list{
+  padding: 1rem;
+  padding-bottom: 10rem;
+}
+.chart-container-list-detail{
+  display:flex;
+  margin-bottom: .2rem;
+  align-items: center;
+}
+.chart-container-list-detail > div:nth-child(1){
+  border-radius: .2rem;
+}
+.chart-container-list-detail > div:nth-child(2){
+  margin-left: 1rem;
+}
+.chart-container-list-detail > div:nth-child(3){
+  float: right;
+  margin-left: auto;
+  font-weight: 500;
+  color: #2aadad;
+}
 @media only screen and (max-width: 540px) {
   .container-table {
     max-width: 540px;

@@ -44,10 +44,6 @@ export default function HomeScreen(props) {
     if (!months) dispatch(getMonths());
   }, [dispatch, months]);
 
-  useEffect(() => {
-    console.log(view);
-  }, [view, dispatch]);
-
   // useEffect(()=>{
   //   dispatch(setNotifications({title: 'ojo con eso manito', message: 'pagat internet'}));
   // }, [dispatch]);
@@ -90,6 +86,7 @@ export default function HomeScreen(props) {
             </div>
           </div>
         </div>
+        <div className="data-card-circle-home"></div>
       </div>
 
       {month && <DateSelect month={month} />}

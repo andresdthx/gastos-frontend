@@ -15,6 +15,9 @@ import {
   SET_VIEWER_FAIL,
   SET_VIEWER_REQUEST,
   SET_VIEWER_SUCCESS,
+  SET_YEAR_FAIL,
+  SET_YEAR_REQUEST,
+  SET_YEAR_SUCCESS,
 } from "../constants/utilsConstants";
 
 export const getMonths = () => async (dispatch) => {
@@ -68,12 +71,29 @@ export const setMonth = (months) => async (dispatch) => {
   }
 };
 
-export const setViewer = (type) => async (dispatch) => {
-  dispatch({ type: SET_VIEWER_REQUEST})
+export const setYear = (year) => async (dispatch) => {
+  dispatch({ type: SET_YEAR_REQUEST });
 
   try {
-    localStorage.setItem('viewer', type);
-    dispatch({ type: SET_VIEWER_SUCCESS, payload: type})
+    localStorage.setItem("year", year);
+    dispatch({ type: SET_YEAR_SUCCESS, payload: year });
+  } catch (error) {
+    dispatch({
+      type: SET_YEAR_FAIL,
+      payload:
+        error.response && error.response.data.response
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const setViewer = (type) => async (dispatch) => {
+  dispatch({ type: SET_VIEWER_REQUEST });
+
+  try {
+    localStorage.setItem("viewer", type);
+    dispatch({ type: SET_VIEWER_SUCCESS, payload: type });
   } catch (error) {
     dispatch({
       type: SET_VIEWER_FAIL,
@@ -83,7 +103,7 @@ export const setViewer = (type) => async (dispatch) => {
           : error.message,
     });
   }
-}
+};
 
 export const setNotifications = (data) => (dispatch) => {
   dispatch({ type: SET_NOTIFICATIONS_REQUEST });
