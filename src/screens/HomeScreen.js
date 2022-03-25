@@ -6,9 +6,11 @@ import { getDateUtils } from "../common/utils";
 import DateSelect from "../components/DateSelect";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import BarChartIcon from "@material-ui/icons/BarChart";
+import FilterListIcon from "@material-ui/icons/FilterList";
 import ListScreen from "./ListScreen";
 import ChartScreen from "./ChartScreen";
 import LoadingBox from "../components/utils/LoadingBox";
+import CompareScreen from "./CompareScreen";
 
 export default function HomeScreen(props) {
   const dispatch = useDispatch();
@@ -44,6 +46,10 @@ export default function HomeScreen(props) {
     if (!months) dispatch(getMonths());
   }, [dispatch, months]);
 
+  useEffect(() => {
+    console.log(view);
+  }, [view]);
+
   // useEffect(()=>{
   //   dispatch(setNotifications({title: 'ojo con eso manito', message: 'pagat internet'}));
   // }, [dispatch]);
@@ -74,15 +80,21 @@ export default function HomeScreen(props) {
           <div>
             <div
               onClick={() => handlerViewer(0)}
-              className={view < 1 && "info-content-date-selected"}
+              className={view === 0 && "info-content-date-selected"}
             >
               <FormatListBulletedIcon />
             </div>
             <div
               onClick={() => handlerViewer(1)}
-              className={view > 0 && "info-content-date-selected"}
+              className={view === 1 && "info-content-date-selected"}
             >
               <BarChartIcon />
+            </div>
+            <div
+              onClick={() => handlerViewer(2)}
+              className={view === 2 && "info-content-date-selected"}
+            >
+              <FilterListIcon />
             </div>
           </div>
         </div>
@@ -93,12 +105,14 @@ export default function HomeScreen(props) {
 
       {loading ? (
         <LoadingBox />
-      ) : view > 0 ? (
+      ) : view === 1 ? (
         <ChartScreen />
-      ) : (
+      ) : view === 0 ? (
         <ListScreen props={props} />
+      ) : (
+        <CompareScreen />
       )}
-
+      {view}
       <FloatButton props={props} />
     </div>
   );

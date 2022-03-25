@@ -67,7 +67,6 @@ export default function ChartScreen() {
         sub,
       ];
 
-      console.log(prev);
       return prev;
     }, []);
   };

@@ -42,7 +42,6 @@ import {
 } from "./reducers/userReducer";
 import {
   getMonthsReducer,
-  getMonthsStorageReducer,
   setGroupReducer,
   setMonthReducer,
   setNotificationReducer,
@@ -78,7 +77,7 @@ const initialState = {
   },
   viewerSet: {
     view: localStorage.getItem("viewer")
-      ? localStorage.getItem("viewer")
+      ? parseInt(localStorage.getItem("viewer"))
       : null,
   },
 };

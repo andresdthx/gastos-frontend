@@ -17,6 +17,8 @@ import {
   EXP_LIST_SUCCESS,
 } from "../constants/expenseConstants";
 
+const { REACT_APP_ENDPOINT_DEV } = process.env;
+
 export const listExpenses = (months, year) => async (dispatch, getState) => {
   dispatch({ type: EXPENSE_LIST_REQUEST });
   const {
@@ -24,7 +26,7 @@ export const listExpenses = (months, year) => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = await axios.post(
-      `/api/expenses/${userInfo.id}`,
+      `${REACT_APP_ENDPOINT_DEV}/api/expenses/${userInfo.id}`,
       {
         months: months,
         year: year,
@@ -35,7 +37,7 @@ export const listExpenses = (months, year) => async (dispatch, getState) => {
         },
       }
     );
-    dispatch({ type: EXPENSE_LIST_SUCCESS, payload: data });
+    dispatch({ type: EXPENSE_LIST_SUCCESS, payload: data.result });
   } catch (error) {
     dispatch({
       type: EXPENSE_LIST_FAIL,
@@ -53,12 +55,15 @@ export const listExpensesByDate = () => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await axios.get(`/api/expenses/byDate/${userInfo.id}`, {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    });
-    dispatch({ type: EXPENSE_LIST_BY_DATE_SUCCESS, payload: data });
+    const { data } = await axios.get(
+      `${REACT_APP_ENDPOINT_DEV}/api/expenses/byDate/${userInfo.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+    );
+    dispatch({ type: EXPENSE_LIST_BY_DATE_SUCCESS, payload: data.result });
   } catch (error) {
     dispatch({
       type: EXPENSE_LIST_BY_DATE_FAIL,
@@ -72,18 +77,20 @@ export const listExpensesByDate = () => async (dispatch, getState) => {
 
 export const listExpense = (expenseId) => async (dispatch) => {
   dispatch({ type: EXP_LIST_REQUEST });
-  try {
-    const { data } = await axios.get(`/api/expenses/${expenseId}`);
-    dispatch({ type: EXP_LIST_SUCCESS, payload: data });
-  } catch (error) {
-    dispatch({
-      type: EXP_LIST_FAIL,
-      payload:
-        error.response && error.response.data.response
-          ? error.response.data.message
-          : error.message,
-    });
-  }
+  // try {
+  //   const { data } = await axios.get(
+  //     `https://7otf2uz1q7.execute-api.us-east-1.amazonaws.com/expense/${expenseId}`
+  //   );
+  //   dispatch({ type: EXP_LIST_SUCCESS, payload: data });
+  // } catch (error) {
+  //   dispatch({
+  //     type: EXP_LIST_FAIL,
+  //     payload:
+  //       error.response && error.response.data.response
+  //         ? error.response.data.message
+  //         : error.message,
+  //   });
+  // }
 };
 
 export const createExpense = (objExpense) => async (dispatch, getState) => {
