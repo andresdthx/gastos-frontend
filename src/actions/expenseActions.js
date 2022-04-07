@@ -97,10 +97,6 @@ export const createExpense = (objExpense) => async (dispatch, getState) => {
       ...objExpense,
       userUserId: userInfo.id,
     });
-
-    if (data.errors) {
-      throw new Error(data.errors[0].message);
-    }
     dispatch({ type: EXPENSE_CREATE_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
