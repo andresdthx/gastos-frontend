@@ -1,10 +1,9 @@
-import { Route, Switch, useLocation, HashRouter } from "react-router-dom";
+import { Route } from "react-router-dom";
 import AlertScreen from "./screens/Alert/AlertScreen";
 import ChartScreen from "./screens/ChartScreen";
 import ExpenseScreen from "./screens/Expense/ExpenseScreen";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/User/LoginScreen";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
 import ProfileScreen from "./screens/User/ProfileScreen";
 import RegisterScreen from "./screens/User/RegisterScreen";
 import ExpenseCreateScreen from "./screens/Expense/ExpenseCreateScreen";

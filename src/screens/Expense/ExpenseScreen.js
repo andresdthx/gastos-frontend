@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteExpense, listExpense } from "../../actions/expenseActions";
-import { getMonths } from "../../actions/utilsActions";
+import { deleteExpense } from "../../actions/expenseActions";
 import MessageBox from "../../components/MessageBox";
 import LoadingBox from "../../components/utils/LoadingBox";
 import EditIcon from "@material-ui/icons/Edit";

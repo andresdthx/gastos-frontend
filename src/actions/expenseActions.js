@@ -12,9 +12,7 @@ import {
   EXPENSE_LIST_FAIL,
   EXPENSE_LIST_REQUEST,
   EXPENSE_LIST_SUCCESS,
-  EXP_LIST_FAIL,
   EXP_LIST_REQUEST,
-  EXP_LIST_SUCCESS,
 } from "../constants/expenseConstants";
 
 const { REACT_APP_ENDPOINT_DEV } = process.env;
