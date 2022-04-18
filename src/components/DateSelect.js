@@ -51,10 +51,6 @@ export default function DateSelect(props) {
   };
 
   useEffect(() => {
-    if (!months) dispatch(getMonths());
-  }, [months, dispatch]);
-
-  useEffect(() => {
     dispatch(listExpenses(month, year));
   }, [dispatch, year, month]);
 

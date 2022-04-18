@@ -6,7 +6,6 @@ import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/User/LoginScreen";
 import ProfileScreen from "./screens/User/ProfileScreen";
 import RegisterScreen from "./screens/User/RegisterScreen";
-import ExpenseCreateScreen from "./screens/Expense/ExpenseCreateScreen";
 import AlertCreateScreen from "./screens/Alert/AlertCreateScreen";
 import ActivityScreen from "./screens/Activity/ActivityScreen";
 import ActivityCreateScreen from "./screens/Activity/ActivityCreateScreen";
@@ -29,11 +28,6 @@ function App() {
       <Route path="/chart" component={ChartScreen}></Route>
 
       <Route path="/expenses/:id" component={ExpenseScreen}></Route>
-      <Route
-        path="/expenses-create"
-        component={ExpenseCreateScreen}
-        exact
-      ></Route>
 
       <Route path="/activities" component={ActivityScreen}></Route>
       <Route path="/activities-create" component={ActivityCreateScreen}></Route>
@@ -42,13 +36,8 @@ function App() {
       <Route path="/alerts-create" component={AlertCreateScreen}></Route>
 
       <Route path="/entries" component={EntryScreen}></Route>
-      <Route path="/entries-create" component={EntryCreateScreen}></Route>
 
       <Route path="/next-expenses/:id" component={NextExpenseScreen}></Route>
-      <Route
-        path="/next-expenses-create"
-        component={NextExpenseCreateScreen}
-      ></Route>
     </BrowserRouter>
     // <HashRouter>
     // <SidebarMenu />

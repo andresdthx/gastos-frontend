@@ -60,6 +60,13 @@ export default function ExpenseCreateScreen(props) {
     }
   }, [categories, dispatch]);
 
+  const onDismiss = useCallback(() => {
+    setOpenLocal(false);
+    setTimeout(() => {
+      setOpen(false);
+    }, 500);
+  }, [setOpen]);
+
   const handlerCategory = (e) => {
     localStorage.setItem("category", e);
     setCategory(e);
@@ -97,13 +104,6 @@ export default function ExpenseCreateScreen(props) {
     setDate(e);
   };
 
-  const onDismiss = () => {
-    setOpenLocal(false);
-    setTimeout(() => {
-      setOpen(false);
-    }, 500);
-  };
-
   useEffect(() => {
     if (category) dispatch(listSubcategories(category));
   }, [category, dispatch]);
@@ -129,10 +129,12 @@ export default function ExpenseCreateScreen(props) {
 
   useEffect(() => {
     if (expense && submit) {
-      let month = [today.split("-")[1]];
-      dispatch(listExpenses(month));
+      const months = JSON.parse(localStorage.getItem("months"));
+      const year = localStorage.getItem("year");
+      onDismiss();
+      dispatch(listExpenses(months, year));
     }
-  }, [expense, dispatch, submit, today]);
+  }, [expense, dispatch, submit, today, onDismiss]);
 
   useEffect(() => {
     if (open) setOpenLocal(open);

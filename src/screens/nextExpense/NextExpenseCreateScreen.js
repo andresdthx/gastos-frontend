@@ -1,39 +1,24 @@
 import React, { useCallback, useEffect, useState } from "react";
-import Drawer from "@material-ui/core/Drawer";
 import LoadingBox from "../../components/utils/LoadingBox";
 import { useDispatch, useSelector } from "react-redux";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import Divider from "@material-ui/core/Divider";
-import { Link } from "react-router-dom";
 import {
   createNextExpense,
   listnextExpenses,
 } from "../../actions/nextExpenseActions";
+import { BottomSheet } from "react-spring-bottom-sheet";
 
 export default function NextExpenseCreateScreen(props) {
   const dispatch = useDispatch();
 
+  const { open, setOpen } = props;
+
   const nextExpenseCreate = useSelector((state) => state.nextExpenseCreate);
   const { nextExpense, loading: loadingCreate } = nextExpenseCreate;
 
+  const [openLocal, setOpenLocal] = useState(false);
   const [name, setName] = useState();
   const [value, setValue] = useState();
-
   const [submit, setSubmit] = useState(false);
-  const [state, setState] = useState({ right: true });
-
-  const toggleDrawer = (open) => {
-    props.history.push("/next-expenses");
-    setState({ ...state, right: open });
-  };
-
-  const handleClose = useCallback(
-    (open) => {
-      if (state.right) props.history.push(`/next-expenses/${1}`);
-      setState({ ...state, right: open });
-    },
-    [setState, state, props]
-  );
 
   const handlerSubmit = (e) => {
     e.preventDefault();
@@ -46,32 +31,35 @@ export default function NextExpenseCreateScreen(props) {
     dispatch(createNextExpense(obj));
   };
 
+  const onDismiss = useCallback(() => {
+    setOpenLocal(false);
+    setTimeout(() => {
+      setOpen(false);
+    }, 500);
+  }, [setOpen]);
+
+  useEffect(() => {
+    if (open) setOpenLocal(open);
+  }, [open]);
+
   useEffect(() => {
     if (nextExpense && submit) {
       dispatch(listnextExpenses(1));
-      handleClose(false);
+      onDismiss();
     }
-  }, [nextExpense, dispatch, submit, handleClose]);
+  }, [nextExpense, dispatch, submit, onDismiss]);
 
   return (
-    <Drawer
-      anchor={"right"}
-      open={state.right}
-      onClose={() => toggleDrawer(false)}
+    <BottomSheet
+      open={openLocal}
+      onDismiss={onDismiss}
+      className="bottomSheet"
+      snapPoints={({ minHeight }) => minHeight}
     >
-      <div className="drawer-header">
-        <Link to="/entries">
-          <ArrowBackIcon
-            className="drawer-back"
-            onClick={() => toggleDrawer(false)}
-          />
-        </Link>
-      </div>
       <div className="drawer-body">
         <form className="form-modal" onSubmit={handlerSubmit}>
           <div className="form-title">
             <div>Ingresar gasto</div>
-            <Divider />
           </div>
 
           <div>
@@ -99,6 +87,6 @@ export default function NextExpenseCreateScreen(props) {
           </div>
         </form>
       </div>
-    </Drawer>
+    </BottomSheet>
   );
 }

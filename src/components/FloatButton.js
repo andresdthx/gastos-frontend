@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import AddIcon from "@material-ui/icons/Add";
 import ExpenseCreateScreen from "../screens/Expense/ExpenseCreateScreen";
+import EntryCreateScreen from "../screens/Entry/EntryCreateScreen";
+import NextExpenseCreateScreen from "../screens/nextExpense/NextExpenseCreateScreen";
 
 export default function FloatButton(props) {
   const userSignin = useSelector((state) => state.userSignin);
@@ -12,12 +14,14 @@ export default function FloatButton(props) {
 
   const routes = {
     expense: ExpenseCreateScreen,
-    activity: ExpenseCreateScreen,
+    entry: EntryCreateScreen,
+    nextExpense: NextExpenseCreateScreen,
   };
 
   const loadBottomSheet = () => {
     const path = props.props.location.pathname;
 
+    console.log(path);
     switch (path) {
       case "/":
         setComponent("expense");
@@ -29,12 +33,12 @@ export default function FloatButton(props) {
         setOpen("/alerts-create");
         break;
       case "/entries":
-        setOpen("/entries-create");
+        setComponent("entry");
         break;
 
       default:
         if (path.includes("/next-expenses")) {
-          setOpen("/next-expenses-create");
+          setComponent("nextExpense");
         }
         break;
     }

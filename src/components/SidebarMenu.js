@@ -2,6 +2,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import UpdateIcon from "@material-ui/icons/Update";
+import FitnessCenterIcon from "@material-ui/icons/FitnessCenter";
 import HomeIcon from "@material-ui/icons/Home";
 import PersonIcon from "@material-ui/icons/Person";
 import { Link, useLocation } from "react-router-dom";
@@ -20,13 +21,23 @@ export default function SidebarMenu() {
           <ul className="sidebar-menu">
             <li
               className={
+                sampleLocation.pathname === "/routine" &&
+                "sidebar-menu-selected"
+              }
+            >
+              <Link to="/routine">
+                <FitnessCenterIcon />
+              </Link>
+            </li>
+            {/* <li
+              className={
                 sampleLocation.pathname === "/income" && "sidebar-menu-selected"
               }
             >
               <Link to="/income">
                 <AttachMoneyIcon />
               </Link>
-            </li>
+            </li> */}
             <li
               className={
                 sampleLocation.pathname === "/entries" &&
@@ -48,10 +59,11 @@ export default function SidebarMenu() {
             </li>
             <li
               className={
-                sampleLocation.pathname === "/user" && "sidebar-menu-selected"
+                sampleLocation.pathname === "/profile" &&
+                "sidebar-menu-selected"
               }
             >
-              <Link to="/user">
+              <Link to="/profile">
                 <PersonIcon />
               </Link>
             </li>
@@ -64,7 +76,7 @@ export default function SidebarMenu() {
                 <NotificationsIcon />
               </Link>
             </li>
-            <li
+            {/* <li
               className={
                 sampleLocation.pathname === "/activities" &&
                 "sidebar-menu-selected"
@@ -73,7 +85,7 @@ export default function SidebarMenu() {
               <Link to="/activities">
                 <FormatListBulletedIcon />
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
       )}

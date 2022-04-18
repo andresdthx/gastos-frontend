@@ -1,16 +1,15 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Select from "react-select";
-import Drawer from "@material-ui/core/Drawer";
 import LoadingBox from "../../components/utils/LoadingBox";
 import { useDispatch, useSelector } from "react-redux";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import Divider from "@material-ui/core/Divider";
-import { Link } from "react-router-dom";
 import { createEntry, listEntries } from "../../actions/entryActions";
 import { getMonths } from "../../actions/utilsActions";
+import { BottomSheet } from "react-spring-bottom-sheet";
 
 export default function EntryCreateScreen(props) {
   const dispatch = useDispatch();
+
+  const { open, setOpen } = props;
 
   const monthsGet = useSelector((state) => state.monthsGet);
   const { months } = monthsGet;
@@ -18,25 +17,19 @@ export default function EntryCreateScreen(props) {
   const entryCreate = useSelector((state) => state.entryCreate);
   const { entry, loading: loadingCreate } = entryCreate;
 
+  const [openLocal, setOpenLocal] = useState(false);
   const [value, setValue] = useState();
   const [month, setMonth] = useState();
   const [actualMonth, setActualMonth] = useState();
 
   const [submit, setSubmit] = useState(false);
-  const [state, setState] = useState({ right: true });
 
-  const toggleDrawer = (open) => {
-    props.history.push("/");
-    setState({ ...state, right: open });
-  };
-
-  const handleClose = useCallback(
-    (open) => {
-      if (state.right) props.history.push("/entries");
-      setState({ ...state, right: open });
-    },
-    [setState, state, props]
-  );
+  const onDismiss = useCallback(() => {
+    setOpenLocal(false);
+    setTimeout(() => {
+      setOpen(false);
+    }, 500);
+  }, [setOpen]);
 
   const handlerSubmit = (e) => {
     e.preventDefault();
@@ -74,30 +67,26 @@ export default function EntryCreateScreen(props) {
   useEffect(() => {
     if (entry && submit) {
       dispatch(listEntries());
-      handleClose(false);
+      onDismiss();
     }
-  }, [entry, dispatch, submit, handleClose]);
+  }, [entry, dispatch, submit, onDismiss]);
+
+  useEffect(() => {
+    if (open) setOpenLocal(open);
+  }, [open]);
 
   return (
-    <Drawer
-      anchor={"right"}
-      open={state.right}
-      onClose={() => toggleDrawer(false)}
+    <BottomSheet
+      open={openLocal}
+      onDismiss={onDismiss}
+      className="bottomSheet"
+      snapPoints={({ minHeight }) => minHeight}
     >
-      <div className="drawer-header">
-        <Link to="/entries">
-          <ArrowBackIcon
-            className="drawer-back"
-            onClick={() => toggleDrawer(false)}
-          />
-        </Link>
-      </div>
       <div className="drawer-body">
         <form className="form-modal" onSubmit={handlerSubmit}>
           {/* {errorCreate && <MessageBox variant="danger">{errorCreate}</MessageBox>} */}
           <div className="form-title">
             <div>Calcular mes</div>
-            <Divider />
           </div>
 
           <div>
@@ -128,6 +117,6 @@ export default function EntryCreateScreen(props) {
           </div>
         </form>
       </div>
-    </Drawer>
+    </BottomSheet>
   );
 }

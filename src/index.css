@@ -401,9 +401,10 @@ table.table td:nth-child(3) {
   position: absolute;
   top: 0.5rem;
   right: 0;
-  width: 2.5rem;
-  font-weight: boldsub-form;
   cursor: pointer;
+  color: var(--bg-color);
+  background-color: var(--primary);
+  border-radius: 2rem;
 }
 .form-modal label {
   font-family: Roboto, serif;
@@ -434,6 +435,10 @@ table.table td:nth-child(3) {
   cursor: pointer;
   margin-top: 0.4rem;
   margin-left: 0.5rem;
+  color: var(--bg-color);
+  background-color: var(--primary);
+  border-radius: 2rem;
+  padding: 0.1rem;
 }
 .sub-form > div > input {
   outline: none;
@@ -518,7 +523,7 @@ table.table td:nth-child(3) {
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  border-left-color: #09f;
+  border-left-color: var(--primary);
   margin: 0 auto;
   animation: spin 1s ease infinite;
   vertical-align: middle;
@@ -875,44 +880,39 @@ body {
   background-color: #1f2328;
 }
 .next-expense-content {
-  padding: 0.7rem;
+  font-family: "Bebas Neue", serif;
+  padding: 1.2rem;
+  color: var(--bg-color);
+  margin-bottom: 1rem;
 }
-.next-expense-table {
-  width: 100%;
+.next-expense-list {
+  display: flex;
+  border-bottom: 1px solid rgb(73, 73, 73);
+  padding: 0.5rem 0 0.5rem 0;
 }
-
-.next-expense-table tr td,
-.next-expense-table th {
-  padding: 0.5rem;
-  width: 100%;
+.next-expense-list div:last-child {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
 }
-.next-expense-table tr td:nth-child(2) {
-  text-align: right;
+.next-expense-list-content div:first-child {
+  font-size: 1.5rem;
 }
-.next-expense-table tr td:nth-child(3) {
-  text-align: center;
+.next-expense-list-content div:last-child {
+  font-size: 1.2rem;
+  font-weight: 100;
 }
-.next-expense-table tr:nth-child(even) {
-  background-color: #eeeeee;
-}
-.next-expense-table-confirmated {
-  font-weight: bold !important;
-  border-left: 0.15rem solid #000e27;
-}
-.next-expense-table-confirmated td {
-  font-weight: bold !important;
-}
-.next-expense-table-estimated {
-  margin-top: 0.3rem !important;
-  background-color: #040911;
-  color: #ffffff;
-}
-.next-expense-table-confirmed {
-  background-color: #000e27 !important;
-  color: #ffffff;
-}
-.next-expense-table-confirmed td {
+.next-expense-list-calculated-content {
   margin-top: 1rem;
+  padding-top: 1rem;
+}
+.next-expense-list-calculated {
+  font-size: 1.2rem;
+  display: flex;
+  font-weight: 500;
+}
+.next-expense-list-calculated div:last-child {
+  margin-left: auto;
 }
 .container {
   background-color: #ffffff;
@@ -1036,6 +1036,9 @@ body {
 .MuiAccordionDetails-root {
   padding: 8px 0 16px !important;
 }
+.MuiAccordion-root {
+  color: var(--bg-color) !important;
+}
 .MuiPaper-root {
   background-color: var(--bg) !important;
   /* color: var(--bg-color) !important; */
@@ -1083,6 +1086,24 @@ body {
 [data-rsbs-backdrop],
 [data-rsbs-root]:after {
   z-index: 1000 !important;
+}
+.user-container {
+  display: flex;
+  color: var(--bg-color);
+  padding: 2rem 1rem 1rem 1rem;
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--primary);
+}
+.user-container div:first-child {
+  font-size: 1.5rem;
+}
+.user-container div:first-child svg {
+  font-size: 5rem;
+}
+.user-container div:last-child {
+  /* font-size: 3rem; */
+  margin-left: auto;
 }
 
 @media only screen and (max-width: 450px) {
