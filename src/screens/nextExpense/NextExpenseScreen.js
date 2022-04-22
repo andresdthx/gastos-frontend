@@ -13,18 +13,21 @@ import Checkbox from "@material-ui/core/Checkbox";
 
 export default function NextExpenseScreen(props) {
   const dispatch = useDispatch();
-  const label = { inputProps: { "aria-label": "Checkbox demo" } };
   const entryId = props.match.params.id;
 
   const [estimated, setEstimated] = useState();
   const [confirmed, setConfirmed] = useState();
+  const [submit, setSubmit] = useState(false);
 
   const nextExpensesList = useSelector((state) => state.nextExpensesList);
   const { nextExpenses, loading, error } = nextExpensesList;
 
+  const nextExpenseUpdate = useSelector((state) => state.nextExpenseUpdate);
+  const { updated } = nextExpenseUpdate;
+
   const handleNextExpense = (nextExpenseId, check) => {
-    // dispatch(updateNextExpense(nextExpenseId, check));
-    // dispatch(listnextExpenses(entryId));
+    setSubmit(true);
+    dispatch(updateNextExpense(nextExpenseId, check));
   };
 
   useEffect(() => {
@@ -49,6 +52,10 @@ export default function NextExpenseScreen(props) {
     dispatch(listnextExpenses(entryId));
   }, [entryId, dispatch]);
 
+  useEffect(() => {
+    if (submit && updated) dispatch(listnextExpenses(entryId));
+  }, [dispatch, submit, updated, entryId]);
+
   return (
     <div>
       {loading ? (
@@ -59,16 +66,18 @@ export default function NextExpenseScreen(props) {
         nextExpenses && (
           <div className="next-expense-content">
             {nextExpenses.map((nextExpense) => (
-              <div className="next-expense-list">
+              <div
+                className="next-expense-list"
+                key={nextExpense.nextExpenseId}
+              >
                 <div className="next-expense-list-content">
                   <div>{nextExpense.name}</div>
                   <div>{convertValue(nextExpense.value)}</div>
                 </div>
                 <div>
                   <Checkbox
-                    {...label}
-                    checked={nextExpense.check}
-                    onClick={() =>
+                    defaultChecked={nextExpense.check}
+                    onChange={() =>
                       handleNextExpense(
                         nextExpense.nextExpenseId,
                         !nextExpense.check

@@ -11,13 +11,13 @@ import {
   NEXT_EXPENSE_UPDATE_SUCCESS,
 } from "../constants/nextExpenseConstants";
 
-const { REACT_APP_ENDPOINT_DEV } = process.env;
+const { REACT_APP_ENDPOINT } = process.env;
 
 export const createNextExpense = (nextExpense) => async (dispatch) => {
   dispatch({ type: NEXT_EXPENSE_CREATE_REQUEST });
   try {
     const { data } = await axios.post(
-      `${REACT_APP_ENDPOINT_DEV}/api/nextExpenses/`,
+      `${REACT_APP_ENDPOINT}/api/nextExpenses/`,
       nextExpense
     );
     dispatch({ type: NEXT_EXPENSE_CREATE_SUCCESS, payload: data.result });
@@ -36,7 +36,7 @@ export const listnextExpenses = (entryId) => async (dispatch, getState) => {
   dispatch({ type: NEXT_EXPENSE_GET_REQUEST });
   try {
     const { data } = await axios.get(
-      `${REACT_APP_ENDPOINT_DEV}/api/nextExpenses/${entryId}`
+      `${REACT_APP_ENDPOINT}/api/nextExpenses/${entryId}`
     );
     dispatch({ type: NEXT_EXPENSE_GET_SUCCESS, payload: data.result });
   } catch (error) {
@@ -54,13 +54,10 @@ export const updateNextExpense = (nextExpenseId, check) => (dispatch) => {
   dispatch({ type: NEXT_EXPENSE_UPDATE_REQUEST });
 
   try {
-    const { data } = axios.put(
-      `${REACT_APP_ENDPOINT_DEV}/api/nextExpenses/${nextExpenseId}`,
-      {
-        check: check,
-      }
-    );
-    dispatch({ type: NEXT_EXPENSE_UPDATE_SUCCESS, payload: data.result });
+    axios.put(`${REACT_APP_ENDPOINT}/api/nextExpenses/${nextExpenseId}`, {
+      check: check,
+    });
+    dispatch({ type: NEXT_EXPENSE_UPDATE_SUCCESS, payload: true });
   } catch (error) {
     dispatch({
       type: NEXT_EXPENSE_UPDATE_FAIL,

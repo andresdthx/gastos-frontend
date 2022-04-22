@@ -15,7 +15,7 @@ import {
   EXP_LIST_REQUEST,
 } from "../constants/expenseConstants";
 
-const { REACT_APP_ENDPOINT_DEV } = process.env;
+const { REACT_APP_ENDPOINT } = process.env;
 
 export const listExpenses = (months, year) => async (dispatch, getState) => {
   dispatch({ type: EXPENSE_LIST_REQUEST });
@@ -24,7 +24,7 @@ export const listExpenses = (months, year) => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = await axios.post(
-      `${REACT_APP_ENDPOINT_DEV}/api/expenses/${userInfo.id}`,
+      `${REACT_APP_ENDPOINT}/api/expenses/${userInfo.id}`,
       {
         months: months,
         year: year,
@@ -54,7 +54,7 @@ export const listExpensesByDate = () => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = await axios.get(
-      `${REACT_APP_ENDPOINT_DEV}/api/expenses/byDate/${userInfo.id}`,
+      `${REACT_APP_ENDPOINT}/api/expenses/byDate/${userInfo.id}`,
       {
         headers: {
           Authorization: `Bearer ${userInfo.token}`,

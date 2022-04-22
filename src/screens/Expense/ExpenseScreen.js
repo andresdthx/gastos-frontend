@@ -37,15 +37,6 @@ export default function ExpenseScreen(props) {
   };
 
   useEffect(() => {
-    // dispatch(listExpense(expenseId));
-    console.log("hola");
-  }, [dispatch, expenseId]);
-
-  //   useEffect(() => {
-  //     if (!months) dispatch(getMonths());
-  //   }, [dispatch, months]);
-
-  useEffect(() => {
     if (deleted && send) {
       props.history.push("/");
       setSend(false);

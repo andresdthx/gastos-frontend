@@ -21,11 +21,11 @@ export default function SidebarMenu() {
           <ul className="sidebar-menu">
             <li
               className={
-                sampleLocation.pathname === "/routine" &&
+                sampleLocation.pathname === "/routines" &&
                 "sidebar-menu-selected"
               }
             >
-              <Link to="/routine">
+              <Link to="/routines">
                 <FitnessCenterIcon />
               </Link>
             </li>

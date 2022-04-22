@@ -821,7 +821,7 @@ li {
   background-color: var(--primary);
 }
 .entry-card-title {
-  padding-bottom: 2rem;
+  /* padding-bottom: 2rem; */
   padding-top: 1rem;
   color: #000000;
 
@@ -841,6 +841,7 @@ li {
   padding: 1rem;
   position: relative;
   text-align: center;
+  z-index: 50;
 }
 
 .entry-card-info div {
@@ -1104,6 +1105,14 @@ body {
 .user-container div:last-child {
   /* font-size: 3rem; */
   margin-left: auto;
+}
+
+.routine-title {
+  color: var(--bg-color);
+  font-size: 1.5rem;
+}
+.routine-content {
+  color: var(--bg-color);
 }
 
 @media only screen and (max-width: 450px) {

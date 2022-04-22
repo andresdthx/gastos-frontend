@@ -10,11 +10,10 @@ import AlertCreateScreen from "./screens/Alert/AlertCreateScreen";
 import ActivityScreen from "./screens/Activity/ActivityScreen";
 import ActivityCreateScreen from "./screens/Activity/ActivityCreateScreen";
 import EntryScreen from "./screens/Entry/EntryScreen";
-import EntryCreateScreen from "./screens/Entry/EntryCreateScreen";
 import NextExpenseScreen from "./screens/nextExpense/NextExpenseScreen";
-import NextExpenseCreateScreen from "./screens/nextExpense/NextExpenseCreateScreen";
 import SidebarMenu from "./components/SidebarMenu";
 import { BrowserRouter } from "react-router-dom";
+import RoutineScreen from "./screens/Rutine/RoutineScreen";
 
 function App() {
   return (
@@ -36,6 +35,8 @@ function App() {
       <Route path="/alerts-create" component={AlertCreateScreen}></Route>
 
       <Route path="/entries" component={EntryScreen}></Route>
+
+      <Route path="/routines" component={RoutineScreen}></Route>
 
       <Route path="/next-expenses/:id" component={NextExpenseScreen}></Route>
     </BrowserRouter>

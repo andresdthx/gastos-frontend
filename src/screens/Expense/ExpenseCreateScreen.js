@@ -168,6 +168,7 @@ export default function ExpenseCreateScreen(props) {
                     <Select
                       className="select"
                       placeholder="Categorias"
+                      isSearchable={false}
                       onChange={(e) => handlerCategory(e.value)}
                       defaultValue={categorySelect}
                       options={categories}
@@ -197,6 +198,8 @@ export default function ExpenseCreateScreen(props) {
                 <Select
                   className="select"
                   placeholder="Subcategorias"
+                  isLoading={loadingSubcategory}
+                  isSearchable={false}
                   onChange={(e) => setSubcategory(e.value)}
                   defaultValue={subcategories[0]}
                   options={subcategories}

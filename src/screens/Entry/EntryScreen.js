@@ -35,7 +35,7 @@ export default function EntryScreen(props) {
   }, [months, dispatch]);
 
   return (
-    <div>
+    <div className="">
       {loading ? (
         <LoadingBox />
       ) : error ? (
@@ -68,13 +68,13 @@ export default function EntryScreen(props) {
               </div>
             </div>
             <div>
-              <div class="data-card-circle"></div>
+              <div className="data-card-circle"></div>
             </div>
             <div>
-              <div class="data-card-circle-2"></div>
+              <div className="data-card-circle-2"></div>
             </div>
             <div>
-              <div class="data-card-circle-3"></div>
+              <div className="data-card-circle-3"></div>
             </div>
           </div>
         ))

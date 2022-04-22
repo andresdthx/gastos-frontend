@@ -11,13 +11,13 @@ import {
   SUBCATEGORY_LIST_SUCCESS,
 } from "../constants/subcategoriesConstants";
 
-const { REACT_APP_ENDPOINT_DEV } = process.env;
+const { REACT_APP_ENDPOINT } = process.env;
 
 export const listSubcategories = (categoryId) => async (dispatch) => {
   dispatch({ type: SUBCATEGORY_LIST_REQUEST });
   try {
     const { data } = await axios.get(
-      `${REACT_APP_ENDPOINT_DEV}/api/subcategories/${categoryId}`
+      `${REACT_APP_ENDPOINT}/api/subcategories/${categoryId}`
     );
     dispatch({ type: SUBCATEGORY_LIST_SUCCESS, payload: data.result });
   } catch (error) {

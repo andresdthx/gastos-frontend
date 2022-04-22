@@ -12,14 +12,14 @@ import {
 } from "../constants/userConstants";
 import axios from "axios";
 
-const { REACT_APP_ENDPOINT_DEV } = process.env;
+const { REACT_APP_ENDPOINT } = process.env;
 
 export const signin = (userData) => async (dispatch) => {
   dispatch({ type: USER_SIGIN_REQUEST });
 
   try {
     const { data } = await axios.post(
-      `${REACT_APP_ENDPOINT_DEV}/api/users/signIn`,
+      `${REACT_APP_ENDPOINT}/api/users/signIn`,
       userData
     );
     dispatch({ type: USER_SIGIN_SUCCESS, payload: data.result });
@@ -44,7 +44,7 @@ export const registerUser = (userData) => async (dispatch) => {
   dispatch({ type: USER_REGISTER_REQUEST, payload: userData });
   try {
     const { data } = await axios.post(
-      `${REACT_APP_ENDPOINT_DEV}/api/users/register`,
+      `${REACT_APP_ENDPOINT}/api/users/register`,
       userData
     );
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
@@ -69,7 +69,7 @@ export const subscribeUser = (suscription) => async (dispatch, getState) => {
     } = getState();
 
     const { data } = await axios.post(
-      `${REACT_APP_ENDPOINT_DEV}/api/users/suscription`,
+      `${REACT_APP_ENDPOINT}/api/users/suscription`,
       {
         suscription: suscription,
         userId: userInfo ? userInfo.id : 1,

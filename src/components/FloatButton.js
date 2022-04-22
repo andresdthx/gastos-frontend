@@ -4,6 +4,7 @@ import AddIcon from "@material-ui/icons/Add";
 import ExpenseCreateScreen from "../screens/Expense/ExpenseCreateScreen";
 import EntryCreateScreen from "../screens/Entry/EntryCreateScreen";
 import NextExpenseCreateScreen from "../screens/nextExpense/NextExpenseCreateScreen";
+import RoutineCreateScreen from "../screens/Rutine/RoutineCreateScreen";
 
 export default function FloatButton(props) {
   const userSignin = useSelector((state) => state.userSignin);
@@ -16,12 +17,12 @@ export default function FloatButton(props) {
     expense: ExpenseCreateScreen,
     entry: EntryCreateScreen,
     nextExpense: NextExpenseCreateScreen,
+    routine: RoutineCreateScreen,
   };
 
   const loadBottomSheet = () => {
     const path = props.props.location.pathname;
 
-    console.log(path);
     switch (path) {
       case "/":
         setComponent("expense");
@@ -34,6 +35,9 @@ export default function FloatButton(props) {
         break;
       case "/entries":
         setComponent("entry");
+        break;
+      case "/routines":
+        setComponent("routine");
         break;
 
       default:

@@ -20,15 +20,13 @@ import {
   SET_YEAR_SUCCESS,
 } from "../constants/utilsConstants";
 
-const { REACT_APP_ENDPOINT_DEV } = process.env;
+const { REACT_APP_ENDPOINT } = process.env;
 
 export const getMonths = () => async (dispatch) => {
   dispatch({ type: GET_MONTHS_REQUEST });
 
   try {
-    const { data } = await axios.get(
-      `${REACT_APP_ENDPOINT_DEV}/api/utils/months`
-    );
+    const { data } = await axios.get(`${REACT_APP_ENDPOINT}/api/utils/months`);
     dispatch({ type: GET_MONTHS_SUCCESS, payload: data.result });
   } catch (error) {
     dispatch({
@@ -112,7 +110,6 @@ export const setViewer = (type) => async (dispatch) => {
 export const setNotifications = (data) => (dispatch) => {
   dispatch({ type: SET_NOTIFICATIONS_REQUEST });
   try {
-    console.log(data);
     let notification = [
       { title: "ojo con eso", body: data.message, watched: false },
     ];

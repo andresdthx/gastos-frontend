@@ -8,7 +8,7 @@ import {
   ENTRY_GET_SUCCESS,
 } from "../constants/entryConstants";
 
-const { REACT_APP_ENDPOINT_DEV } = process.env;
+const { REACT_APP_ENDPOINT } = process.env;
 
 export const createEntry = (entry) => async (dispatch, getState) => {
   dispatch({ type: ENTRY_CREATE_REQUEST });
@@ -16,13 +16,10 @@ export const createEntry = (entry) => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await axios.post(
-      `${REACT_APP_ENDPOINT_DEV}/api/entries/`,
-      {
-        ...entry,
-        userUserId: userInfo.id,
-      }
-    );
+    const { data } = await axios.post(`${REACT_APP_ENDPOINT}/api/entries/`, {
+      ...entry,
+      userUserId: userInfo.id,
+    });
     dispatch({ type: ENTRY_CREATE_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -42,7 +39,7 @@ export const listEntries = () => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = await axios.get(
-      `${REACT_APP_ENDPOINT_DEV}/api/entries/${userInfo.id}`
+      `${REACT_APP_ENDPOINT}/api/entries/${userInfo.id}`
     );
     dispatch({ type: ENTRY_GET_SUCCESS, payload: data.result });
   } catch (error) {

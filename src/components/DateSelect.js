@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listExpenses, listExpensesByDate } from "../actions/expenseActions";
-import { getMonths, setMonth, setYear } from "../actions/utilsActions";
+import { setMonth, setYear } from "../actions/utilsActions";
 import Select from "react-select";
 
 export default function DateSelect(props) {
@@ -47,7 +47,6 @@ export default function DateSelect(props) {
 
   const handlerPickYear = (year) => {
     dispatch(setYear(year));
-    console.log(year);
   };
 
   useEffect(() => {
@@ -75,6 +74,10 @@ export default function DateSelect(props) {
       );
     }
   }, [expensesByDate, dispatch]);
+
+  useEffect(() => {
+    if (!monthsStorage) dispatch(setMonth(month));
+  }, [dispatch, monthsStorage, month]);
 
   return (
     <div className="container">

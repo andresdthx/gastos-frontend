@@ -62,6 +62,10 @@ export default function HomeScreen(props) {
     setSuccess(false);
   }, [dispatch, props, userInfo, success, expenses, month]);
 
+  useEffect(() => {
+    if (!view) dispatch(setViewer(0));
+  }, [dispatch, view]);
+
   return (
     <div className="home-screen">
       <div className="home-screen-info-content">

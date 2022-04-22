@@ -8,7 +8,7 @@ import {
   CATEGORY_LIST_SUCCESS,
 } from "../constants/categoryConstants";
 
-const { REACT_APP_ENDPOINT_DEV } = process.env;
+const { REACT_APP_ENDPOINT } = process.env;
 
 export const listCategories = () => async (dispatch, useState) => {
   dispatch({ type: CATEGORY_LIST_REQUEST });
@@ -17,7 +17,7 @@ export const listCategories = () => async (dispatch, useState) => {
   } = useState();
   try {
     const { data } = await axios.get(
-      `${REACT_APP_ENDPOINT_DEV}/api/categories/${userInfo.id}`
+      `${REACT_APP_ENDPOINT}/api/categories/${userInfo.id}`
     );
     dispatch({ type: CATEGORY_LIST_SUCCESS, payload: data.result });
   } catch (error) {

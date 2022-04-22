@@ -17,6 +17,7 @@
     "axios": "^0.21.1",
     "chart.js": "^3.5.1",
     "dotenv": "^16.0.0",
+    "env-cmd": "^10.1.0",
     "framer-motion": "^4.1.17",
     "mdbreact": "^5.1.0",
     "react": "^17.0.2",
@@ -52,6 +53,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:prod": "env-cmd -f .env.prod react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

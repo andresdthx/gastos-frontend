@@ -32,6 +32,10 @@ import {
   updateNextExpenseReducer,
 } from "./reducers/nextExpenseReducer";
 import {
+  createRoutineReducer,
+  getRoutinesByUserReducer,
+} from "./reducers/routineReducers";
+import {
   createSubcategoryReducer,
   listSubcategoriesReducer,
 } from "./reducers/subcategoryReducers";
@@ -71,9 +75,7 @@ const initialState = {
       : null,
   },
   yearSet: {
-    year: localStorage.getItem('year')
-    ? localStorage.getItem('year')
-    : null,
+    year: localStorage.getItem("year") ? localStorage.getItem("year") : null,
   },
   viewerSet: {
     view: localStorage.getItem("viewer")
@@ -121,6 +123,9 @@ const reducer = combineReducers({
   nextExpenseCreate: createNextExpenseReducer,
   nextExpensesList: listNextExpensesReducer,
   nextExpenseUpdate: updateNextExpenseReducer,
+
+  routineByUserList: getRoutinesByUserReducer,
+  routineCreate: createRoutineReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
